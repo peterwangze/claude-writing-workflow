@@ -55,6 +55,14 @@ writing-workflow/
 │   │   └── SKILL.md             # 正文生成skill
 │   ├── quality-review/
 │   │   └── SKILL.md             # 质量审查skill
+│   ├── human-ai-collaboration/
+│   │   └── SKILL.md             # AI合规与人机协作skill
+│   ├── launch-strategy/
+│   │   └── SKILL.md             # 上架发布策略skill
+│   ├── monetization-strategy/
+│   │   └── SKILL.md             # 变现策略skill
+│   ├── competitor-analysis/
+│   │   └── SKILL.md             # 竞品深度分析skill
 │   ├── opening-optimization/
 │   │   └── SKILL.md             # 开篇优化skill（可选）
 │   ├── novel-style-learning/
@@ -224,15 +232,19 @@ AI辅助小说创作工作流插件，实现从平台调研到正文生成的端
 
 | 阶段 | Skill | 职责 | 输入 | 输出 |
 |------|-------|------|------|------|
-| 0 | work-type-selection | 选择作品类型（长篇/中篇/短篇等） | - | 作品类型信息文件 |
+| 0 | work-type-selection | 选择作品类型 | - | 作品类型信息文件 |
 | 1 | platform-research | 调研平台数据，推荐平台 | 作品类型 | 平台调研报告 |
-| 2 | genre-selection | 分析题材，推荐选择 | 平台信息 | 题材分析报告 |
-| 3 | novel-confirmation | 5个作品概念选择，确定作品基本信息 | 题材信息 | 作品信息文件 |
+| 1.5 | competitor-analysis | 竞品深度分析 | 平台+题材方向 | 竞品分析报告 |
+| 2 | genre-selection | 分析题材，推荐选择 | 平台信息+竞品分析 | 题材分析报告 |
+| 3 | novel-confirmation | 5个作品概念选择，确定基本信息 | 题材信息 | 作品信息文件 |
 | 4 | creation-planning | 制定创作规划 | 作品信息 | 创作规划文件 |
 | 5 | outline-writing | 生成作品大纲+人物关系图 | 创作规划 | 大纲文件 |
 | 6 | chapter-outline | 生成章节细纲 | 大纲文件 | 细纲文件 |
-| 7 | content-generation | 生成正文内容 | 细纲+前文 | 章节文件 |
+| 7 | content-generation | 生成正文内容（含平台算法适配） | 细纲+前文 | 章节文件 |
+| 7.5 | human-ai-collaboration | AI合规人机协作 | 正文初稿 | 合规内容+创作日志 |
 | 8 | quality-review | 质量审查 | 生成内容 | 审查报告 |
+| 9 | launch-strategy | 上架发布策略 | 存稿+平台信息 | 发布策略文件 |
+| 10 | monetization-strategy | 变现策略 | 发布策略+平台 | 变现策略文件 |
 
 ### 3.2 阶段详细设计
 
@@ -560,7 +572,11 @@ novel-project/
 ├── 10-reviews/                   # 审查报告
 │   └── quality-reports/
 ├── 11-data-monitoring/           # 数据监控（发布后）
-└── 12-reader-interaction/        # 读者互动记录（发布后）
+├── 12-reader-interaction/        # 读者互动记录（发布后）
+├── 13-creation-logs/             # 创作日志（AI合规记录）
+├── 14-launch-strategy.md         # 上架发布策略
+├── 15-monetization-strategy.md   # 变现策略
+└── 16-competitor-analysis.md     # 竞品分析报告
 ```
 
 ### 4.2 工作流状态文件
@@ -742,7 +758,7 @@ description: "[skill描述]"
 
 ### v1.0.0 (当前)
 - 基础工作流实现
-- 9个核心skill + 5个辅助skill（共14个）
+- 9个核心创作skill + 4个盈利运营skill + 5个辅助skill（共18个）
 - 质量检查机制
 - 上下文管理
 

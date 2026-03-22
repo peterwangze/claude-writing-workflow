@@ -48,15 +48,20 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 |--------|----------|-----------|------|
 | work_type_selection | 作品类型选择 | work-type-selection | 选择适合的作品类型 |
 | platform_research | 平台调研 | platform-research | 调研平台数据、签约政策 |
+| competitor_analysis | 竞品分析 | competitor-analysis | 深度拆解同赛道头部作品 |
 | genre_selection | 题材选择 | genre-selection | 选择创作题材 |
 | novel_confirmation | 作品确认 | novel-confirmation | 确定作品基本信息 |
 | creation_planning | 创作规划 | creation-planning | 制定创作计划 |
 | outline_writing | 大纲生成 | outline-writing | 生成世界观和大纲 |
 | chapter_outline | 章节细纲 | chapter-outline | 生成章节细纲 |
-| content_generation | 正文生成 | content-generation | 生成正文内容 |
+| content_generation | 正文生成 | content-generation | 生成正文内容（含平台算法适配） |
+| human_ai_collaboration | AI合规处理 | human-ai-collaboration | 人机协作流程，确保内容过审 |
+| quality_review | 质量审查 | quality-review | 多维度质量审查 |
+| launch_strategy | 上架发布 | launch-strategy | 存稿管理、签约、首秀准备 |
+| monetization_strategy | 变现策略 | monetization-strategy | VIP/付费卡点/收益优化 |
 | opening_optimization | 开篇优化 | opening-optimization | 黄金三章优化（可选） |
 | novel_style_learning | 网文风格学习 | novel-style-learning | 学习网文风格（可选） |
-| data_monitoring | 数据监控 | data-monitoring | 监控运营数据（发布后） |
+| data_monitoring | 数据监控 | data-monitoring | 监控运营数据+数据→内容闭环（发布后） |
 | reader_interaction | 读者互动 | reader-interaction | 管理读者关系（发布后） |
 
 ## PUA Skill 集成
@@ -142,25 +147,34 @@ while (用户未退出) {
 ```
 work_type_selection
     └── platform_research
+            ├── competitor_analysis (竞品分析)
             └── genre_selection
                     └── novel_confirmation
                             └── creation_planning
                                     └── outline_writing
                                             └── chapter_outline
                                                     └── content_generation
-                                                            └── opening_optimization (前三章优化)
+                                                            ├── human_ai_collaboration (AI合规)
+                                                            ├── quality_review (质量审查)
+                                                            ├── opening_optimization (前三章优化)
                                                             └── novel_style_learning (风格学习)
 
-发布后阶段：
-content_generation ──┬── data_monitoring (数据监控)
-                    └── reader_interaction (读者互动)
+发布运营阶段：
+content_generation ──┬── launch_strategy (上架发布策略)
+                     │       └── monetization_strategy (变现策略)
+                     ├── data_monitoring (数据监控+闭环)
+                     └── reader_interaction (读者互动)
 ```
 
 **阶段说明**：
-- `opening_optimization`：前三章完成后自动建议执行，对首秀成败至关重要
-- `novel_style_learning`：可在任何阶段执行，帮助理解网文风格
-- `data_monitoring`：作品发布后定期执行，监控运营数据
-- `reader_interaction`：作品发布后持续执行，管理读者关系
+- `competitor_analysis`：平台确定后、题材选择前执行，为选题和写作提供差异化方向
+- `human_ai_collaboration`：每章正文生成后自动触发，确保AI合规
+- `launch_strategy`：正文存稿达标后执行，制定发布策略
+- `monetization_strategy`：上架策略确定后执行，制定变现计划
+- `data_monitoring`：作品发布后持续执行，数据异常自动触发内容优化
+- `opening_optimization`：前三章完成后自动建议执行
+- `novel_style_learning`：可在任何阶段执行
+- `reader_interaction`：作品发布后持续执行
 
 ## 文件管理
 
