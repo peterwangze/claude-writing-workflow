@@ -37,6 +37,8 @@ writing-workflow/
 ├── skills/
 │   ├── using-writing-workflow/
 │   │   └── SKILL.md             # 主入口skill
+│   ├── work-type-selection/
+│   │   └── SKILL.md             # 作品类型选择skill
 │   ├── platform-research/
 │   │   └── SKILL.md             # 平台调研skill
 │   ├── genre-selection/
@@ -51,8 +53,16 @@ writing-workflow/
 │   │   └── SKILL.md             # 章节细纲skill
 │   ├── content-generation/
 │   │   └── SKILL.md             # 正文生成skill
-│   └── quality-review/
-│       └── SKILL.md             # 质量审查skill
+│   ├── quality-review/
+│   │   └── SKILL.md             # 质量审查skill
+│   ├── opening-optimization/
+│   │   └── SKILL.md             # 开篇优化skill（可选）
+│   ├── novel-style-learning/
+│   │   └── SKILL.md             # 网文风格学习skill（可选）
+│   ├── data-monitoring/
+│   │   └── SKILL.md             # 数据监控skill（发布后）
+│   └── reader-interaction/
+│       └── SKILL.md             # 读者互动skill（发布后）
 ├── agents/
 │   └── novel-creator.md         # 子agent配置
 ├── hooks/
@@ -560,6 +570,7 @@ novel-project/
 {
   "current_stage": "outline_writing",
   "completed_stages": [
+    "work_type_selection",
     "platform_research",
     "genre_selection",
     "novel_confirmation",
@@ -590,9 +601,12 @@ novel-project/
 
 | 阶段 | 必须加载 | 可选加载 |
 |------|----------|----------|
-| platform-research | project-info | - |
-| genre-selection | project-info, platform-research | - |
-| outline-writing | project-info, novel-info, creation-plan | genre-analysis |
+| work-type-selection | - | - |
+| platform-research | work-type | - |
+| genre-selection | work-type, platform-research | - |
+| novel-confirmation | platform-research, genre-analysis | work-type |
+| creation-planning | novel-info | - |
+| outline-writing | novel-info, creation-plan | genre-analysis |
 | chapter-outline | outline | characters, worldbuilding |
 | content-generation | chapter-outline, outline | 前3章内容 |
 
@@ -728,7 +742,7 @@ description: "[skill描述]"
 
 ### v1.0.0 (当前)
 - 基础工作流实现
-- 8个核心skill
+- 9个核心skill + 5个辅助skill（共14个）
 - 质量检查机制
 - 上下文管理
 
