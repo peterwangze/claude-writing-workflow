@@ -14,7 +14,6 @@
 - **多维质量审查**：架构/节奏/人物/文风/AI 痕迹多角色审查
 - **数据→内容闭环**：发布后数据异常自动触发内容优化建议
 - **断点续传**：工作流状态持久化，随时保存/恢复创作进度
-- **全程用户确认**：所有关键决策必须用户确认，不擅作主张
 
 ## 支持的平台
 
@@ -25,177 +24,159 @@
 | 晋江文学城 | 积分/收藏 | 情感细腻、人设优先、评论引导 |
 | 七猫小说 | 阅读时长 | 通俗易懂、情节密集 |
 
+---
+
 ## 安装
 
-### 前置条件
+> ⚠️ 以下 `/plugin` 命令均在 **Claude Code 对话框**中输入，不是在终端执行。
 
-- [Claude Code](https://claude.ai/claude-code) CLI 已安装
-- Claude Code Plugin 功能已启用
+### 方式一：通过 Marketplace 安装（推荐）
 
-### 安装步骤
-
-```bash
-# 1. 克隆此仓库
-git clone git@github.com:peterwangze/claude-writing-workflow.git
-cd claude-writing-workflow
-
-# 2. 在 Claude Code 中安装插件（从仓库目录执行）
-/plugin add ./writing-workflow
+```
+/plugin marketplace add https://raw.githubusercontent.com/peterwangze/claude-writing-workflow/main/writing-workflow/.claude-plugin/marketplace.json
 ```
 
-安装完成后，下次启动 Claude Code 时会看到：
+```
+/plugin install writing-workflow
+```
+
+### 方式二：本地安装
+
+```bash
+# 在终端中克隆仓库
+git clone git@github.com:peterwangze/claude-writing-workflow.git
+```
+
+然后在 **Claude Code 对话框**中执行：
+
+```
+/plugin add /你的路径/claude-writing-workflow/writing-workflow
+```
+
+### 验证安装
+
+安装成功后，重启 Claude Code 会话，启动时会看到：
+
 ```
 Writing Workflow Plugin loaded. Use 'writing-workflow' skill to start.
 ```
 
+---
+
 ## 快速开始
 
-在 Claude Code 中，告诉 Claude：
+### 第一步：设置工作目录
+
+插件会在 Claude Code 的**当前工作目录**下创建 `novel-project/` 文件夹保存所有创作文件。建议为每部小说创建独立目录：
+
+```bash
+# 在终端中
+mkdir ~/novels/我的第一部小说
+cd ~/novels/我的第一部小说
+# 然后在此目录下启动 Claude Code
+```
+
+> 如果你在 Claude Code 中已经打开了某个项目目录，创作文件会生成在那个目录下。
+
+### 第二步：启动工作流
+
+在 Claude Code 对话框中，直接告诉 Claude：
 
 ```
 开始小说创作工作流
 ```
 
-或者：
+Claude 会自动检测当前目录是否有已有项目进度：
+- **新项目**：初始化工作流，从"作品类型选择"开始
+- **已有项目**：加载进度，显示当前阶段和可选操作
+
+### 第三步：跟随引导完成创作
+
+工作流由 `using-writing-workflow` 主 Skill 全程协调，**你不需要手动调用其他 Skill**。只需回答 Claude 的问题和确认每个阶段的产出即可。
+
+---
+
+## 工作流概览
 
 ```
-请使用 writing-workflow skill 帮我创作小说
+作品类型选择 → 平台调研 → 竞品分析 → 题材选择 → 作品确认 → 创作规划
+                                                              ↓
+                                  质量审查 ← AI合规处理 ← 正文生成 ← 章节细纲 ← 大纲生成
+                                                              ↓
+                              上架发布策略 → 变现策略 → 数据监控 → 读者互动
 ```
 
-Claude 会自动进入工作流，检查现有进度或初始化新项目。
+| # | 阶段 | 核心产出 |
+|---|------|----------|
+| 0 | 作品类型选择 | 长/中/短篇选择 + 约束设定 |
+| 1 | 平台调研 | 平台对比报告 + 推荐平台 |
+| 1.5 | 竞品深度分析 | 头部作品拆解 + 差异化方向 |
+| 2 | 题材选择 | 红海/蓝海分析 + 推荐题材 |
+| 3 | 作品确认 | 5个方案 → 选定书名/简介 |
+| 4 | 创作规划 | 篇幅/频率/节奏规划 |
+| 5 | 大纲生成 | 世界观/人物/情节大纲 |
+| 6 | 章节细纲 | 逐章场景/情节/伏笔 |
+| 7 | 正文生成 | 平台算法适配正文 |
+| 7.5 | AI合规处理 | 去AI痕迹 + 创作日志 |
+| 8 | 质量审查 | 多维审查报告 |
+| 9 | 上架发布策略 | 存稿计划 + 签约指导 |
+| 10 | 变现策略 | VIP卡点 + 收益预测 |
+| 11 | 数据监控 | 数据周报 + 内容优化闭环 |
+| 12 | 读者互动 | 评论运营 + 粉丝管理 |
 
-## 工作流阶段
+详细的每个阶段说明参见 [writing-workflow/README.md](./writing-workflow/README.md)。
 
-### 核心创作流程（共11步）
-
-```
-作品类型选择 → 平台调研 → 竞品分析 → 题材选择 → 作品确认
-      ↓
-创作规划 → 大纲生成 → 章节细纲 → 正文生成 → AI合规处理 → 质量审查
-```
-
-| # | 阶段 | Skill | 核心产出 |
-|---|------|-------|----------|
-| 0 | 作品类型选择 | `work-type-selection` | 长/中/短篇选择 + 约束设定 |
-| 1 | 平台调研 | `platform-research` | 平台对比报告 + 推荐平台 |
-| 1.5 | 竞品深度分析 | `competitor-analysis` | 头部作品拆解 + 差异化方向 |
-| 2 | 题材选择 | `genre-selection` | 红海/蓝海分析 + 推荐题材 |
-| 3 | 作品确认 | `novel-confirmation` | 5个方案 → 选定书名/简介 |
-| 4 | 创作规划 | `creation-planning` | 篇幅/频率/节奏规划 |
-| 5 | 大纲生成 | `outline-writing` | 世界观/人物/情节大纲 |
-| 6 | 章节细纲 | `chapter-outline` | 逐章场景/情节/伏笔 |
-| 7 | 正文生成 | `content-generation` | 平台算法适配正文 |
-| 7.5 | AI合规处理 | `human-ai-collaboration` | 去AI痕迹 + 创作日志 |
-| 8 | 质量审查 | `quality-review` | 多维审查报告 |
-
-### 盈利运营流程（共4步）
-
-| # | 阶段 | Skill | 核心产出 |
-|---|------|-------|----------|
-| 9 | 上架发布策略 | `launch-strategy` | 存稿计划 + 签约指导 + 首秀准备 |
-| 10 | 变现策略 | `monetization-strategy` | VIP卡点 + 全勤收益 + 收益预测 |
-| 11 | 数据监控 | `data-monitoring` | 数据周报 + 内容优化闭环 |
-| 12 | 读者互动 | `reader-interaction` | 评论运营 + 粉丝管理 |
-
-### 辅助工具
-
-| Skill | 触发时机 | 用途 |
-|-------|----------|------|
-| `opening-optimization` | 前三章生成后 | 黄金三章专项优化 |
-| `novel-style-learning` | 任意阶段 | 网文写作方法论学习 |
-
-## 创作项目文件结构
-
-工作流执行过程中会在工作目录下生成 `novel-project/` 文件夹：
-
-```
-novel-project/
-├── workflow-state.json         # 工作流状态（自动维护）
-├── 00-work-type.md             # 作品类型信息
-├── 01-platform-research.md     # 平台调研报告
-├── 02-genre-analysis.md        # 题材分析报告
-├── 03-novel-info.md            # 作品信息（书名/简介等）
-├── 04-creation-plan.md         # 创作规划（篇幅/频率等）
-├── 05-outline.md               # 完整大纲
-├── 06-chapter-outlines/        # 章节细纲（每章一文件）
-│   ├── chapter-001.md
-│   └── chapter-002.md
-├── 07-content/                 # 正文内容（每章一文件）
-│   ├── chapter-001.md
-│   └── chapter-002.md
-├── 08-characters/              # 人物设定
-│   ├── main-characters.md
-│   ├── supporting-characters.md
-│   └── character-relationships.md
-├── 09-worldbuilding/           # 世界观设定
-│   ├── world-settings.md
-│   └── power-system.md
-├── 10-reviews/                 # 质量审查报告
-├── 11-data-monitoring/         # 数据监控周报（发布后）
-├── 12-reader-interaction/      # 读者互动记录（发布后）
-├── 13-creation-logs/           # AI合规创作日志
-├── 14-launch-strategy.md       # 上架发布策略
-├── 15-monetization-strategy.md # 变现策略
-└── 16-competitor-analysis.md   # 竞品分析报告
-```
-
-> `novel-project/` 目录已在 `.gitignore` 中排除，用户创作内容不会被提交到版本库。
-
-## 插件结构
-
-```
-writing-workflow/
-├── .claude-plugin/
-│   ├── plugin.json             # 插件元数据
-│   └── marketplace.json        # 市场配置
-├── skills/                     # 18个工作流 Skill
-│   ├── using-writing-workflow/ # 主入口（工作流协调器）
-│   ├── work-type-selection/
-│   ├── platform-research/
-│   ├── competitor-analysis/
-│   ├── genre-selection/
-│   ├── novel-confirmation/
-│   ├── creation-planning/
-│   ├── outline-writing/
-│   ├── chapter-outline/
-│   ├── content-generation/
-│   ├── human-ai-collaboration/
-│   ├── quality-review/
-│   ├── launch-strategy/
-│   ├── monetization-strategy/
-│   ├── opening-optimization/
-│   ├── novel-style-learning/
-│   ├── data-monitoring/
-│   └── reader-interaction/
-├── agents/
-│   └── novel-creator.md        # 子 Agent 配置（并行任务）
-├── hooks/
-│   ├── hooks.json              # SessionStart Hook 配置
-│   └── run-hook.cmd            # Windows Hook 脚本
-└── README.md                   # 插件说明文档
-```
+---
 
 ## 常见问题
 
+**Q: `/plugin` 命令在哪里输入？**
+
+在 Claude Code 的对话框（聊天输入框）中输入，以 `/` 开头。不是在系统终端中执行。
+
 **Q: 如何继续上次未完成的创作？**
 
-直接告诉 Claude "继续小说创作工作流"，系统会自动加载 `novel-project/workflow-state.json` 中的进度。
-
-**Q: 可以跳过某个阶段吗？**
-
-可以。工作流支持阶段跳转，在每个阶段完成后的确认界面中选择"跳到指定阶段"。非关键阶段（如竞品分析、风格学习）可以跳过。
+确保在同一个工作目录下启动 Claude Code，然后说"继续小说创作工作流"，系统会自动加载 `novel-project/workflow-state.json` 中的进度。
 
 **Q: 如何管理多个创作项目？**
 
-目前每个工作目录管理一个项目。不同项目建议在不同目录下运行 Claude Code，各自维护独立的 `novel-project/` 文件夹。
+为每部小说创建独立目录，在不同目录下启动 Claude Code：
+```bash
+cd ~/novels/项目A  # 切换到项目A目录，再使用Claude Code
+cd ~/novels/项目B  # 切换到项目B目录，再使用Claude Code
+```
+每个目录下有独立的 `novel-project/` 文件夹。
 
-**Q: 平台 AI 检测会影响我吗？**
+**Q: 需要手动调用各个 Skill 吗？**
 
-本插件内置了完整的 `human-ai-collaboration` 合规流程，包括系统性去 AI 痕迹改写和创作日志生成。但最终是否通过平台审核取决于平台政策，建议在发布前仔细检查。
+不需要。启动"小说创作工作流"后，`using-writing-workflow` 主 Skill 会自动协调所有其他 Skill。你只需回答问题和确认产出即可。
 
-**Q: 数据监控需要接入 API 吗？**
+**Q: 可以跳过某个阶段吗？**
 
-不需要。`data-monitoring` skill 使用 WebSearch 搜索公开数据，并提供模板让用户手动填入后台数据。系统根据你填入的数据进行分析和优化建议。
+可以。每个阶段完成后的确认菜单中可以选择"跳到指定阶段"。竞品分析、风格学习等非关键阶段可以跳过。
+
+**Q: 创作的内容会上传到 GitHub 吗？**
+
+不会。`novel-project/` 目录已加入 `.gitignore`，所有创作内容只保存在本地。
+
+---
+
+## 项目结构
+
+```
+claude-writing-workflow/
+├── writing-workflow/          # 插件目录
+│   ├── .claude-plugin/
+│   │   ├── plugin.json        # 插件元数据
+│   │   └── marketplace.json   # Marketplace 配置
+│   ├── skills/                # 18 个工作流 Skill
+│   ├── agents/                # 子 Agent 配置
+│   ├── hooks/                 # SessionStart Hook
+│   └── README.md              # 插件详细使用指南
+├── docs/                      # 设计文档
+├── .gitignore                 # novel-project/ 已排除
+└── README.md                  # 本文件
+```
 
 ## 版本历史
 
