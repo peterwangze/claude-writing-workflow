@@ -1,0 +1,15 @@
+{
+  "name": "writing-workflow-market",
+  "description": "小说创作工作流插件市场",
+  "owner": {
+    "name": "User"
+  },
+  "plugins": [
+    {
+      "name": "writing-workflow",
+      "description": "AI辅助小说创作工作流",
+      "version": "1.0.0",
+      "source": "./"
+    }
+  ]
+}

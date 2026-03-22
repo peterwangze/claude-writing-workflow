@@ -1,0 +1,5 @@
+# 小说创作生成的项目文件（用户数据，不纳入版本管理）
+novel-project/
+
+# Claude 本地配置
+.claude/settings.local.json

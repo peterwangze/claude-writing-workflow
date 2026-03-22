@@ -1,0 +1,6 @@
+#!/bin/bash
+# Writing Workflow Plugin Session Start Hook
+echo "=========================================="
+echo "Writing Workflow Plugin loaded."
+echo "Use 'writing-workflow' skill to start."
+echo "=========================================="
