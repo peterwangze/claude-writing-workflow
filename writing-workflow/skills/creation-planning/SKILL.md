@@ -201,6 +201,7 @@ description: Use when user needs to plan novel creation - defines length, update
 
 ### 6. 更新工作流状态
 
+长篇/中篇路径（已完成平台调研）：
 ```json
 {
   "current_stage": "outline_writing",
@@ -215,6 +216,27 @@ description: Use when user needs to plan novel creation - defines length, update
   },
   "files": {
     "platform_research": "novel-project/01-platform-research.md",
+    "genre_analysis": "novel-project/02-genre-analysis.md",
+    "novel_info": "novel-project/03-novel-info.md",
+    "creation_plan": "novel-project/04-creation-plan.md"
+  }
+}
+```
+
+短篇路径（跳过了平台调研）：
+```json
+{
+  "current_stage": "outline_writing",
+  "completed_stages": ["work_type_selection", "genre_selection", "novel_confirmation", "creation_planning"],
+  "project_info": {
+    "work_type": "短篇小说",
+    "platform": "公众号/短篇平台",
+    "genre": "[题材]",
+    "title": "[书名]",
+    "target_words": 10000,
+    "update_frequency": "单篇完结"
+  },
+  "files": {
     "genre_analysis": "novel-project/02-genre-analysis.md",
     "novel_info": "novel-project/03-novel-info.md",
     "creation_plan": "novel-project/04-creation-plan.md"

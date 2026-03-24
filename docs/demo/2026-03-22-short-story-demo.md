@@ -263,8 +263,8 @@
 
 | 限制项 | 说明 |
 |--------|------|
-| 短篇路径 | 已在此 demo 中手动绕过部分前置依赖，Skill 层依赖条件已在后续版本中修复 |
-| AI 合规阶段 | 本 demo 未执行 `human-ai-collaboration` 阶段，创作日志未生成，状态文件中无 `human_ai_collaboration` 记录 |
+| 短篇路径 | Skill 层依赖条件已修复，短篇路径可在不依赖 `01-platform-research.md` 的情况下正常闭环 |
+| AI 合规阶段 | 已补充样例产物：`13-creation-logs/chapter-001-log.md`，状态文件已记录 `human_ai_collaboration`；本 demo 记录为后补，不代表该阶段已经过完整对话路径验证 |
 | 自动化行为 | demo 中所有"自动触发"均为 Claude 遵循 SKILL.md 约定执行，非底层脚本触发 |
-| 阶段依赖冲突 | `competitor-analysis` 的前置依赖已在后续版本中修正（移除对 02-genre-analysis.md 的误依赖） |
+| 阶段依赖冲突 | `competitor-analysis` 前置依赖已修正，已移除对 `02-genre-analysis.md` 的误依赖 |
 | 长篇路径未验证 | 本 demo 仅验证了短篇简化路径，长篇完整路径（含平台调研、竞品分析）未经端到端测试 |
