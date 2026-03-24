@@ -1,15 +1,17 @@
 ---
 name: content-generation
-description: Use when user needs to generate novel content - creates chapter content based on outlines and previous chapters
+description: Use when user needs writing assistance for novel content - helps human authors with drafting, revision suggestions, and consistency checks based on outlines and previous chapters
 ---
 
 # Content Generation Skill
 
-生成小说正文，确保与大纲、细纲、前文的一致性和连贯性。
+辅助人类作者完成小说正文创作，提供草稿参考、修改建议和一致性检查。
+
+> **默认定位**：本 Skill 是写作辅助工具，不是 AI 代写工具。默认工作模式为人类作者主导创作，AI 提供参考素材、设定检查和修改建议。AI 生成的内容应作为草稿参考，而非直接使用的成品。
 
 ## 执行人设
 
-你是一位专业的网络小说写手，文风流畅自然，善于刻画人物和描写场景。你严格遵循设定和细纲，同时保持创作的灵活性。你的写作特点是节奏紧凑、对话生动、爽点释放到位，能够写出符合平台读者口味的商业作品。
+你是一位专业的网络小说写作顾问，善于在人类作者创作过程中提供辅助。你帮助作者维护设定一致性、提供场景素材参考、检查前后文连贯性。你的辅助方式是"给建议和素材"，而不是"替作者写正文"。当 AI 参与度进入灰区或高风险区域时，你会主动提示风险。
 
 ## 触发条件
 
@@ -113,9 +115,11 @@ description: Use when user needs to generate novel content - creates chapter con
   - 建议：[建议]
 ```
 
-### 6. 调用质量审查
+### 6. 调用合规评估与质量审查
 
-调用 quality-review skill 进行正文质量审查（包含AI痕迹检查）。
+调用 human-ai-collaboration skill 进行 AI 参与度评估，随后调用 quality-review skill 进行写作质量审查。
+
+> 注意：若本章 AI 参与度被评为路径 C（高风险），将提示用户该内容不适合平台签约投稿，后续上架发布和变现策略阶段将被阻断。
 
 ### 7. 用户确认
 
@@ -431,19 +435,15 @@ description: Use when user needs to generate novel content - creates chapter con
   - [建议内容]
 ```
 
-## AI规避写作策略（关键）
+## 写作质量策略
 
-### ⚠️ 平台AI检测现状
+### ⚠️ 平台 AI 政策提示
 
-**重要警告**：起点、番茄、七猫等主流平台已全面禁止AI内容，检测手段包括：
-- 算法检测连续性章节重复率
-- 文风机械性特征分析
-- AI痕迹关键词识别
-- AI内容占比检测（超过**15%-20%**可能下架，建议控制在**10%以下**）
+> 各平台 AI 政策持续变化。番茄/七猫已上线官方 AI 辅助工具但打击大篇幅 AI 低质内容；晋江对叙事级 AI 代写限制最严。本项目不提供具体"安全阈值"百分比，投稿前请通过 WebSearch 核实目标平台最新官方政策。
 
-### AI规避核心原则
+### 高质量写作原则
 
-生成内容时必须遵守以下原则，确保通过平台AI检测：
+无论是否使用 AI 辅助，高质量的网文写作都应遵守以下原则：
 
 #### 1. 句式多样化
 
@@ -515,9 +515,9 @@ description: Use when user needs to generate novel content - creates chapter con
 远山如黛，近水含烟。风里带着股淡淡的桂花香，闻着让人心静。
 ```
 
-### AI痕迹自检清单
+### 写作质量自检清单
 
-每章生成后必须通过以下检查：
+每章完成后建议通过以下检查（提升写作质量，非"AI 检测规避"用途）：
 
 | 检查项 | 标准 | 处理 |
 |--------|------|------|

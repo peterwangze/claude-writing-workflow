@@ -26,6 +26,12 @@ description: Use when user needs to research and select a novel publishing platf
 | 晋江文学城 | 女性向 | 女频为主，言情/耽美热门 |
 | 七猫小说 | 保底+分成 | 保底稿费，适合稳健创作 |
 
+## 数据时效性提示
+
+> 本 Skill 中的签约门槛、分成比例、推荐位规则、收益数据等内容为**历史参考值**。平台规则频繁调整，执行时必须通过 WebSearch 搜索当前平台最新政策，不应将 Skill 中的固定数值直接作为执行依据。
+>
+> 若 WebSearch 未能找到某项数据的官方来源，应明确标记"公开规则不充分，不应作强结论"。
+
 ## 执行流程
 
 ### 1. 加载作品类型信息
