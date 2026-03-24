@@ -19,17 +19,19 @@ description: Use when user needs to confirm novel details - generates book title
 
 ## 前置依赖
 
-- workflow-state.json 中 platform 和 genre 字段已设置
-- 01-platform-research.md 和 02-genre-analysis.md 存在
+- workflow-state.json 中 genre 字段已设置
+- 02-genre-analysis.md 存在
+- platform 字段已设置（短篇路径可为"公众号/短篇平台"等发布场景描述）
+- 01-platform-research.md：长/中篇路径必须存在；短篇路径（跳过平台调研）可不存在
 
 ## 执行流程
 
 ### 1. 加载上下文
 
 读取以下文件：
-- `novel-project/workflow-state.json`
-- `novel-project/01-platform-research.md`
-- `novel-project/02-genre-analysis.md`
+- `novel-project/workflow-state.json`（必须）
+- `novel-project/02-genre-analysis.md`（必须）
+- `novel-project/01-platform-research.md`（若存在则读取；短篇路径可不存在）
 
 ### 2. 细分领域分析
 
@@ -220,6 +222,7 @@ description: Use when user needs to confirm novel details - generates book title
 
 ### 7. 更新工作流状态
 
+长篇/中篇路径（已完成平台调研）：
 ```json
 {
   "current_stage": "creation_planning",
@@ -232,6 +235,24 @@ description: Use when user needs to confirm novel details - generates book title
   },
   "files": {
     "platform_research": "novel-project/01-platform-research.md",
+    "genre_analysis": "novel-project/02-genre-analysis.md",
+    "novel_info": "novel-project/03-novel-info.md"
+  }
+}
+```
+
+短篇路径（跳过了平台调研）：
+```json
+{
+  "current_stage": "creation_planning",
+  "completed_stages": ["work_type_selection", "genre_selection", "novel_confirmation"],
+  "project_info": {
+    "work_type": "短篇小说",
+    "platform": "公众号/短篇平台",
+    "genre": "[题材]",
+    "title": "[书名]"
+  },
+  "files": {
     "genre_analysis": "novel-project/02-genre-analysis.md",
     "novel_info": "novel-project/03-novel-info.md"
   }

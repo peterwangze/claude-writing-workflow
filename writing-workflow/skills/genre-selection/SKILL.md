@@ -19,18 +19,25 @@ description: Use when user needs to select a genre for their novel - analyzes ho
 
 ## 前置依赖
 
-- workflow-state.json 中 platform 字段已设置
-- 01-platform-research.md 文件存在
+- workflow-state.json 中 work_type 字段已设置
+- platform 字段已设置，**或** work_type 为短篇/小故事（可跳过平台调研）
+- 若已执行平台调研：01-platform-research.md 存在；短篇路径可不存在该文件
 
 ## 执行流程
 
 ### 1. 加载平台信息
 
 读取 `novel-project/workflow-state.json` 获取：
-- 目标平台
-- 作品类型
+- 目标平台（platform 字段）
+- 作品类型（work_type 字段）
 
-读取 `novel-project/01-platform-research.md` 获取平台调研数据。
+**短篇路径处理**：
+- 若 work_type 为"短篇小说"或"小故事/短篇集"，且 01-platform-research.md 不存在：
+  - 跳过平台调研数据读取
+  - 将平台设为"公众号/短篇平台"（或用户之前指定的发布场景）
+  - 直接进入题材调研
+
+- 若 01-platform-research.md 存在：读取该文件获取平台调研数据
 
 ### 2. 执行题材调研
 
@@ -39,12 +46,10 @@ description: Use when user needs to select a genre for their novel - analyzes ho
 **动态日期获取**：搜索时必须使用当前年月，不硬编码年份。
 
 **搜索关键词模板**（基于当前日期动态生成）：
-- "[平台名称] {当前年份}年 热门题材 排行榜"
-- "[平台名称] {当前年份}年{当前月份}月 潜力题材 蓝海"
-- "[平台名称] [题材类型] 读者分析 {当前年份}"
-- "[平台名称] 新人作者 题材建议 {当前年份}"
+- 长/中篇："[平台名称] {当前年份}年 热门题材 排行榜"
+- 短篇："公众号短篇 {当前年份}年{当前月份}月 热门题材"、"短篇投稿平台 题材建议 {当前年份}"
 
-**示例**：如果当前日期是2026年3月，则搜索"起点中文网 2026年3月 热门题材 排行榜"
+**示例**：如果当前日期是2026年3月，则搜索"起点中文网 2026年3月 热门题材 排行榜"（长篇）或"公众号短篇 2026年3月 热门题材"（短篇）
 
 ### 3. 分析题材类型
 
@@ -146,6 +151,7 @@ description: Use when user needs to select a genre for their novel - analyzes ho
 
 ### 6. 更新工作流状态
 
+长篇/中篇路径（已完成平台调研）：
 ```json
 {
   "current_stage": "novel_confirmation",
@@ -157,6 +163,22 @@ description: Use when user needs to select a genre for their novel - analyzes ho
   },
   "files": {
     "platform_research": "novel-project/01-platform-research.md",
+    "genre_analysis": "novel-project/02-genre-analysis.md"
+  }
+}
+```
+
+短篇路径（跳过了平台调研）：
+```json
+{
+  "current_stage": "novel_confirmation",
+  "completed_stages": ["work_type_selection", "genre_selection"],
+  "project_info": {
+    "work_type": "短篇小说",
+    "platform": "公众号/短篇平台",
+    "genre": "[用户选择的题材]"
+  },
+  "files": {
     "genre_analysis": "novel-project/02-genre-analysis.md"
   }
 }

@@ -146,6 +146,7 @@ mkdir -p novel-project/10-reviews/quality-reports
 
 创建 `novel-project/workflow-state.json`：
 
+**长篇/中篇路径**（用户选择"出版小说""长篇小说""中篇小说"）：
 ```json
 {
   "current_stage": "platform_research",
@@ -153,6 +154,28 @@ mkdir -p novel-project/10-reviews/quality-reports
   "project_info": {
     "work_type": "[用户选择的类型]",
     "platform": null,
+    "genre": null,
+    "title": null
+  },
+  "files": {
+    "work_type_info": "novel-project/00-work-type.md"
+  },
+  "statistics": {
+    "total_chapters": 0,
+    "total_words": 0,
+    "last_updated": "[当前时间戳]"
+  }
+}
+```
+
+**短篇路径**（用户选择"短篇小说"或"小故事/短篇集"，且选择跳过平台调研）：
+```json
+{
+  "current_stage": "genre_selection",
+  "completed_stages": ["work_type_selection"],
+  "project_info": {
+    "work_type": "[用户选择的类型]",
+    "platform": "公众号/短篇平台",
     "genre": null,
     "title": null
   },

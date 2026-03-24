@@ -13,15 +13,15 @@ description: Use when analyzing successful novels in the same genre/platform - d
 
 ## 触发条件
 
-- 题材选择完成后（推荐）
+- 平台调研完成后、题材选择前执行（标准流程，为选题提供差异化参考）
 - 大纲生成前（帮助设计爽点和节奏）
 - 作品表现不佳时（对标分析差距）
 - 用户明确请求竞品分析
 
 ## 前置依赖
 
-- 平台和题材已确定
-- 01-platform-research.md 和 02-genre-analysis.md 存在
+- 平台已确定
+- 01-platform-research.md 存在（题材候选方向可暂时为空，将在本阶段完成后进入题材选择）
 
 ## 执行流程
 
