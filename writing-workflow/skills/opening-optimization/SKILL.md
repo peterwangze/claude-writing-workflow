@@ -305,6 +305,12 @@ description: Use when optimizing novel opening chapters - applies Golden Three C
 | 节奏拖沓 | 剧情推进太慢 | 删减无效描写 |
 | 缺乏悬念 | 读者没有期待感 | 添加章末钩子 |
 
+## 输出文件
+
+审查报告保存至：`novel-project/10-reviews/opening-optimization-report.md`
+
+> 此报告供 content-generation 和 quality-review 阶段参考。前三章的 quality-review 评分应综合参考本报告的100分制评分结果。
+
 ## 注意事项
 
 - 黄金三章是网文成功的80%

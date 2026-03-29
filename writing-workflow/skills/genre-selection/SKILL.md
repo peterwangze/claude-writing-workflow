@@ -91,9 +91,9 @@ description: Use when user needs to select a genre for their novel - analyzes ho
 ## 红海题材分析
 
 ### [题材名称]
-- 热度指数：★★★★★
+- 热度指数：极高
 - 竞争程度：激烈
-- 新人友好度：★★☆☆☆
+- 新人友好度：低
 - 成功案例：《[作品名]》
 - 突围建议：[具体建议]
 
@@ -103,7 +103,7 @@ description: Use when user needs to select a genre for their novel - analyzes ho
 ## 蓝海题材分析
 
 ### [题材名称]
-- 潜力指数：★★★★☆
+- 潜力指数：高
 - 作品缺口：大
 - 读者粘性：高
 - 成功概率：中等
@@ -196,6 +196,23 @@ description: Use when user needs to select a genre for their novel - analyzes ho
 3. [元素3] - [结合效果]
 
 是否要添加这些元素？
+```
+
+## 搜索失败处理
+
+若 WebSearch 无法获取某题材的最新数据：
+
+```
+AI: 抱歉，无法获取[题材名称]的最新平台数据。
+
+可能原因：
+1. 网络连接问题
+2. 搜索服务暂时不可用
+
+请选择：
+1. 重试搜索
+2. 跳过此题材的数据分析，基于已有信息决策
+3. 手动输入题材信息
 ```
 
 ## 注意事项
