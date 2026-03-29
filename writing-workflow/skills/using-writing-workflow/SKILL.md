@@ -90,8 +90,9 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 
 ### 降级规则（pua Skill 不存在时）
 
-若 `pua:pua` 不可用（未安装 superpowers 或相关插件），**跳过该分支**，改为直接向用户说明：
+若 `pua:pua` 不可用（未安装 superpowers 或相关插件），**跳过该分支**，改为直接向用户说明。
 
+**非质量关键阶段**（work_type_selection, platform_research, competitor_analysis, genre_selection, novel_confirmation, creation_planning）：
 ```
 当前阶段遇到困难，需要您决定下一步：
 
@@ -99,6 +100,17 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 2. 跳过此阶段，进入下一阶段
 3. 退出工作流，稍后继续
 ```
+
+**质量关键阶段**（outline_writing, chapter_outline, content_generation, quality_review, human_ai_collaboration）：
+```
+当前阶段遇到困难，需要您决定下一步：
+
+1. 重新尝试（Claude 使用不同方式重试）
+2. 手动修改后重新审查
+3. 保存当前进度，稍后继续
+```
+
+> ⚠️ 质量关键阶段不提供"跳过"选项，与质量门禁规则保持一致。
 
 不抛出错误，不尝试调用不存在的 Skill。
 
@@ -168,6 +180,15 @@ while (用户未退出) {
 
 > ⚠️ 质量关键阶段不提供"跳过"选项。必须通过质量检查才能进入下一阶段。
 > 唯一例外：短篇用户可跳过 platform_research 和 competitor_analysis。
+
+> ⚠️ 质量门禁最大重试次数：同一阶段连续3次未通过质量检查后，暂停工作流并提示用户：
+>
+> ```
+> 当前阶段已连续3次未通过质量检查。建议：
+> 1. 查看历次审查报告，分析共性问题
+> 2. 手动大幅修改后重新提交
+> 3. 保存进度，寻求外部帮助后继续
+> ```
 
 ## 阶段跳转规则
 

@@ -104,12 +104,11 @@ description: Use when user needs to create novel outline - generates worldbuildi
 
 创建 `novel-project/08-characters/character-relationships.md`：
 
-```markdown
+```
 # 人物关系图
 
 ## 关系总览
 
-```
 主角 [姓名]
 ├── 友情/师徒
 │   ├── [配角A]：[关系描述，如"结义兄弟，共同成长"]
@@ -121,7 +120,6 @@ description: Use when user needs to create novel outline - generates worldbuildi
 │   └── [反派B]：[冲突原因，如"家仇"]
 └── 中立/复杂
     └── [配角C]：[关系描述，如"亦敌亦友，立场多变"]
-```
 
 ## 各卷关系演变
 
