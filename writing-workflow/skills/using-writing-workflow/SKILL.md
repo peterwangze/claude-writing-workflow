@@ -138,6 +138,7 @@ while (用户未退出) {
 
 每次阶段完成后，使用AskUserQuestion确认下一步：
 
+**非质量关键阶段**（work_type_selection, platform_research, competitor_analysis, genre_selection, novel_confirmation, creation_planning）：
 ```
 当前阶段：[阶段名称] 已完成
 
@@ -148,9 +149,25 @@ while (用户未退出) {
 4. 跳到指定阶段
 5. 查看当前进度
 6. 保存并退出
-
-> 注意：选项3"跳过"应始终显示，避免用户找不到跳过入口。短篇用户可跳过平台调研等长篇专属阶段。
 ```
+
+**质量关键阶段**（outline_writing, chapter_outline, content_generation, quality_review, human_ai_collaboration）：
+```
+当前阶段：[阶段名称] 已完成
+
+质量检查结果：[通过/未通过]
+
+可选操作：
+1. 继续下一阶段（仅质量检查通过时可选）
+2. 重新执行当前阶段
+3. 查看质量审查报告
+4. 手动修改后重新审查
+5. 查看当前进度
+6. 保存并退出
+```
+
+> ⚠️ 质量关键阶段不提供"跳过"选项。必须通过质量检查才能进入下一阶段。
+> 唯一例外：短篇用户可跳过 platform_research 和 competitor_analysis。
 
 ## 阶段跳转规则
 
