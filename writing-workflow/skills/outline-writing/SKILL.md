@@ -261,6 +261,11 @@ description: Use when user needs to create novel outline - generates worldbuildi
 - 主角：[本卷发展]
 - 配角：[本卷发展]
 
+#### 付费策略预设
+- 建议VIP上架章节：第[X]章
+- 上架理由：[此处有重大悬念/高潮，读者付费意愿最高]
+- 免费部分钩子：[最后一个免费章的悬念设计]
+
 ### 第二卷：[卷名]
 [同上结构]
 
@@ -278,27 +283,43 @@ description: Use when user needs to create novel outline - generates worldbuildi
 | [伏笔] | [章节] | [章节] | [作用] |
 ```
 
-### 7. 内嵌自检
+### 7. 内嵌自检（含盈利维度）
 
 生成大纲后执行自检：
 
 ```
 大纲自检报告：
 
-✓ 世界观完整性
-  - 主要区域已定义
-  - 势力关系清晰
-  - 规则法则明确
+一、世界观与设定完整性
+✓ 主要区域已定义
+✓ 势力关系清晰
+✓ 规则法则明确
 
-✓ 人物设定
-  - 主角成长线完整
-  - 配角作用明确
-  - 人物关系清晰
+二、人物设定
+✓ 主角成长线完整
+✓ 配角作用明确
+✓ 人物关系清晰
 
-✓ 情节逻辑
-  - 主线清晰
-  - 冲突合理
-  - 高潮设计到位
+三、情节逻辑
+✓ 主线清晰
+✓ 冲突合理
+✓ 高潮设计到位
+
+四、盈利适配检查（新增）
+□ 付费卡点预设：大纲中是否标注了建议的VIP上架位置？
+  - 付费起始章应设置在重大悬念/高潮前
+  - 免费部分是否足够让读者"上钩"？
+□ 爽点商业价值：爽点是否与平台核心指标对齐？
+  - 起点：爽点是否能产生"停留20秒+"的沉浸感？
+  - 番茄：爽点是否在每800字内出现以维持完读率？
+  - 晋江：情感高潮是否足以引发评论区讨论？
+□ 章末钩子密度：每章结尾是否预设了钩子类型？
+□ 短剧/IP 适配：是否有强视觉冲突场景？是否可拆分为独立单元？
+
+五、平台合规预检（新增）
+□ AI 参与度预估：大纲阶段的 AI 使用是否在路径 A（平台安全）范围内？
+□ 政策红线：是否涉及平台禁止的题材元素？
+□ 原创性：核心创意是否有足够的差异化，不会被认定为"套路化"？
 
 ⚠ 需要确认
   - [某设定]是否符合预期？
@@ -319,6 +340,7 @@ description: Use when user needs to create novel outline - generates worldbuildi
 - 世界观设定：[简要描述]
 - 主角设定：[简要描述]
 - 分卷规划：[卷数]卷
+- 建议VIP上架位置：第[X]章（[理由]）
 
 请选择：
 1. 确认大纲，继续下一步
@@ -334,7 +356,6 @@ description: Use when user needs to create novel outline - generates worldbuildi
   "current_stage": "chapter_outline",
   "completed_stages": [..., "outline_writing"],
   "files": {
-    ...
     "outline": "novel-project/05-outline.md",
     "characters": "novel-project/08-characters/",
     "character_relationships": "novel-project/08-characters/character-relationships.md",
@@ -352,3 +373,5 @@ description: Use when user needs to create novel outline - generates worldbuildi
 | 可执行性 | 能指导细纲和正文生成 |
 | 节奏感 | 爽点分布合理 |
 | 差异化 | 有独特的卖点 |
+| **盈利适配** | **付费卡点已预设，爽点与平台指标对齐** |
+| **合规预检** | **无政策红线，AI参与度在安全范围** |
