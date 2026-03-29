@@ -44,6 +44,8 @@ description: Use when preparing to publish a novel on a platform - covers manusc
 
 基于目标平台计算所需存稿：
 
+> ⚠️ 以下存稿数据为历史参考值。执行前必须通过 WebSearch 搜索"[平台] 签约字数要求 {当前年份}"和"[平台] 首秀规则 {当前年份}"核实最新门槛。若搜索结果与下表不符，以搜索结果为准。
+
 **各平台存稿要求**：
 
 | 平台 | 最低存稿 | 建议存稿 | 原因 |
@@ -52,6 +54,8 @@ description: Use when preparing to publish a novel on a platform - covers manusc
 | 番茄小说 | 8万字 | 15-20万字 | 验证期8万字触发推荐+首秀14天不能断更 |
 | 晋江文学城 | 2万字 | 5-8万字 | 更新要求相对宽松但稳定更新加分 |
 | 七猫小说 | 3万字 | 8-10万字 | 保底签约需日更达标 |
+
+> 计算前请先通过 WebSearch 确认目标平台的最新签约字数门槛和推荐期天数。
 
 **存稿计算公式**：
 
@@ -271,6 +275,8 @@ description: Use when preparing to publish a novel on a platform - covers manusc
   2. 爽点密度适当提高
   3. 章末钩子不能松懈
   4. 关注读者反馈及时调整
+
+> ⚠️ 以下达标线为历史参考值，番茄算法经常调整。执行前必须 WebSearch 搜索"番茄小说 首秀 数据达标 {当前年份}"核实最新标准。
 
 首秀数据达标线：
 | 级别 | 日均吸量 | 完读率 | 结果 |
