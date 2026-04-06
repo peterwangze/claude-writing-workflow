@@ -34,6 +34,16 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
     "title": null
   },
   "files": {},
+  "guardrails": {
+    "continuity_mode": "strict",
+    "latest_passed_chapter": 0,
+    "latest_ai_path": null,
+    "release_allowed": true,
+    "monetization_allowed": true,
+    "latest_drift_score": null,
+    "latest_context_card": null,
+    "latest_continuity_ledger": "novel-project/17-continuity/continuity-ledger.md"
+  },
   "statistics": {
     "total_chapters": 0,
     "total_words": 0,
@@ -244,6 +254,7 @@ mkdir -p novel-project/07-content
 mkdir -p novel-project/08-characters
 mkdir -p novel-project/09-worldbuilding
 mkdir -p novel-project/10-reviews/quality-reports
+mkdir -p novel-project/17-continuity
 ```
 
 ### 状态更新
@@ -253,7 +264,54 @@ mkdir -p novel-project/10-reviews/quality-reports
 - 更新 `current_stage`
 - 更新 `project_info` 相关字段
 - 更新 `files` 映射
+- 更新 `guardrails`：
+  - `latest_passed_chapter`：最近通过看护流程的章节号
+  - `latest_ai_path`：最近一次合规评估的 A/B/C 路径
+  - `release_allowed`：是否允许进入上架发布阶段
+  - `monetization_allowed`：是否允许进入变现策略阶段
+  - `latest_drift_score`：最近一章的偏离度
+  - `latest_context_card`：当前章节看护卡路径
+  - `latest_continuity_ledger`：连续性账本路径
 - 更新 `last_updated` 时间戳
+
+## 正文看护流程
+
+正文生成和质量审查阶段必须执行以下看护链路，目标是减少大纲偏离、细纲偏离和上下文断裂：
+
+```text
+大纲阶段：
+  生成 continuity story bible（不可变更事实、时间线锚点、人物初始状态、关键伏笔）
+
+细纲阶段：
+  为每章生成 chapter context card（本章起点状态、必写场景、禁止偏离项、章末交接状态）
+
+正文阶段：
+  先读取 story bible + chapter context card + 前章连续性账本
+  再按场景顺序逐段生成，禁止跳过必写场景或随意新增设定
+
+审查阶段：
+  先做连续性硬门槛检查，再做人物/文风/平台适配评分
+```
+
+### 连续性硬门槛
+
+出现以下任一情况时，正文视为**未通过**，不得继续下一阶段：
+
+1. 场景覆盖率低于 90%
+2. 偏离度高于 15%
+3. 前后章时间线、地点、人物状态存在硬冲突
+4. 本章 context card 中的必写信息缺失
+5. 未经说明擅自新增关键设定、人物关系或世界规则
+
+### 允许的有限偏离
+
+以下偏离可以接受，但必须在本章自检和审查报告中解释原因：
+
+- 细节扩写但不改变场景功能
+- 衔接过渡补写
+- 为增强连贯性添加的微小动作、情绪、环境信息
+
+> 原则：允许“补充”，不允许“改轨”。
 
 ## 错误处理
 

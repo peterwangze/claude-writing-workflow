@@ -26,13 +26,17 @@ description: Use when preparing to publish a novel on a platform - covers manusc
 
 ## AI 参与度合规闸门
 
-> 进入本阶段前，必须检查当前作品的 AI 参与度评级。
+> 进入本阶段前，必须检查 `workflow-state.json.guardrails`：
+> - `latest_ai_path`
+> - `release_allowed`
 
 | 评级 | 行为 |
 |------|------|
 | **A 级**（平台安全） | ✅ 放行，正常执行上架发布策略 |
 | **B 级**（灰区） | ⚠️ 警告：建议仅在自发平台发布，不建议直接签约投稿。若用户坚持，需大幅人工改稿后重新通过 `human-ai-collaboration` 评估 |
 | **C 级**（高风险） | 🚫 阻断：不允许进入此阶段。提示用户将作品用于学习练习，或大幅人工重写后重新评估 |
+
+若 `release_allowed = false`，无论用户主观判断如何，默认阻断本阶段。
 
 ## 数据时效性提示
 

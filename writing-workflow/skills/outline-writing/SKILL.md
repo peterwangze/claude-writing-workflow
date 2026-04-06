@@ -281,7 +281,41 @@ description: Use when user needs to create novel outline - generates worldbuildi
 | [伏笔] | [章节] | [章节] | [作用] |
 ```
 
-### 7. 内嵌自检（含盈利维度）
+### 7. 生成连续性总纲
+
+创建 `novel-project/17-continuity/story-bible.md`：
+
+```markdown
+# 连续性总纲
+
+## 不可变更事实
+- [主角核心身份]
+- [关键关系设定]
+- [世界规则/禁忌]
+
+## 时间线锚点
+| 节点 | 必然事件 | 不能改变的结果 |
+|------|----------|---------------|
+| [节点] | [事件] | [结果] |
+
+## 人物基线状态
+| 人物 | 起始状态 | 禁止越界行为 |
+|------|---------|-------------|
+| [人物] | [状态] | [禁止项] |
+
+## 关键伏笔清单
+| 伏笔 | 埋设章节 | 最迟回收章节 | 当前状态 |
+|------|----------|-------------|---------|
+| [伏笔] | [章节] | [章节] | 未回收 |
+
+## 禁止偏离事项
+- 不得无解释改变主角目标
+- 不得无铺垫新增关键设定
+- 不得跳过已承诺回收的关键伏笔
+- 不得改写大纲中已锁定的重大转折结果
+```
+
+### 8. 内嵌自检（含盈利维度）
 
 生成大纲后执行自检：
 
@@ -319,15 +353,20 @@ description: Use when user needs to create novel outline - generates worldbuildi
 □ 政策红线：是否涉及平台禁止的题材元素？
 □ 原创性：核心创意是否有足够的差异化，不会被认定为"套路化"？
 
+六、连续性看护准备（新增）
+□ 是否生成了 continuity story bible？
+□ 是否明确列出了不可变更事实、时间线锚点、人物基线状态？
+□ 是否锁定了关键伏笔和禁止偏离事项？
+
 ⚠ 需要确认
   - [某设定]是否符合预期？
 ```
 
-### 8. 调用质量审查
+### 9. 调用质量审查
 
 调用 quality-review skill 进行大纲质量审查。
 
-### 9. 用户确认
+### 10. 用户确认
 
 使用AskUserQuestion确认大纲：
 
@@ -347,7 +386,7 @@ description: Use when user needs to create novel outline - generates worldbuildi
 4. 重新生成大纲
 ```
 
-### 10. 更新工作流状态
+### 11. 更新工作流状态
 
 ```json
 {
@@ -357,7 +396,8 @@ description: Use when user needs to create novel outline - generates worldbuildi
     "outline": "novel-project/05-outline.md",
     "characters": "novel-project/08-characters/",
     "character_relationships": "novel-project/08-characters/character-relationships.md",
-    "worldbuilding": "novel-project/09-worldbuilding/"
+    "worldbuilding": "novel-project/09-worldbuilding/",
+    "continuity_bible": "novel-project/17-continuity/story-bible.md"
   }
 }
 ```
@@ -373,3 +413,4 @@ description: Use when user needs to create novel outline - generates worldbuildi
 | 差异化 | 有独特的卖点 |
 | **盈利适配** | **付费卡点已预设，爽点与平台指标对齐** |
 | **合规预检** | **无政策红线，AI参与度在安全范围** |
+| **连续性可执行** | **story bible 完整，可用于锁定后续正文看护** |

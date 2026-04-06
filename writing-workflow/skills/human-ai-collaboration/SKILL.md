@@ -321,6 +321,39 @@ AI 参与度评估报告：
 
 > 注：晋江等平台可能要求保留"AI 前最后一版原稿 + AI 对话过程 + AI 输出首稿"。以上模板已覆盖此要求。
 
+### 7. 更新工作流状态（强制）
+
+完成路径评估后，必须把结论写回 `novel-project/workflow-state.json`：
+
+```json
+{
+  "guardrails": {
+    "latest_ai_path": "A|B|C",
+    "release_allowed": true,
+    "monetization_allowed": true
+  }
+}
+```
+
+更新规则：
+
+- 路径 A：
+  - `latest_ai_path = "A"`
+  - `release_allowed = true`
+  - `monetization_allowed = true`
+- 路径 B：
+  - `latest_ai_path = "B"`
+  - `release_allowed = false`
+  - `monetization_allowed = false`
+  
+  > 若用户坚持走平台签约投稿路径，必须先大幅人工改稿，再重新执行本 Skill 评估。未重新评估前，不得手动改回 true。
+- 路径 C：
+  - `latest_ai_path = "C"`
+  - `release_allowed = false`
+  - `monetization_allowed = false`
+
+> 这一步是风控闸门真正生效的关键。只生成日志但不回写状态，视为流程未完成。
+
 ## 紧急应对方案
 
 ### 被平台警告时

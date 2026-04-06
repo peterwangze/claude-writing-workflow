@@ -146,6 +146,7 @@ Claude：[执行 WebSearch 获取当前市场数据...]
 - `novel-project/05-outline.md`
 - `novel-project/08-characters/`（主角/配角/关系图）
 - `novel-project/09-worldbuilding/`（世界观/力量体系）
+- `novel-project/17-continuity/story-bible.md`（连续性总纲）
 
 生成后建议调用质量审查（架构/节奏/用户画像三角色审查）。
 
@@ -156,6 +157,17 @@ Claude：[执行 WebSearch 获取当前市场数据...]
 **输出**：`novel-project/06-chapter-outlines/chapter-XXX.md`
 
 逐章生成细纲（概要/场景/情节四要素/伏笔），分批确认后继续。
+
+同时为每章生成：
+
+- `novel-project/17-continuity/chapter-XXX-context.md`
+
+其中包含：
+
+- 本章输入状态
+- 必写场景
+- 禁止偏离项
+- 本章结束状态
 
 ---
 
@@ -172,6 +184,26 @@ Claude：[执行 WebSearch 获取当前市场数据...]
 | **晋江** | 情感有层次、人设优先、章末引发评论 |
 
 前三章完成后建议调用 `opening-optimization` 进行黄金三章专项优化。
+
+### 正文看护流程
+
+为减少“脱离大纲、脱离细纲、上下文断裂”，正文阶段执行四层看护：
+
+1. **story bible 锁定**：先读取 `17-continuity/story-bible.md` 中的硬事实、时间线锚点、人物基线状态
+2. **chapter context card 锁定**：逐章读取 `17-continuity/chapter-XXX-context.md`，明确本章必写场景和禁止偏离项
+3. **场景级逐段生成**：按场景顺序生成，而不是一次性自由发挥整章
+4. **连续性硬门槛**：若场景覆盖率 <90%、偏离度 >15%、或出现人物/时间线硬冲突，则本章必须重写，不允许继续下一阶段
+
+每章通过看护流程后，更新：
+
+- `novel-project/17-continuity/continuity-ledger.md`
+
+用于记录：
+
+- 本章结束人物状态
+- 新增已生效事实
+- 新埋伏笔 / 已回收伏笔
+- 下一章必须承接点
 
 ---
 
@@ -257,7 +289,7 @@ VIP 上架时机、付费卡点设计、全勤奖规划、打赏激励、收益�
 
 ```
 novel-project/
-├── workflow-state.json         # 工作流状态（由 Claude 遵循规范更新）
+├── workflow-state.json         # 工作流状态（由 Claude 遵循规范更新，含正文看护 guardrails）
 ├── 00-work-type.md
 ├── 01-platform-research.md
 ├── 02-genre-analysis.md
@@ -274,7 +306,8 @@ novel-project/
 ├── 13-creation-logs/           # AI合规创作日志
 ├── 14-launch-strategy.md
 ├── 15-monetization-strategy.md
-└── 16-competitor-analysis.md
+├── 16-competitor-analysis.md
+└── 17-continuity/              # 正文看护资产（story bible / context card / continuity ledger）
 ```
 
 > `novel-project/` 已加入 `.gitignore`，创作内容仅保存在本地。

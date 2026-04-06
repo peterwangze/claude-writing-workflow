@@ -19,13 +19,17 @@ description: Use when planning revenue strategy for a novel - covers VIP timing,
 
 ## AI 参与度合规闸门
 
-> 进入本阶段前，必须检查当前作品的 AI 参与度评级。
+> 进入本阶段前，必须检查 `workflow-state.json.guardrails`：
+> - `latest_ai_path`
+> - `monetization_allowed`
 
 | 评级 | 行为 |
 |------|------|
 | **A 级**（平台安全） | ✅ 放行，正常执行变现策略 |
 | **B 级**（灰区） | ⚠️ 警告：仅提供非签约平台变现建议（自发平台打赏/流量分成等），不提供平台签约收益优化 |
 | **C 级**（高风险） | 🚫 阻断：不允许进入此阶段。提示用户将作品用于学习练习 |
+
+若 `monetization_allowed = false`，默认阻断平台签约收益优化建议。
 
 ## 数据时效性提示
 

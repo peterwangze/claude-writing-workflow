@@ -24,6 +24,8 @@ description: Use when user needs writing assistance for novel content - helps hu
 - workflow-state.json 中 chapter_outline 阶段已完成
 - 至少有一章细纲存在
 - 人物设定和世界观文件存在
+- `novel-project/17-continuity/story-bible.md` 存在
+- 当前章节对应的 `novel-project/17-continuity/chapter-XXX-context.md` 存在
 
 ## 执行流程
 
@@ -33,8 +35,63 @@ description: Use when user needs writing assistance for novel content - helps hu
 - `novel-project/workflow-state.json`
 - `novel-project/05-outline.md`（大纲摘要）
 - `novel-project/06-chapter-outlines/chapter-XXX.md`（当前章节细纲）
+- `novel-project/17-continuity/story-bible.md`（连续性总纲）
+- `novel-project/17-continuity/chapter-XXX-context.md`（本章正文看护卡）
 - `novel-project/08-characters/main-characters.md`（人物设定）
 - 前3章正文（如存在）
+
+### 1.1 生成前看护预检（强制）
+
+在开始生成正文前，必须先完成以下看护预检：
+
+```text
+看护预检清单：
+1. story bible 是否已加载
+2. chapter context card 是否已加载
+3. 上一章结尾状态是否已确认
+4. 本章输入状态是否与上一章一致
+5. 本章必写场景是否完整
+6. 本章禁止偏离项是否明确
+```
+
+若任一项缺失，先补看护资料，不得直接生成正文。
+
+### 1.2 构建正文看护包（强制）
+
+生成前，先把关键约束整理成一份“正文看护包”：
+
+```markdown
+# 第X章 正文看护包
+
+## 不可变更事实
+- [来自 story bible 的硬事实]
+
+## 本章输入状态
+- [人物位置]
+- [人物关系状态]
+- [未回收伏笔]
+- [必须承接的上一章钩子]
+
+## 本章必写场景
+1. [场景一]
+2. [场景二]
+
+## 本章允许发挥范围
+- 可补充的细节
+- 可扩写的情绪
+- 可增加的环境描写
+
+## 本章禁止偏离项
+- 禁止跳过的场景
+- 禁止新增的设定
+- 禁止改变的人物目标/关系/结果
+
+## 本章结束状态
+- 本章结束人物状态
+- 留给下一章的钩子
+```
+
+> 原则：正文生成时必须始终以“正文看护包”为第一约束，其优先级高于自由发挥。
 
 ### 2. 确认生成范围
 
@@ -65,12 +122,47 @@ description: Use when user needs writing assistance for novel content - helps hu
 加载上下文：
 - 大纲摘要 ✓
 - 本章细纲 ✓
+- story bible ✓
+- chapter context card ✓
 - 人物设定 ✓
 - 前3章内容 ✓
 
 生成中...
 [生成正文内容]
 ```
+
+**生成规则（严格执行）**：
+
+1. 按 `chapter-XXX-context.md` 中的“本章必写场景”顺序写，不得跳场景
+2. 场景功能不能变：
+   - 细纲中负责“推进情节”的场景，正文不能改成纯气氛描写
+   - 细纲中负责“回收伏笔”的场景，正文不能只做铺垫不回收
+3. 若确需新增内容，只允许新增：
+   - 衔接动作
+   - 情绪细节
+   - 环境补写
+
+   不允许新增：
+   - 核心设定
+   - 关键人物
+   - 关键冲突方向
+4. 每写完一个场景，都要自问：
+   - 这个场景是否仍在服务细纲原目标？
+   - 是否改变了本章结尾状态？
+   - 是否影响后续章节承接？
+
+### 3.1 场景级逐段生成（推荐）
+
+为减少大纲偏离和上下文断裂，推荐采用“按场景逐段生成”：
+
+```text
+步骤 1：只写场景一，检查是否命中本场景目标
+步骤 2：再写场景二，检查与场景一承接是否顺畅
+步骤 3：逐场景推进，直到本章结束状态完成
+步骤 4：最后统一做全章连贯性复核
+```
+
+> 如果是长篇连载或前文信息复杂，默认使用场景级逐段生成，而不是一次性整章生成。
 
 ### 4. 正文模板
 
@@ -135,7 +227,25 @@ description: Use when user needs writing assistance for novel content - helps hu
 六、前后文连贯
   - 承接自然：[是/否]
   - 无矛盾：[是/否，列出矛盾]
+
+七、看护命中率（新增）
+  - story bible 硬事实命中：[X]/[Y]
+  - context card 必写项命中：[X]/[Y]
+  - 本章结束状态是否与 context card 一致：[是/否]
 ```
+
+### 5.1 连续性硬失败条件
+
+出现以下任一情况时，本章判定为**硬失败**，必须重写或修正后重新审查：
+
+1. 场景覆盖率 < 90%
+2. 偏离度 > 15%
+3. story bible 中的不可变更事实被改写
+4. `chapter-XXX-context.md` 中的必写场景缺失
+5. 本章结束状态与 context card 不一致
+6. 与前章存在人物位置、时间线、关系、目标上的硬冲突
+
+> 硬失败优先级高于总分。只要命中硬失败，就不允许进入下一阶段。
 
 ### 6. 调用合规评估与质量审查
 
@@ -193,11 +303,34 @@ description: Use when user needs writing assistance for novel content - helps hu
 
 > 注意：偏离度>20%时，**不提供"忽略并继续"选项**。
 
-### 8. 更新工作流状态
+### 8. 更新连续性账本
+
+当正文通过看护流程后，更新 `novel-project/17-continuity/continuity-ledger.md`：
+
+```markdown
+# 连续性账本
+
+## 第X章
+- 已确认通过章节：chapter-XXX
+- 本章结束人物状态：[描述]
+- 本章结束地点/时间：[描述]
+- 本章新增已生效事实：[列表]
+- 本章新埋伏笔：[列表]
+- 本章回收伏笔：[列表]
+- 下一章必须承接点：[列表]
+```
+
+### 9. 更新工作流状态
 
 ```json
 {
   "current_stage": "content_generation",
+  "guardrails": {
+    "latest_passed_chapter": 1,
+    "latest_drift_score": "[X]%",
+    "latest_context_card": "novel-project/17-continuity/chapter-001-context.md",
+    "latest_continuity_ledger": "novel-project/17-continuity/continuity-ledger.md"
+  },
   "statistics": {
     "total_chapters": 10,
     "completed_chapters": 1,
@@ -215,6 +348,8 @@ description: Use when user needs writing assistance for novel content - helps hu
 |----------|----------|
 | 大纲 | 加载摘要版本 |
 | 细纲 | 加载当前章节完整内容 |
+| story bible | 加载完整硬事实与时间线锚点 |
+| context card | 加载当前章节完整看护卡 |
 | 人物设定 | 加载本章出场人物设定 |
 | 前文 | 加载前3章内容 |
 

@@ -24,7 +24,7 @@ description: Use when quality check is needed - reviews content for consistency,
 |------|----------|----------|
 | 大纲 | 世界观完整性、设定逻辑性、节奏合理性 | 架构审查员、节奏审查员、用户画像审查员 |
 | 细纲 | 与大纲一致性、章节连贯性 | 情节审查员、连贯性审查员 |
-| 正文 | 人物一致性、前后文连贯性、文风、AI痕迹 | 连贯性审查员、人物审查员、文风审查员、AI痕迹审查员 |
+| 正文 | 细纲一致性、人物一致性、前后文连贯性、文风、AI痕迹 | 连贯性审查员、人物审查员、文风审查员、AI痕迹审查员 |
 
 ## 执行流程
 
@@ -40,7 +40,7 @@ description: Use when quality check is needed - reviews content for consistency,
 根据审查类型加载对应文件：
 - 大纲审查：05-outline.md, 08-characters/, 09-worldbuilding/
 - 细纲审查：06-chapter-outlines/chapter-XXX.md, 05-outline.md
-- 正文审查：07-content/chapter-XXX.md, 06-chapter-outlines/, 08-characters/
+- 正文审查：07-content/chapter-XXX.md, 06-chapter-outlines/, 08-characters/, 17-continuity/story-bible.md, 17-continuity/chapter-XXX-context.md, 17-continuity/continuity-ledger.md
 
 ### 3. 执行审查
 
@@ -115,6 +115,15 @@ description: Use when quality check is needed - reviews content for consistency,
 
 ```
 ## 正文质量审查报告
+
+### 连续性硬门槛（先判定）
+
+出现以下任一情况，直接判定为**不通过**：
+- 场景覆盖率 < 90%
+- 偏离度 > 15%
+- 前后章时间线、地点、人物状态存在硬冲突
+- `chapter-XXX-context.md` 中的必写场景缺失
+- 本章结束状态与 context card 不一致
 
 ### 评分体系（100分制，60分及格）
 
@@ -345,9 +354,9 @@ AI痕迹统计：
 | 七猫小说 | 官方提供 AI 辅助工具；要求原创和质量 | 人类主导创作，AI 做辅助 |
 | 起点/阅文 | 未检索到公开明确阈值；建议按高风险平台处理 | 最高安全标准 |
 
-### AI检测必过检查项
+### 写作质量检查项（用于内控）
 
-生成内容必须通过以下检测才能通过平台审核：
+以下检查用于发现机械化表达、连贯性风险和低质段落，**不等同于平台官方审核标准**：
 
 #### 1. 句式多样性检测
 
