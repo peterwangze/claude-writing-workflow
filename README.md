@@ -263,6 +263,16 @@ claude-writing-workflow/
 
 ## 版本历史
 
+### v1.1.0
+- 统一偏离度/场景覆盖率阈值标准（10%/15% 硬门槛），消除 P0 级矛盾
+- 补齐短篇/公众号路径平台算法适配
+- 对齐 context card 与看护包字段，消除正文生成偏移风险
+- novel-creator agent 新增正文看护指令
+- 消除 AI 合规闸门在 launch-strategy 和 monetization-strategy 中的代码重复
+- 修复 hooks 跨平台兼容性（Unix/macOS）
+- 修复 novel-confirmation section 编号重复
+- 强化 quality-review 独立 subagent 审查执行保证
+
 ### v1.0.0
 - 18 个完整 Skill 覆盖创作全链路
 - 平台算法适配写法（番茄/起点/晋江）

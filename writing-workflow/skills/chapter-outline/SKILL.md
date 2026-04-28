@@ -149,6 +149,11 @@ description: Use when user needs to create chapter outlines - generates detailed
 - 不得无铺垫新增[设定/人物/能力]
 - 不得改变[人物关系/目标/已发生事实]
 
+## 本章允许发挥范围
+- 可补充的细节方向
+- 可扩写的情绪段落
+- 可增加的环境描写
+
 ## 本章必须回收/推进
 - [伏笔/承诺/冲突]
 

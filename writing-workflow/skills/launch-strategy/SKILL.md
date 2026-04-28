@@ -26,17 +26,13 @@ description: Use when preparing to publish a novel on a platform - covers manusc
 
 ## AI 参与度合规闸门
 
-> 进入本阶段前，必须检查 `workflow-state.json.guardrails`：
-> - `latest_ai_path`
-> - `release_allowed`
+> 闸门规则详见 `human-ai-collaboration` skill 中的"风险闸门机制"。该 Skill 在每章正文生成后评估 AI 参与度并回写 `workflow-state.json.guardrails`。
 
-| 评级 | 行为 |
-|------|------|
-| **A 级**（平台安全） | ✅ 放行，正常执行上架发布策略 |
-| **B 级**（灰区） | ⚠️ 警告：建议仅在自发平台发布，不建议直接签约投稿。若用户坚持，需大幅人工改稿后重新通过 `human-ai-collaboration` 评估 |
-| **C 级**（高风险） | 🚫 阻断：不允许进入此阶段。提示用户将作品用于学习练习，或大幅人工重写后重新评估 |
+进入本阶段前，必须检查 `workflow-state.json.guardrails`：
+- `latest_ai_path`：当前 AI 参与度评级（A/B/C）
+- `release_allowed`：是否允许进入上架发布阶段
 
-若 `release_allowed = false`，无论用户主观判断如何，默认阻断本阶段。
+若 `release_allowed = false`，阻断本阶段执行并提示用户：当前 AI 参与度评级不支持平台签约投稿。请通过 `human-ai-collaboration` skill 重新评估后重试。
 
 ## 数据时效性提示
 

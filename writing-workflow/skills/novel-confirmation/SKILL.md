@@ -116,7 +116,7 @@ description: Use when user needs to confirm novel details - generates book title
 3. 调整主选内容
 ```
 
-### 5. 展示备选方案
+### 6. 展示备选方案
 
 主选确认后，展示5个备选：
 
@@ -140,7 +140,7 @@ description: Use when user needs to confirm novel details - generates book title
 4. 重新生成全部备选
 ```
 
-### 6. 生成作品信息文件
+### 7. 生成作品信息文件
 
 输出文件：`novel-project/03-novel-info.md`
 
@@ -220,7 +220,7 @@ description: Use when user needs to confirm novel details - generates book title
 - [ ] 目标读者确认
 ```
 
-### 7. 更新工作流状态
+### 8. 更新工作流状态
 
 长篇/中篇路径（已完成平台调研）：
 ```json

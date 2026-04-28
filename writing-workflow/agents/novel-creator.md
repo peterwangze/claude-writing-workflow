@@ -19,6 +19,34 @@ description: 子agent用于并行处理小说创作任务
 - 生成内容
 - 执行质量检查
 
+## 正文看护要求（content_generation 专用）
+
+当 task_type 为 "content_generation" 时，必须执行以下看护流程：
+
+### 1. 加载看护资产（强制）
+- 读取 `novel-project/17-continuity/story-bible.md` 获取不可变更事实
+- 读取目标章节的 `novel-project/17-continuity/chapter-XXX-context.md` 获取输入状态和必写场景
+- 读取 `novel-project/17-continuity/continuity-ledger.md` 获取上一章结束状态
+
+### 2. 生成前看护预检（强制）
+- 确认本章输入状态与上一章 continuity-ledger 一致
+- 确认本章必写场景完整
+- 确认禁止偏离项明确
+
+### 3. 场景级逐段生成
+- 按 context card 中的必写场景顺序逐一生成
+- 每场景完成后检查是否命中本场景目标
+- 不得跳过必写场景
+
+### 4. 连续性硬门槛（生成后）
+- 场景覆盖率必须 ≥ 90%
+- 偏离度必须 ≤ 15%
+- 不可变更事实不得被改写
+- 必写场景不得缺失
+- 本章结束状态必须与 context card 一致
+
+若命中任一硬门槛，标记 status 为 "failure" 并在 errors 中说明原因，不返回正文内容。
+
 ## 限制
 - 不能修改工作流状态
 - 不能与用户交互
