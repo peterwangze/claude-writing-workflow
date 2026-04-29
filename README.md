@@ -263,6 +263,16 @@ claude-writing-workflow/
 
 ## 版本历史
 
+### v1.4.0
+- quality-review 评分体系重构为行业标准 8 维度 100 分制
+- 修复文件加载链：character-relationships / world-settings / power-system 全下游可读取
+- 修复 ledger↔context 字段粒度对齐（逐角色状态 + 主角目标）
+- 修复 subagent 审查 prompt 模板（补全 bible/context/ledger 路径）
+- 力量体系模板结构化（晋升条件/资源/风险/副作用/实力差距）
+- 统一 outline 与 story-bible 的伏笔表字段
+- 新增连续性硬门槛：bible 不可变更事实改写检测 + 伏笔逾期检测
+- 新增 ledger 重写版本控制和审查反馈修正循环
+
 ### v1.3.0
 - 体裁选择注入盈利数据（按体裁/按平台收入搜索+盈利潜力评估）
 - 新增 5 种合同陷阱保护（自动续约、优先购买权、竞业限制、广告权、独家范围）
