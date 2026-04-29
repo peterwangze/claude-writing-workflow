@@ -468,7 +468,7 @@ description: Use when tracking novel performance data - monitors completion rate
 3. 角色调整：[具体建议]
    - 原因：[读者反馈]
 
-确认后续细纲调整方案？
+使用AskUserQuestion确认后续细纲调整方案？
 
 1. 全部应用以上调整到后续细纲
 2. 选择性应用（请指定哪些调整）

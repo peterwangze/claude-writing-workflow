@@ -313,6 +313,8 @@ description: Use when optimizing novel opening chapters - applies Golden Three C
 
 ### 用户确认
 
+使用AskUserQuestion确认：
+
 ```
 黄金三章优化报告已完成！总分：[X]/100
 

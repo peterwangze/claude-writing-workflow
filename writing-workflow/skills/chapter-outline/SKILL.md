@@ -228,7 +228,7 @@ description: Use when user needs to create chapter outlines - generates detailed
 
 ### 7. 用户确认
 
-每批生成后确认：
+每批生成后使用AskUserQuestion确认：
 
 ```
 第X-Y章细纲生成完成！

@@ -105,6 +105,8 @@ description: Use when starting novel creation - helps user select work type (nov
 
 ### 4. 确认选择
 
+使用AskUserQuestion确认：
+
 ```
 作品类型已确认：[类型]
 

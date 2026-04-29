@@ -234,6 +234,8 @@ description: Use when analyzing successful novels in the same genre/platform - d
 
 ### 7. 用户确认
 
+使用AskUserQuestion确认：
+
 ```
 竞品分析完成！
 
@@ -271,7 +273,8 @@ AI: 抱歉，无法获取[作品名称]的公开信息。
 2. 搜索服务暂时不可用
 3. 该作品公开信息较少
 
-请选择：
+使用AskUserQuestion确认处理方式：
+
 1. 重试搜索
 2. 使用通用分析框架（不含具体数据，仅提供分析维度）
 3. 跳过此竞品，分析其他作品

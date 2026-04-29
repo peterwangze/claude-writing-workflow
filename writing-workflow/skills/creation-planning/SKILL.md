@@ -52,6 +52,8 @@ description: Use when user needs to plan novel creation - defines length, update
 
 ### 2. 确认发布频率
 
+使用AskUserQuestion确认：
+
 ```
 请选择您的发布频率：
 
@@ -75,6 +77,8 @@ description: Use when user needs to plan novel creation - defines length, update
 ```
 
 ### 3. 确认章节长度
+
+使用AskUserQuestion确认：
 
 ```
 请选择您的章节长度：
@@ -128,7 +132,7 @@ description: Use when user needs to plan novel creation - defines length, update
    - 地图扩展：随剧情逐步开放新地图
    - 力量体系：[基于题材的建议]
 
-是否接受以上指导原则？
+使用AskUserQuestion确认是否接受以上指导原则？
 1. 接受
 2. 调整（请说明需要调整的部分）
 ```
@@ -268,7 +272,7 @@ description: Use when user needs to plan novel creation - defines length, update
 2. 读者反馈节奏问题
 3. 剧情发展需要扩展/压缩
 
-是否需要调整规划？
+使用AskUserQuestion确认是否需要调整规划？
 1. 调整篇幅
 2. 调整更新频率
 3. 调整节奏设置

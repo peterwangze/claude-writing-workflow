@@ -254,7 +254,7 @@ description: Use when user needs writing assistance for novel content - helps hu
 
 ### 7. 用户确认
 
-根据偏离度不同，展示不同的确认选项：
+使用AskUserQuestion根据偏离度不同展示确认选项：
 
 **偏离度 ≤10%（合格）**：
 ```
