@@ -263,6 +263,18 @@ claude-writing-workflow/
 
 ## 版本历史
 
+### v1.2.0
+- 状态更新从完整替换改为增量模式，消除逐阶段覆盖导致的数据丢失
+- work-type-selection 初始状态补齐 guardrails 对象
+- 补全 11-data-monitoring/12-reader-interaction/13-creation-logs 目录创建
+- 对齐 creation-planning 与 launch-strategy 的存稿数字
+- genre-selection 消费 competitor-analysis 的差异化分析结果
+- 补齐 launch-strategy/monetization-strategy/data-monitoring/reader-interaction 的状态更新
+- data-monitoring/reader-interaction/opening-optimization/novel-style-learning 补全用户交互
+- 统一 WebSearch 搜索失败降级选项为 4 项标准格式
+- 合并 data-monitoring 重复报告模板
+- 清理 human-ai-collaboration 路径 C 重复赋值
+
 ### v1.1.0
 - 统一偏离度/场景覆盖率阈值标准（10%/15% 硬门槛），消除 P0 级矛盾
 - 补齐短篇/公众号路径平台算法适配
