@@ -263,6 +263,13 @@ claude-writing-workflow/
 
 ## 版本历史
 
+### v2.1.0
+- 新增 14 个 Agent 的子 Agent 启动协议模板（标准 prompt + 三层约束注入）
+- 审查组 5 个 Agent 支持并行启动
+- 每个启动模板包含：角色定义路径 + SKILL 规范路径 + 工作文件绝对路径 + 任务描述
+- 内容写作者启动 prompt 明确"只负责写，不自审"
+- Agent 启动使用 `isolation: "worktree"` 实现文件隔离
+
 ### v2.0.0
 - **重大架构变更**：引入 Agent Team 模式，14 个专业 Agent 分属 5 个职能团队
 - 市场调研组：市场分析师 + 竞品拆解专家
