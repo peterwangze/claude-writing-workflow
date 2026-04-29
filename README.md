@@ -263,6 +263,11 @@ claude-writing-workflow/
 
 ## 版本历史
 
+### v1.2.1
+- 全 18 个 Skill 强制使用 AskUserQuestion 进行用户决策交互
+- quality-review / opening-optimization / novel-style-learning 从零开始引入 AskUserQuestion
+- 统所有用户确认步骤和搜索失败处理为 AskUserQuestion 模式
+
 ### v1.2.0
 - 状态更新从完整替换改为增量模式，消除逐阶段覆盖导致的数据丢失
 - work-type-selection 初始状态补齐 guardrails 对象
