@@ -74,6 +74,41 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 | data_monitoring | 数据监控 | data-monitoring | 监控运营数据+数据→内容闭环（发布后） |
 | reader_interaction | 读者互动 | reader-interaction | 管理读者关系（发布后） |
 
+## Agent Team 调度
+
+本工作流采用 **Agent Team 模式**，不同阶段由不同职能的专业 Agent 执行，避免同一 LLM 创作又审查自己的内容。
+
+### 团队结构
+
+| 团队 | Agent | 负责阶段 | Agent 文件 |
+|------|-------|---------|-----------|
+| 市场调研组 | 市场分析师 | platform_research, genre_selection | `agents/market-analyst.md` |
+| | 竞品拆解专家 | competitor_analysis | `agents/competitor-analyst.md` |
+| 策划创作组 | 创作策略顾问 | work_type_selection, creation_planning | `agents/creation-strategist.md` |
+| | 小说架构师 | outline_writing | `agents/novel-architect.md` |
+| 内容生产组 | 章节设计师 | chapter_outline | `agents/chapter-designer.md` |
+| | 内容写作者 | content_generation | `agents/content-writer.md` |
+| 审查组 | 连续性审查员 | 连续性硬门槛 + ledger 验证 | `agents/continuity-reviewer.md` |
+| | 人物世界观审查员 | 人物一致性 + 世界观合规 | `agents/character-world-reviewer.md` |
+| | 情节逻辑审查员 | 因果链 + 伏笔 + 冲突升级 | `agents/plot-logic-reviewer.md` |
+| | 商业编辑 | 平台适配 + 付费设计 + 文学质量 | `agents/commercial-editor.md` |
+| | AI合规官 | human_ai_collaboration | `agents/ai-compliance-officer.md` |
+| 运营组 | 发布策略师 | launch_strategy | `agents/launch-strategist.md` |
+| | 变现顾问 | monetization_strategy | `agents/monetization-advisor.md` |
+| | 数据运营分析师 | data_monitoring, reader_interaction | `agents/data-analyst.md` |
+
+### 调度规则
+
+1. **创作者与审查者绝对分离**：内容写作者完成正文后，必须由审查组的独立 Agent 进行审查
+2. **审查组并行执行**：连续性审查员、人物世界观审查员、情节逻辑审查员、商业编辑可并行启动
+3. **每个 Agent 使用独立 subagent**：`Agent` 工具启动，加载对应的 agent 定义文件
+4. **Agent 定义优先于 SKILL**：Agent 文件定义"谁来做、怎么做"，SKILL 文件定义"做什么标准"
+5. **Coordinator 不替代 Agent**：using-writing-workflow 只负责调度，不亲自执行任何阶段的内容生成或审查
+
+### 阶段→Agent 映射
+
+每个阶段启动时，Coordinator 加载对应的 Agent 定义文件和 SKILL 文件，以 Agent 的角色身份执行 SKILL 中定义的任务规范。
+
 ## PUA Skill 集成
 
 本工作流集成了 pua skill 进行AI行为监督，在以下情况下自动触发：
