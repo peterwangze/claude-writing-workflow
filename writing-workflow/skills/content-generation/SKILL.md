@@ -37,7 +37,11 @@ description: Use when user needs writing assistance for novel content - helps hu
 - `novel-project/06-chapter-outlines/chapter-XXX.md`（当前章节细纲）
 - `novel-project/17-continuity/story-bible.md`（连续性总纲）
 - `novel-project/17-continuity/chapter-XXX-context.md`（本章正文看护卡）
+- `novel-project/17-continuity/continuity-ledger.md`（上一章连续性账本，核对输入状态）
 - `novel-project/08-characters/main-characters.md`（人物设定）
+- `novel-project/08-characters/character-relationships.md`（关系一致性参考）
+- `novel-project/09-worldbuilding/world-settings.md`（世界规则参考）
+- `novel-project/09-worldbuilding/power-system.md`（力量体系参考）
 - 前3章正文（如存在）
 
 ### 1.1 生成前看护预检（强制）
@@ -46,12 +50,14 @@ description: Use when user needs writing assistance for novel content - helps hu
 
 ```text
 看护预检清单：
-1. story bible 是否已加载
-2. chapter context card 是否已加载
-3. 上一章结尾状态是否已确认
-4. 本章输入状态是否与上一章一致
-5. 本章必写场景是否完整
-6. 本章禁止偏离项是否明确
+1. story bible 是否已加载（不可变更事实 + 时间线锚点）
+2. world-settings + power-system 是否已加载（世界规则 + 力量体系）
+3. character-relationships 是否已加载（当前关系状态）
+4. chapter context card 是否已加载
+5. 上一章 continuity ledger 是否已加载
+6. 上一章结尾状态是否与本章输入状态一致
+7. 本章必写场景是否完整
+8. 本章禁止偏离项是否明确
 ```
 
 若任一项缺失，先补看护资料，不得直接生成正文。
@@ -65,6 +71,13 @@ description: Use when user needs writing assistance for novel content - helps hu
 
 ## 不可变更事实
 - [来自 story bible 的硬事实]
+
+## 世界规则约束
+- [来自 world-settings 的关键规则]
+- [来自 power-system 的等级限制和晋升条件]
+
+## 当前关系状态
+- [来自 character-relationships 的关键关系状态]
 
 ## 本章输入状态
 - [人物位置]
@@ -219,15 +232,21 @@ description: Use when user needs writing assistance for novel content - helps hu
 
 本章偏离度：[X]% — [判定结果]
 
-五、人物一致性
+五、世界观合规
+  - 世界规则遵守：[是/否，列出违规点]
+  - 力量体系一致：[是/否，列出等级/晋升条件违反]
+
+六、人物一致性
   - 行为符合人设：[是/否，列出问题]
   - 对话风格一致：[是/否，列出问题]
+  - 关系状态一致：[是/否，与 character-relationships 对比]
 
-六、前后文连贯
+七、前后文连贯
   - 承接自然：[是/否]
-  - 无矛盾：[是/否，列出矛盾]
+  - 无时间线矛盾：[是/否，列出矛盾]
+  - 无因果关系断裂：[是/否，列出断裂点]
 
-七、看护命中率（新增）
+八、看护命中率（新增）
   - story bible 硬事实命中：[X]/[Y]
   - context card 必写项命中：[X]/[Y]
   - 本章结束状态是否与 context card 一致：[是/否]
@@ -313,7 +332,11 @@ description: Use when user needs writing assistance for novel content - helps hu
 
 ## 第X章
 - 已确认通过章节：chapter-XXX
-- 本章结束人物状态：[描述]
+- 主角当前目标：[明确目标描述，供下一章 context card 读取]
+- 本章结束人物状态：
+  - [角色A]：[当前状态/位置/情绪/关键变化]
+  - [角色B]：[当前状态/位置/情绪/关键变化]
+- 本章关系变化：[如角色关系发生质变，记录变化前→变化后状态]
 - 本章结束地点/时间：[描述]
 - 本章新增已生效事实：[列表]
 - 本章新埋伏笔：[列表]

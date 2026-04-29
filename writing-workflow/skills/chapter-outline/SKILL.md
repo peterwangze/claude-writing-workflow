@@ -31,7 +31,10 @@ description: Use when user needs to create chapter outlines - generates detailed
 - `novel-project/workflow-state.json`
 - `novel-project/05-outline.md`
 - `novel-project/08-characters/main-characters.md`
+- `novel-project/08-characters/supporting-characters.md`
+- `novel-project/08-characters/character-relationships.md`
 - `novel-project/09-worldbuilding/` 目录下的设定文件
+- `novel-project/17-continuity/story-bible.md`（锁定不可变更事实，避免 context card 与 bible 偏移）
 
 ### 2. 确认生成范围
 
@@ -141,9 +144,13 @@ description: Use when user needs to create chapter outlines - generates detailed
 
 ## 本章输入状态
 - 承接上一章的事件：[必须承接的信息]
-- 主角当前目标：[目标]
-- 关键人物状态：[人物A 状态] / [人物B 状态]
-- 时间与地点锁定：[时间] / [地点]
+- 主角当前目标：[目标]（来自上一章 ledger 的"主角当前目标"）
+- 关键人物状态（来自上一章 ledger，逐角色核对）：
+  - [人物A]：[当前状态/位置/情绪]
+  - [人物B]：[当前状态/位置/情绪]
+- 当前关系状态（来自上一章 ledger 的"本章关系变化"）：
+  - [关系A-B]：[当前关系性质]
+- 时间与地点锁定：[时间] / [地点]（来自上一章 ledger）
 
 ## 本章必写场景
 1. [场景一]

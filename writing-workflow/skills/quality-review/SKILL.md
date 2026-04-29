@@ -40,7 +40,7 @@ description: Use when quality check is needed - reviews content for consistency,
 根据审查类型加载对应文件：
 - 大纲审查：05-outline.md, 08-characters/, 09-worldbuilding/
 - 细纲审查：06-chapter-outlines/chapter-XXX.md, 05-outline.md
-- 正文审查：07-content/chapter-XXX.md, 06-chapter-outlines/, 08-characters/, 17-continuity/story-bible.md, 17-continuity/chapter-XXX-context.md, 17-continuity/continuity-ledger.md
+- 正文审查：07-content/chapter-XXX.md, 06-chapter-outlines/, 08-characters/（含 main/supporting/relationships）, 09-worldbuilding/（含 world-settings + power-system）, 17-continuity/story-bible.md, 17-continuity/chapter-XXX-context.md, 17-continuity/continuity-ledger.md
 
 ### 3. 执行审查
 
@@ -523,7 +523,11 @@ AI痕迹统计：
 审查对象：
 - 正文文件：[路径]
 - 对应细纲：[路径]
-- 人物设定：[路径]
+- 人物设定：[路径]（含 main-characters + supporting-characters + character-relationships）
+- 世界观文件：[路径]（含 world-settings + power-system）
+- 连续性总纲：[路径]（story-bible.md）
+- 看护卡：[路径]（chapter-XXX-context.md）
+- 连续性账本：[路径]（continuity-ledger.md）
 - 目标平台：[平台名称]
 
 请按以下维度评分（100分制）：
