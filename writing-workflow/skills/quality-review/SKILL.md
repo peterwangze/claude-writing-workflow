@@ -124,6 +124,8 @@ description: Use when quality check is needed - reviews content for consistency,
 - 前后章时间线、地点、人物状态存在硬冲突
 - `chapter-XXX-context.md` 中的必写场景缺失
 - 本章结束状态与 context card 不一致
+- story-bible 中的不可变更事实被改写
+- 关键伏笔超过"最迟回收章节"仍未回收（逾期伏笔）
 
 ### 评分体系（100分制，60分及格）
 

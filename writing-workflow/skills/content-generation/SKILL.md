@@ -325,7 +325,17 @@ description: Use when user needs writing assistance for novel content - helps hu
 
 ### 8. 更新连续性账本
 
-当正文通过看护流程后，更新 `novel-project/17-continuity/continuity-ledger.md`：
+当正文通过看护流程后，更新 `novel-project/17-continuity/continuity-ledger.md`。
+
+**重写时的版本控制**：若本章为重写（之前已有一条 ledger 条目），不删除旧条目，追加新条目并标注 `（重写版 v[N]）`。审查时以最新版本为准。
+
+**跳过章节的处理**：若前一章被跳过（不存在 ledger 条目），在 context card 中标注"上一章无 ledger 数据"，手动填写已知的承接信息。
+
+**审查反馈修正**：若 quality-review 发现连续性硬失败（bible 事实被改写、必写场景缺失等），审查报告应明确指出需要修正的源文件：
+- context card 字段错误 → 更新 `chapter-XXX-context.md` 对应字段
+- story-bible 事实被违反 → 两个选择：修正正文使其符合 bible，或评审 bible 事实是否需要更新（如更新，需同步更新 bible 并记录变更原因）
+
+更新 `novel-project/17-continuity/continuity-ledger.md`：
 
 ```markdown
 # 连续性账本
