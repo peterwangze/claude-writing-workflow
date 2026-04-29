@@ -263,6 +263,13 @@ claude-writing-workflow/
 
 ## 版本历史
 
+### v1.5.0
+- 新增强制门禁检查系统：Coordinator 在阶段间执行 F1→F4 四级硬门禁
+- 全部 16 个阶段技能新增"最低交付清单"章节（结构化可验证）
+- 质量关键阶段（大纲/细纲/正文/AI合规/质量审查）不提供跳过选项
+- AI 合规闸门嵌入发布和变现阶段的门禁检查（release_allowed/monetization_allowed）
+- 门禁失败统一使用 AskUserQuestion 阻断流程
+
 ### v1.4.0
 - quality-review 评分体系重构为行业标准 8 维度 100 分制
 - 修复文件加载链：character-relationships / world-settings / power-system 全下游可读取
