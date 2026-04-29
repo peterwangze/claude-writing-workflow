@@ -39,6 +39,13 @@ description: Use when user needs to select a genre for their novel - analyzes ho
 
 - 若 01-platform-research.md 存在：读取该文件获取平台调研数据
 
+**竞品分析消费**：
+- 若 `novel-project/16-competitor-analysis.md` 存在（用户已完成竞品分析），读取其中的差异化定位和竞品空白分析
+- 将竞品分析中的"竞品共性"和"竞品空白"结论注入题材推荐：
+  - 竞品共性 = 该题材必须包含的核心要素，作为题材推荐的"基线要求"
+  - 竞品空白 = 差异化机会，作为题材推荐的"差异化方向"
+- 若该文件不存在（短篇路径或用户跳过竞品分析），正常进入题材调研
+
 ### 2. 执行题材调研
 
 使用WebSearch搜索平台题材数据：

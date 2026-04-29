@@ -254,25 +254,26 @@ mkdir -p novel-project/07-content
 mkdir -p novel-project/08-characters
 mkdir -p novel-project/09-worldbuilding
 mkdir -p novel-project/10-reviews/quality-reports
+mkdir -p novel-project/11-data-monitoring
+mkdir -p novel-project/12-reader-interaction
+mkdir -p novel-project/13-creation-logs
 mkdir -p novel-project/17-continuity
 ```
 
 ### 状态更新
 
-每次阶段完成后更新 `workflow-state.json`：
-- 添加到 `completed_stages`
-- 更新 `current_stage`
-- 更新 `project_info` 相关字段
-- 更新 `files` 映射
-- 更新 `guardrails`：
-  - `latest_passed_chapter`：最近通过看护流程的章节号
-  - `latest_ai_path`：最近一次合规评估的 A/B/C 路径
-  - `release_allowed`：是否允许进入上架发布阶段
-  - `monetization_allowed`：是否允许进入变现策略阶段
-  - `latest_drift_score`：最近一章的偏离度
-  - `latest_context_card`：当前章节看护卡路径
-  - `latest_continuity_ledger`：连续性账本路径
-- 更新 `last_updated` 时间戳
+每次阶段完成后以**增量方式**更新 `workflow-state.json`，只修改该阶段负责的字段，**不整文件替换**，避免丢失其他阶段写入的数据。
+
+增量更新规则：
+- `completed_stages`：追加当前阶段 ID（不覆盖已有列表）
+- `current_stage`：设为下一阶段 ID
+- `project_info`：只更新本阶段写入的字段（如 `platform`、`genre`、`title`），不动其他字段
+- `files`：追加本阶段产出的文件路径（如 `"platform_research": "novel-project/01-platform-research.md"`），不动已有映射
+- `guardrails`：仅 `human-ai-collaboration` 和 `content-generation` 阶段写入，其他阶段不触碰
+- `statistics.last_updated`：每次阶段完成都更新为当前时间戳
+- `statistics.total_chapters` / `total_words`：仅 `content-generation` 阶段更新
+
+> ⚠️ 每个阶段的 Skill 文件中只列出该阶段负责的增量字段。执行时读取已有状态，只修改声明字段，其余字段原样保留。
 
 ## 正文看护流程
 

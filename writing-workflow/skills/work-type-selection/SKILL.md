@@ -140,6 +140,10 @@ mkdir -p novel-project/07-content
 mkdir -p novel-project/08-characters
 mkdir -p novel-project/09-worldbuilding
 mkdir -p novel-project/10-reviews/quality-reports
+mkdir -p novel-project/11-data-monitoring
+mkdir -p novel-project/12-reader-interaction
+mkdir -p novel-project/13-creation-logs
+mkdir -p novel-project/17-continuity
 ```
 
 ### 6. 创建工作流状态文件
@@ -159,6 +163,16 @@ mkdir -p novel-project/10-reviews/quality-reports
   },
   "files": {
     "work_type_info": "novel-project/00-work-type.md"
+  },
+  "guardrails": {
+    "continuity_mode": "strict",
+    "latest_passed_chapter": 0,
+    "latest_ai_path": null,
+    "release_allowed": true,
+    "monetization_allowed": true,
+    "latest_drift_score": null,
+    "latest_context_card": null,
+    "latest_continuity_ledger": "novel-project/17-continuity/continuity-ledger.md"
   },
   "statistics": {
     "total_chapters": 0,
@@ -181,6 +195,16 @@ mkdir -p novel-project/10-reviews/quality-reports
   },
   "files": {
     "work_type_info": "novel-project/00-work-type.md"
+  },
+  "guardrails": {
+    "continuity_mode": "strict",
+    "latest_passed_chapter": 0,
+    "latest_ai_path": null,
+    "release_allowed": true,
+    "monetization_allowed": true,
+    "latest_drift_score": null,
+    "latest_context_card": null,
+    "latest_continuity_ledger": "novel-project/17-continuity/continuity-ledger.md"
   },
   "statistics": {
     "total_chapters": 0,
