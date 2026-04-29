@@ -346,33 +346,7 @@ description: Use when tracking novel performance data - monitors completion rate
 
 ## 数据报告生成
 
-每次数据复盘后生成报告：
-
-```
-数据复盘报告
-
-作品：[书名]
-平台：[平台]
-日期：[日期]
-
-一、核心数据汇总
-[数据表格]
-
-二、数据趋势分析
-[趋势分析]
-
-三、问题诊断
-[问题列表和原因]
-
-四、优化行动
-[具体行动项]
-
-五、下周目标
-[可量化的目标]
-
-报告生成时间：[时间]
-下次复盘时间：[时间]
-```
+每次数据复盘后生成报告，格式参见上方"数据记录模板"（周报格式），此处不重复定义。核心要素：作品/平台/周期 → 核心数据汇总 → 趋势分析 → 问题诊断 → 优化行动 → 下周目标。
 
 ## 数据→内容闭环机制（关键）
 
@@ -399,7 +373,22 @@ description: Use when tracking novel performance data - monitors completion rate
     ↓
 生成修改方案（具体到章节和段落级别）
     ↓
-使用AskUserQuestion确认方案
+使用AskUserQuestion确认方案：
+
+```
+数据分析发现以下问题：
+
+[问题1描述]
+建议修改：[具体方案]
+
+[问题2描述]
+建议修改：[具体方案]
+
+请选择：
+1. 全部应用以上修改建议
+2. 选择性应用（请指定哪些）
+3. 暂不修改，继续观察
+```
     ↓
 执行修改（调用 content-generation 重写指定章节）
     ↓
@@ -479,11 +468,18 @@ description: Use when tracking novel performance data - monitors completion rate
 3. 角色调整：[具体建议]
    - 原因：[读者反馈]
 
-是否将这些调整应用到后续细纲？
-1. 全部应用
-2. 选择性应用
-3. 暂不调整，继续观察
+确认后续细纲调整方案？
+
+1. 全部应用以上调整到后续细纲
+2. 选择性应用（请指定哪些调整）
+3. 暂不调整，继续观察现有数据
 ```
+
+### 10. 更新工作流状态
+
+增量更新 `workflow-state.json`：
+- `statistics.last_updated`：更新为当前时间戳
+- `statistics.last_monitoring_date`：记录最近一次数据监控执行时间
 
 ## 注意事项
 

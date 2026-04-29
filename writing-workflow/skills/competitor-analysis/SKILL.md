@@ -227,6 +227,11 @@ description: Use when analyzing successful novels in the same genre/platform - d
 
 输出文件：`novel-project/16-competitor-analysis.md`
 
+增量更新 `workflow-state.json`：
+- `completed_stages`：若未包含则追加 `"competitor_analysis"`
+- `files.competitor_analysis`：设为 `"novel-project/16-competitor-analysis.md"`
+- `statistics.last_updated`：更新为当前时间戳
+
 ### 7. 用户确认
 
 ```
@@ -268,8 +273,9 @@ AI: 抱歉，无法获取[作品名称]的公开信息。
 
 请选择：
 1. 重试搜索
-2. 跳过此竞品，分析其他作品
-3. 手动输入竞品信息
+2. 使用通用分析框架（不含具体数据，仅提供分析维度）
+3. 跳过此竞品，分析其他作品
+4. 手动输入竞品信息
 ```
 
 ## 注意事项

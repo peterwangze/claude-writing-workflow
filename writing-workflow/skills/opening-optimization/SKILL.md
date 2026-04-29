@@ -311,6 +311,24 @@ description: Use when optimizing novel opening chapters - applies Golden Three C
 
 > 此报告供 content-generation 和 quality-review 阶段参考。前三章的 quality-review 评分应综合参考本报告的100分制评分结果。
 
+### 用户确认
+
+```
+黄金三章优化报告已完成！总分：[X]/100
+
+请选择：
+1. 继续优化（选择要改进的章节和维度）
+2. 接受当前评分，继续创作流程
+3. 跳过优化，直接进入后续阶段
+4. 查看详细优化建议
+```
+
+### 更新工作流状态
+
+增量更新 `workflow-state.json`：
+- `completed_stages`：若未包含则追加 `"opening_optimization"`
+- `statistics.last_updated`：更新为当前时间戳
+
 ## 注意事项
 
 - 黄金三章是网文成功的80%

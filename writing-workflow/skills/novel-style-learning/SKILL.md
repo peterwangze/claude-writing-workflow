@@ -402,3 +402,26 @@ description: Use when learning web novel writing style - teaches what makes web 
 - 学习经典，但要有自己的创新
 - 保持日更是网文的基本功
 - 读者反馈是最好的老师
+
+### 学习完成确认
+
+```
+网文风格学习已完成。
+
+已覆盖内容：
+- 网文与传统文学的核心区别
+- 爽点驱动的四大原则
+- 常见误区和修正方法
+- 开篇/情绪/章末钩子等实战技巧
+
+请选择：
+1. 确认完成，继续创作流程
+2. 深入学习某个主题（请指定方向）
+3. 分析一部我喜欢的作品，学习其风格
+```
+
+### 更新工作流状态
+
+增量更新 `workflow-state.json`：
+- `completed_stages`：若未包含则追加 `"novel_style_learning"`
+- `statistics.last_updated`：更新为当前时间戳

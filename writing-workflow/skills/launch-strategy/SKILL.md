@@ -320,7 +320,11 @@ Day [N] 监控报告：
 
 ### 8. 更新工作流状态
 
-完成后建议进入 monetization-strategy 阶段。
+增量更新 `workflow-state.json`：
+- `completed_stages`：追加 `"launch_strategy"`
+- `current_stage`：设为 `"monetization_strategy"`
+- `files.launch_strategy`：设为 `"novel-project/14-launch-strategy.md"`
+- `statistics.last_updated`：更新为当前时间戳
 
 ## 搜索失败处理
 

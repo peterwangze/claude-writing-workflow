@@ -415,3 +415,21 @@ description: Use when managing reader relationships - handles comments, fan oper
 - 批评是进步的阶梯，虚心接受
 - 保持真诚，读者能感受到真心
 - 长期维护比短期爆发更重要
+- 每次互动管理完成后，使用AskUserQuestion确认：
+
+```
+读者互动方案已准备：
+
+[方案摘要]
+
+请选择：
+1. 按方案执行互动回复
+2. 调整方案内容
+3. 仅记录方案，稍后执行
+```
+
+### 更新工作流状态
+
+增量更新 `workflow-state.json`：
+- `statistics.last_updated`：更新为当前时间戳
+- `statistics.last_interaction_date`：记录最近一次读者互动执行时间

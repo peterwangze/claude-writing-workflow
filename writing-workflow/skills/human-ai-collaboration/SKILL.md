@@ -347,7 +347,7 @@ AI 参与度评估报告：
   - `monetization_allowed = false`
   
   > 若用户坚持走平台签约投稿路径，必须先大幅人工改稿，再重新执行本 Skill 评估。未重新评估前，不得手动改回 true。
-- 路径 C：
+- 路径 C（高风险）：
   - `latest_ai_path = "C"`
   - `release_allowed = false`
   - `monetization_allowed = false`

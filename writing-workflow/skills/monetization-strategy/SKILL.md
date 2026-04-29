@@ -262,6 +262,14 @@ IP衍生路径：
 
 输出文件：`novel-project/15-monetization-strategy.md`
 
+### 8. 更新工作流状态
+
+增量更新 `workflow-state.json`：
+- `completed_stages`：追加 `"monetization_strategy"`
+- `current_stage`：设为 `"data_monitoring"`
+- `files.monetization_strategy`：设为 `"novel-project/15-monetization-strategy.md"`
+- `statistics.last_updated`：更新为当前时间戳
+
 ### 8. 收益方向性估算
 
 > ⚠️ 以下为估算框架，非收益承诺。实际收益因作品质量、更新频率、平台推荐等因素差异极大。所有数据必须基于 WebSearch 获取的最新信息填写。
@@ -302,8 +310,9 @@ AI: 抱歉，无法获取[平台名称]的最新收益数据。
 
 请选择：
 1. 重试搜索
-2. 跳过此平台收益分析，继续其他内容
-3. 手动输入收益信息
+2. 使用通用分析框架（不含具体数值，仅提供收益类型方向）
+3. 跳过此平台收益分析，继续其他内容
+4. 手动输入收益信息
 ```
 
 ## 注意事项
