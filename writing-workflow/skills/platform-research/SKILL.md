@@ -586,3 +586,14 @@ AI: 调研完成！生成报告：novel-project/01-platform-research.md
 3. 买断签约谨慎考虑，版权一次性转让
 4. 签约前最好咨询专业人士或律师
 
+## 最低交付清单（硬门禁）
+
+Coordinator 在本阶段完成后必须验证（短篇路径跳过本阶段时免检）：
+
+□ 输出文件：`novel-project/01-platform-research.md` 存在且 > 0 字节
+□ 状态更新：`completed_stages` 含 `"platform_research"`，`project_info.platform` 已设置且非 null，`project_info.platform_revenue_model` 已记录
+□ 内容标准：`01-platform-research.md` 含节标题 `## 平台分析` 和 `## 综合推荐`
+□ 数据来源：至少 2 个数据来源 URL（标记为 ⚠️ 未验证的除外）
+
+任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+

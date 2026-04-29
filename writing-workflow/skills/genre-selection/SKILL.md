@@ -226,6 +226,16 @@ AI: 抱歉，无法获取[题材名称]的最新平台数据。
 4. 手动输入题材信息
 ```
 
+## 最低交付清单（硬门禁）
+
+Coordinator 在本阶段完成后必须验证：
+
+□ 输出文件：`novel-project/02-genre-analysis.md` 存在且 > 0 字节
+□ 状态更新：`completed_stages` 含 `"genre_selection"`，`project_info.genre` 已设置且非 null
+□ 内容标准：`02-genre-analysis.md` 含 `## 红海题材分析` 或 `## 蓝海题材分析`，且含 `## 题材推荐`
+
+任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+
 ## 注意事项
 
 - 所有数据必须来自实时搜索

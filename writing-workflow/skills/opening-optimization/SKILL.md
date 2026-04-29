@@ -336,6 +336,17 @@ description: Use when optimizing novel opening chapters - applies Golden Three C
 - `completed_stages`：若未包含则追加 `"opening_optimization"`
 - `statistics.last_updated`：更新为当前时间戳
 
+## 最低交付清单（硬门禁·可选阶段）
+
+Coordinator 在本阶段完成后验证（可选阶段，最低检查）：
+
+□ 输出文件：`novel-project/10-reviews/opening-optimization-report.md` 存在且 > 0 字节
+□ 状态更新：`completed_stages` 若未包含则追加 `"opening_optimization"`，`statistics.last_updated` 已更新
+□ 内容标准：报告含三章分项评分（第一章/第二章/第三章）和总分（满分110分制）
+□ 质量建议：总分 < 66 时建议优化后发布，但不强制阻断
+
+任一□未勾选 → Coordinator 提示用户，使用AskUserQuestion选择重新执行/跳过。
+
 ## 注意事项
 
 - 黄金三章是网文成功的80%

@@ -300,3 +300,14 @@ AI: 抱歉，无法获取[作品名称]的公开信息。
 - 差异化是成功的关键，不能做同赛道的低配版
 - 竞品分析应定期更新，市场在变化
 - 分析完成后的方法论应融入到大纲和细纲设计中
+
+## 最低交付清单（硬门禁）
+
+Coordinator 在本阶段完成后必须验证：
+
+□ 输出文件：`novel-project/16-competitor-analysis.md` 存在且 > 0 字节
+□ 状态更新：`files.competitor_analysis` 已设置，`statistics.last_updated` 已更新
+□ 内容标准：`16-competitor-analysis.md` 含 `## 差异化定位分析` 和 `## 可复用方法论`
+□ 数据完整性：竞品选取数量 ≥ 3 部（头部标杆+中腰部+同期各至少1部）
+
+任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。

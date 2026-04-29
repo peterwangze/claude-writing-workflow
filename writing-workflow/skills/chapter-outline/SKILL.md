@@ -288,6 +288,17 @@ description: Use when user needs to create chapter outlines - generates detailed
 | **盈利设计** | **付费卡点、钩子已预设** |
 | **正文看护** | **每章 context card 完整，可直接约束正文生成** |
 
+## 最低交付清单（硬门禁·质量关键阶段）
+
+Coordinator 在本阶段完成后必须验证（🔒不可跳过）：
+
+□ 输出文件：至少 1 章 `06-chapter-outlines/chapter-XXX.md` 存在且 > 0 字节，对应 `17-continuity/chapter-XXX-context.md` 存在且 > 0 字节
+□ 状态更新：`completed_stages` 含 `"chapter_outline"`，`statistics.total_chapters` > 0
+□ 内容标准：每章细纲含 `## 章节概要` + `## 详细情节` + `## 爽点设计` + `## 章末钩子`
+□ 质量门禁：多维度检查报告中平台算法适配 ≥ 80% 通过，盈利节点检查全部勾选
+
+任一□未勾选 → Coordinator 强制阻断（不提供"跳过"选项）。
+
 ## 上下文管理
 
 ### 加载策略

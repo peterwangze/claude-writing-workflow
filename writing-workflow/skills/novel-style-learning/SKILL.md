@@ -403,6 +403,15 @@ description: Use when learning web novel writing style - teaches what makes web 
 - 保持日更是网文的基本功
 - 读者反馈是最好的老师
 
+## 最低交付清单（硬门禁·可选阶段）
+
+Coordinator 在本阶段完成后验证（可选阶段，最低检查）：
+
+□ 用户确认：用户已通过 AskUserQuestion 确认完成学习（无文件输出要求）
+□ 状态更新：`completed_stages` 若未包含则追加 `"novel_style_learning"`，`statistics.last_updated` 已更新
+
+任一□未勾选 → Coordinator 提示用户，使用AskUserQuestion选择确认完成/继续学习/跳过。
+
 ### 学习完成确认
 
 使用AskUserQuestion确认：

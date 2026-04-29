@@ -388,3 +388,14 @@ AI 参与度评估报告：
 - 各平台政策持续变化，投稿前必须通过 WebSearch 核实目标平台最新官方规则
 - 晋江对 AI 使用层级限制最明确，番茄/七猫有官方 AI 工具但打击 AI 低质内容
 - 路径 C（高风险）创作不建议签约投稿，仅适合学习练习
+
+## 最低交付清单（硬门禁·质量关键阶段）
+
+Coordinator 在本阶段完成后必须验证（🔒不可跳过）：
+
+□ 输出文件：`novel-project/13-creation-logs/chapter-XXX-log.md` 存在且 > 0 字节
+□ 状态更新：`guardrails.latest_ai_path` 已设置且非 null（必须为 A/B/C），`guardrails.release_allowed` 已设置，`guardrails.monetization_allowed` 已设置
+□ 内容标准：创作日志含 `## 创意来源与人工构思` + `## AI 辅助范围记录` + `## 证据链文件` + `## 投稿前确认声明`
+□ 质量门禁：`latest_ai_path` 非 null 且非空字符串
+
+任一□未勾选 → Coordinator 强制阻断（不提供"跳过"选项）。

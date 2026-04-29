@@ -375,6 +375,17 @@ IP衍生路径：
 
 > ⚠️ 海外市场需额外注意：翻译质量影响收益、文化差异可能导致题材偏好不同、版权和税务问题复杂。建议国内作品稳定盈利后再考虑海外拓展。
 
+## 最低交付清单（硬门禁）
+
+Coordinator 在本阶段完成后必须验证（🔒若 `monetization_allowed = false` 则阻断本阶段）：
+
+□ 输出文件：`novel-project/15-monetization-strategy.md` 存在且 > 0 字节
+□ 状态更新：`completed_stages` 含 `"monetization_strategy"`，`guardrails.monetization_allowed = true`，`files.monetization_strategy` 已设置
+□ 内容标准：`15-monetization-strategy.md` 含 `## 各平台收益模式` 或 `## VIP上架时机决策`
+□ 合规闸门：`guardrails.monetization_allowed` 必须为 true（路径 B/C 阻断）
+
+任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+
 ## 注意事项
 
 - 变现策略需要和内容质量平衡，不能为了赚钱牺牲内容

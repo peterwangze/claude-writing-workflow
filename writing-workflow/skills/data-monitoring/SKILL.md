@@ -526,6 +526,16 @@ description: Use when tracking novel performance data - monitors completion rate
 
 > 止损不是失败，是理性的资源配置。很多成功的网文作者都经历过弃书开新书的决策。
 
+## 最低交付清单（硬门禁）
+
+Coordinator 在本阶段完成后必须验证：
+
+□ 输出文件：`novel-project/11-data-monitoring/` 下存在最新报告文件且 > 0 字节
+□ 状态更新：`statistics.last_monitoring_date` 已更新，`statistics.last_updated` 已更新
+□ 内容标准：报告文件含 `## 核心数据` 汇总表（至少含完读率、追读率、收藏增长）
+
+任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+
 ## 注意事项
 
 - 数据是辅助工具，不要过度依赖

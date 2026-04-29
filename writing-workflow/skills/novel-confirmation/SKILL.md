@@ -276,6 +276,16 @@ description: Use when user needs to confirm novel details - generates book title
 | 言情 | 唯美浪漫 | 《何以笙箫默》 |
 | 悬疑 | 引人入胜 | 《心理罪》 |
 
+## 最低交付清单（硬门禁）
+
+Coordinator 在本阶段完成后必须验证：
+
+□ 输出文件：`novel-project/03-novel-info.md` 存在且 > 0 字节
+□ 状态更新：`completed_stages` 含 `"novel_confirmation"`，`project_info.title` 已设置且非 null
+□ 内容标准：`03-novel-info.md` 含 `## 主选方案`（含书名和简介）和 `## 备选方案`
+
+任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+
 ## 简介撰写原则
 
 1. **开头抓人**：第一句话就要吸引读者

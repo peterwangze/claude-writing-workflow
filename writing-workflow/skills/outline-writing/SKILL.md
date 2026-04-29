@@ -438,3 +438,14 @@ description: Use when user needs to create novel outline - generates worldbuildi
 | **盈利适配** | **付费卡点已预设，爽点与平台指标对齐** |
 | **合规预检** | **无政策红线，AI参与度在安全范围** |
 | **连续性可执行** | **story bible 完整，可用于锁定后续正文看护** |
+
+## 最低交付清单（硬门禁·质量关键阶段）
+
+Coordinator 在本阶段完成后必须验证（🔒不可跳过）：
+
+□ 输出文件（4 项必须全部存在）：`05-outline.md`、`08-characters/main-characters.md`、`09-worldbuilding/world-settings.md`、`17-continuity/story-bible.md` 均存在且 > 0 字节
+□ 状态更新：`completed_stages` 含 `"outline_writing"`，`files.outline`/`files.characters`/`files.worldbuilding`/`files.continuity_bible` 均已设置，`statistics.last_updated` 已更新
+□ 内容标准：`05-outline.md` 含 `## 核心设定` + `## 分卷大纲` + `## 伏笔设计`；`main-characters.md` 含 `## 主角`；`story-bible.md` 含 `## 不可变更事实`（至少 3 项硬事实）和 `## 关键伏笔清单`
+□ 质量门禁：大纲自检报告已生成，盈利适配检查全部勾选，连续性可执行检查全部勾选
+
+任一□未勾选 → Coordinator 强制阻断（不提供"跳过"选项），使用AskUserQuestion选择重试/手动修复/回退。

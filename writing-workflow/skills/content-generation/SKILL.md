@@ -795,6 +795,17 @@ description: Use when user needs writing assistance for novel content - helps hu
 
 前三章决定首秀成败，必须特殊处理。生成前三章正文时，**必须同时调用 `opening-optimization` skill** 进行专项优化。
 
+## 最低交付清单（硬门禁·质量关键阶段）
+
+Coordinator 在本阶段完成后必须验证（🔒不可跳过）：
+
+□ 输出文件：`07-content/chapter-XXX.md` 存在且 > 0 字节，字数 ≥ 目标字数的 80%
+□ 状态更新：`guardrails.latest_passed_chapter` 已更新，`guardrails.latest_drift_score` 已记录，`statistics.total_words` 已更新，`statistics.last_updated` 已更新
+□ 内容标准：正文文件含章节号标题，场景覆盖率 ≥ 90%，偏离度 ≤ 15%
+□ 质量门禁：`continuity-ledger.md` 已更新（含逐角色状态和主角目标），quality-review 报告已生成总分 ≥ 60，human-ai-collaboration 路径非 C
+
+任一□未勾选 → Coordinator 强制阻断（不提供"跳过"选项）。
+
 ```
 当检测到当前生成章节为第1、2、3章时：
 1. 按本 skill 的正常流程生成初稿

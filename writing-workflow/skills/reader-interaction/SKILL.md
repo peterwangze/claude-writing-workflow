@@ -430,6 +430,16 @@ description: Use when managing reader relationships - handles comments, fan oper
 - 经验教训：[总结]
 ```
 
+## 最低交付清单（硬门禁）
+
+Coordinator 在本阶段完成后必须验证：
+
+□ 输出文件：`novel-project/12-reader-interaction/` 下存在互动日志文件且 > 0 字节
+□ 状态更新：`statistics.last_interaction_date` 已更新，`statistics.last_updated` 已更新
+□ 内容标准：互动日志含 `## 重要评论记录` 或 `## 粉丝里程碑`
+
+任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+
 ## 注意事项
 
 - 读者是作品的生命线，尊重每一位读者

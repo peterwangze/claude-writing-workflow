@@ -337,6 +337,18 @@ description: Use when user needs to plan novel creation - defines length, update
 
 ## 规划调整机制
 
+## 最低交付清单（硬门禁）
+
+Coordinator 在本阶段完成后必须验证：
+
+□ 输出文件：`novel-project/04-creation-plan.md` 存在且 > 0 字节
+□ 状态更新：`completed_stages` 含 `"creation_planning"`，`project_info.target_words` 已设置
+□ 内容标准：`04-creation-plan.md` 含 `## 篇幅规划` 和 `## 发布规划`
+
+任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+
+## 规划调整机制
+
 创作过程中可根据实际情况调整规划：
 
 ```

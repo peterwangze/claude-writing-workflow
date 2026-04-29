@@ -263,6 +263,16 @@ work_type_selection (作品类型选择)
                     └── ...
 ```
 
+## 最低交付清单（硬门禁）
+
+Coordinator 在本阶段完成后必须验证：
+
+□ 输出文件：`novel-project/00-work-type.md` 存在且 > 0 字节
+□ 状态更新：`workflow-state.json` 中 `completed_stages` 含 `"work_type_selection"`，`project_info.work_type` 已设置，`guardrails` 对象存在且包含全部默认字段
+□ 内容标准：`00-work-type.md` 含节标题 `## 基本信息` 和 `## 类型分析`
+
+任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+
 ## 注意事项
 
 - 作品类型选择会影响后续所有阶段的推荐和建议
