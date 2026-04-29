@@ -188,20 +188,13 @@ description: Use when user needs to research and select a novel publishing platf
 
 ### 6. 更新工作流状态
 
-更新 `workflow-state.json`：
-```json
-{
-  "current_stage": "genre_selection",
-  "completed_stages": ["work_type_selection", "platform_research"],
-  "project_info": {
-    "work_type": "长篇小说",
-    "platform": "起点中文网"
-  },
-  "files": {
-    "platform_research": "novel-project/01-platform-research.md"
-  }
-}
-```
+增量更新 `workflow-state.json`：
+- `completed_stages`：追加 `"platform_research"`
+- `current_stage`：设为 `"genre_selection"`
+- `project_info.platform`：设为已选平台名称
+- `project_info.platform_revenue_model`：记录搜索到的收益模式摘要（供后续变现策略阶段复用，避免重复搜索）
+- `files.platform_research`：设为 `"novel-project/01-platform-research.md"`
+- `statistics.last_updated`：更新为当前时间戳
 
 ## 数据真实性要求
 
