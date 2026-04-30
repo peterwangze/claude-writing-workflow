@@ -393,10 +393,6 @@ description: Use when user needs to plan novel creation - defines length, update
    数据表明：第1章留存率能高度预测100章后的留存率。
 ```
 
-## 规划调整机制
-
-## 规划调整机制
-
 ## 最低交付清单（硬门禁）
 
 Coordinator 在本阶段完成后必须验证：

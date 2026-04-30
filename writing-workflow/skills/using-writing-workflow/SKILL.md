@@ -252,7 +252,7 @@ AskUserQuestion：
 |------|-------|---------|-----------|
 | 市场调研组 | 市场分析师 | platform_research, genre_selection | `agents/market-analyst.md` |
 | | 竞品拆解专家 | competitor_analysis | `agents/competitor-analyst.md` |
-| 策划创作组 | 创作策略顾问 | work_type_selection, creation_planning | `agents/creation-strategist.md` |
+| 策划创作组 | 创作策略顾问 | work_type_selection, novel_confirmation, creation_planning | `agents/creation-strategist.md` |
 | | 小说架构师 | outline_writing | `agents/novel-architect.md` |
 | 内容生产组 | 章节设计师 | chapter_outline | `agents/chapter-designer.md` |
 | | 内容写作者 | content_generation | `agents/content-writer.md` |
@@ -563,10 +563,10 @@ Coordinator 检测到 WebSearch 不可用/无结果
 
 **执行模式**：直接生成正文。结果由审查组独立审查，Coordinator 汇总后用 AskUserQuestion 确认。
 
-你只负责写，不自审。输出 07-content/chapter-XXX.md，更新 continuity-ledger.md。
+你只负责写，不自审。输出 07-content/chapter-XXX.md，更新 continuity-ledger.md。若前3章正文存在，加载 novel-project/07-content/chapter-001~003.md 以保持文风和节奏连续性。
 ```
 
-### 审查组（执行型——5 个 Agent 并行启动）
+### 审查组（执行型——6 个 Agent 并行启动）
 
 以下 5 个审查 Agent 在内容写作者完成后**并行启动**。每个 Agent 的启动模板以 `**执行模式**：独立审查，结果汇总给 Coordinator` 开头。审查结果由 Coordinator 汇总后用 AskUserQuestion 展示给用户。
 
@@ -646,6 +646,22 @@ Coordinator 检测到 WebSearch 不可用/无结果
 - novel-project/workflow-state.json（获取目标平台信息）
 
 任务：检查平台算法适配、付费卡点设计、章末钩子有效性、货币化准备度。审查文学质量（句式/描写/对话/视角/文风）。给出按优先级排序的具体修改建议。输出结构化审查报告。
+```
+
+**阅读体验审查员**：
+
+```
+**执行模式**：独立审查，以读者身份感受，不做技术性分析。
+
+你是阅读体验审查员。请先读取：
+
+角色定义：writing-workflow/agents/engagement-reviewer.md
+审查标准规范：writing-workflow/skills/quality-review/SKILL.md（仅"评分体系"中情感体验相关部分）
+
+需要加载的工作文件：
+- novel-project/07-content/chapter-XXX.md
+
+任务：以读者身份通读本章，评估情绪曲线、期待感强度、读者代入感和节奏感受。标记最精彩和最薄弱段落。检查"规则正确但无聊"的内容。输出结构化阅读体验审查报告。
 ```
 
 **AI合规官**（在正文完成、审查开始前执行）：
@@ -1245,7 +1261,7 @@ AskUserQuestion：展示检查结果摘要 → 用户确认后进入下一阶段
 | F1-文件 | `10-reviews/quality-reports/` 下存在最新审查报告 |
 | F2-状态 | 无额外状态更新（审查结果记录在报告中） |
 | F3-内容 | 审查报告含 8 维度逐项评分和总分 |
-| F4-质量 | 总分 ≥ 60，无任何硬失败项（含 Contract-Clock-Crucible / 悬念断裂 / 中段崩坏） |
+| F4-质量 | 总分 ≥ 60，无任何硬失败项。硬失败项完整清单见 `quality-review/SKILL.md` "连续性硬门槛（先判定）"章节（共15项）。Coordinator 必须逐项检查 quality-review 报告中的判定结果，任一失败=阻断 |
 
 #### 阶段 9-12：发布运营阶段（非关键，可跳过）
 
@@ -1260,7 +1276,7 @@ AskUserQuestion：展示检查结果摘要 → 用户确认后进入下一阶段
 
 | 阶段 | 最低检查 |
 |------|---------|
-| opening_optimization | `10-reviews/opening-optimization-report.md` 存在 > 0 |
+| opening_optimization | `novel-project/10-reviews/opening-optimization-report.md` 存在 > 0 |
 | novel_style_learning | 用户确认已完成学习（无文件输出要求） |
 
 ### 门禁执行顺序
