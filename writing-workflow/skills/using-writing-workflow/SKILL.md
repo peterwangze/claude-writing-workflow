@@ -143,7 +143,20 @@ AskUserQuestion：
     "best_genres": ["都市修真融合的跨界读者最多"],
     "best_platforms": ["起点付费追读指标最适合作者风格"],
     "recommended_chapter_length": "2500-3000字/章",
-    "effective_hook_types": ["悬念型章末钩子的留存最高"]
+    "effective_hook_types": ["悬念型章末钩子的留存最高"],
+    "genre_specific_lessons": {
+      "玄幻": {"best_word_count": 3000000, "best_chapter_length": "2500-3000", "best_platform": "起点"},
+      "都市": {"best_word_count": 2000000, "best_chapter_length": "2000-2500", "best_platform": "番茄"}
+    },
+    "platform_specific_lessons": {
+      "起点": {"best_genre": "玄幻", "best_posting_time": "11:30+21:00"},
+      "番茄": {"best_genre": "都市脑洞", "critical_chapters": "前10章"}
+    },
+    "emotional_signature_performance": {
+      "最佳主情感": "爽感驱动",
+      "最佳辅助情感": ["悬念", "温情"],
+      "最弱情感体验": "悲剧美感（推荐率低）"
+    }
   }
 }
 ```
