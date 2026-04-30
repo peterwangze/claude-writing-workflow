@@ -1323,7 +1323,7 @@ content_generation / quality_review 通过后：
 | F1-文件 | `07-content/chapter-XXX.md` 存在 > 0，字数达标（≥ 目标字数的 80%） |
 | F2-状态 | `guardrails.latest_passed_chapter` 已更新，`guardrails.latest_drift_score` 已记录，`statistics.total_words` 已更新 |
 | F3-内容 | 正文文件含章节号标题，且场景覆盖率 = 100%，偏离度 = 0%（零容忍） |
-| F4-质量 | continuity-ledger 已更新，quality-review 报告已生成且总分 ≥ 60，human-ai-collaboration 评估已完成且路径非 C。**第1-3章**：Contract-Clock-Crucible 三要素全部达标。**全章节**：无连续3章弱钩子。**40-60%进度**：中段防崩检查通过 |
+| F4-质量 | continuity-ledger 已更新，quality-review 报告已生成且总分 ≥ 90，human-ai-collaboration 评估已完成且路径非 C。**第1-3章**：Contract-Clock-Crucible 三要素全部达标。**全章节**：无连续3章弱钩子。**40-60%进度**：中段防崩检查通过 |
 
 #### 阶段 7.5：AI 合规处理（🔒质量关键）
 
@@ -1341,7 +1341,7 @@ content_generation / quality_review 通过后：
 | F1-文件 | `10-reviews/quality-reports/` 下存在最新审查报告 |
 | F2-状态 | 无额外状态更新（审查结果记录在报告中） |
 | F3-内容 | 审查报告含 8 维度逐项评分和总分 |
-| F4-质量 | 总分 ≥ 60，无任何硬失败项。硬失败项完整清单见 `quality-review/SKILL.md` "连续性硬门槛（先判定）"章节（共15项）。Coordinator 必须逐项检查 quality-review 报告中的判定结果，任一失败=阻断 |
+| F4-质量 | 总分 ≥ 90，无任何硬失败项。硬失败项完整清单见 `quality-review/SKILL.md` "连续性硬门槛（先判定）"章节（共15项）。低于 90 = 不通过 = 必须修改。Coordinator 必须逐项检查 quality-review 报告中的判定结果，任一失败=阻断 |
 
 #### 阶段 9-12：发布运营阶段（非关键，可跳过）
 
