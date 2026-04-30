@@ -10,18 +10,23 @@
 
 > ⚠️ 以下 `/plugin` 命令均在 **Claude Code 对话框**中输入，不是在终端执行。
 
-**方式一：Marketplace 安装（推荐）**
+### 前提条件
+
+确保 Claude Code 已启用 **WebSearch** 和 **AskUserQuestion** 能力（市场调研和用户交互必需）。
+
+### 方式一：Marketplace 安装（推荐）
 
 ```
-/plugin marketplace add https://raw.githubusercontent.com/peterwangze/claude-writing-workflow/main/writing-workflow/.claude-plugin/marketplace.json
-```
-```
+/plugin marketplace add peterwangze/claude-writing-workflow
 /plugin install writing-workflow
 ```
 
-**方式二：本地安装**
+### 方式二：本地安装
 
-克隆仓库后，在 Claude Code 对话框中执行：
+```bash
+git clone https://github.com/peterwangze/claude-writing-workflow.git
+```
+然后在 Claude Code 对话框中执行：
 ```
 /plugin add /你的路径/claude-writing-workflow/writing-workflow
 ```

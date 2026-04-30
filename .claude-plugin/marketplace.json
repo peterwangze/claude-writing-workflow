@@ -1,0 +1,15 @@
+{
+  "name": "writing-workflow-market",
+  "description": "小说创作工作流插件 — 面向平台投稿的写作辅助，以人类原创为主体",
+  "owner": {
+    "name": "peterwangze"
+  },
+  "plugins": [
+    {
+      "name": "writing-workflow",
+      "description": "AI辅助小说创作工作流：从平台调研到正文生成到变现策略的端到端解决方案。16个专业Agent，9维质量审查，零容忍连续性。",
+      "version": "3.0.0",
+      "source": "./writing-workflow"
+    }
+  ]
+}

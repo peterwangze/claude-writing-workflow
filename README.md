@@ -8,15 +8,15 @@
 
 ## 特性
 
-- **全流程覆盖**：18 个 Skill 覆盖创作→发布→运营→变现完整链路
+- **全流程覆盖**：18 个 Skill + 16 个专业 Agent（5 团队），覆盖创作→发布→运营→变现完整链路
+- **Agent Team 架构**：创作者与审查者绝对分离，6 个独立审查 Agent 并行审查每章
 - **人类原创为主**：默认工作模式为人类主导创作，AI 仅做研究、灵感、校对等有限辅助
-- **平台写法参考**：番茄（完读率）、起点（付费追读）、晋江（积分/收藏）差异化写法建议
-- **AI 参与度分级**：三级路径分流（平台安全/灰区/高风险），高风险时阻断盈利投稿路径
-- **基于实时数据**：WebSearch 驱动的市场调研，不捏造数据
-- **多维质量审查**：架构/节奏/人物/文风/原创性多角色审查
-- **正文看护流程**：story bible + chapter context card + continuity ledger 三层约束，减少脱纲和上下文断裂
-- **证据链留存**：创作日志记录人机协作过程，保留原稿、对话、修改记录，支持投稿前自证
-- **数据→内容闭环**：发布后识别数据异常，由 Claude 遵循工作流规范建议触发内容优化
+- **零容忍连续性**：场景覆盖率=100%，偏离度=0%——任何偏离随章节累积会指数级放大
+- **9 维质量审查**：基于行业标准 + 1000+ 作品研究的评分体系
+- **平台写法参考**：番茄/起点/晋江/七猫差异化写法，CCC 开篇架构验证
+- **基于实时数据**：WebSearch 驱动的市场调研，1000+ 作品成功模式研究注入
+- **正文看护流程**：story bible + context card + continuity ledger 三层约束 + Bible 交叉验证
+- **证据链留存**：创作日志记录人机协作过程，支持投稿前自证
 - **断点续传**：工作流状态持久化，随时保存/恢复创作进度
 
 ## 支持的平台
@@ -32,23 +32,27 @@
 
 ## 安装
 
-> ⚠️ 以下 `/plugin` 命令均在 **Claude Code 对话框**中输入，不是在终端执行。
+> ⚠️ `/plugin` 命令在 **Claude Code 对话框**中输入，不是在终端执行。
 
-### 方式一：通过 Marketplace 安装（推荐）
+### 前提条件
+
+| 依赖 | 说明 |
+|------|------|
+| Claude Code | 支持 `/plugin` 命令的版本 |
+| WebSearch | 必须 — 市场调研阶段需要实时搜索 |
+| AskUserQuestion | 必须 — 所有关键决策需要用户确认 |
+
+### 方式一：Marketplace 安装（推荐）
 
 ```
-/plugin marketplace add https://raw.githubusercontent.com/peterwangze/claude-writing-workflow/main/writing-workflow/.claude-plugin/marketplace.json
-```
-
-```
+/plugin marketplace add peterwangze/claude-writing-workflow
 /plugin install writing-workflow
 ```
 
 ### 方式二：本地安装
 
 ```bash
-# 在终端中克隆仓库
-git clone git@github.com:peterwangze/claude-writing-workflow.git
+git clone https://github.com/peterwangze/claude-writing-workflow.git
 ```
 
 然后在 **Claude Code 对话框**中执行：
@@ -59,7 +63,7 @@ git clone git@github.com:peterwangze/claude-writing-workflow.git
 
 ### 验证安装
 
-安装成功后，重启 Claude Code 会话，启动时会看到：
+重启 Claude Code 会话，启动时看到以下提示即安装成功：
 
 ```
 Writing Workflow Plugin loaded. Use 'writing-workflow' skill to start.
@@ -182,10 +186,10 @@ cd ~/novels/项目B  # 切换到项目B目录，再使用Claude Code
 
 | 限制项 | 说明 |
 |--------|------|
-| "自动化"行为 | 大多数"自动触发"描述是工作流约定，依赖 Claude 遵循 Skill 规范执行，非后台脚本 |
-| 数据监控闭环 | 工作流规范定义，非后台定时任务或数据接口集成 |
-| 长篇路径 | 当前 demo 验证了短篇路径；长篇完整路径（含平台调研、竞品分析）未经端到端 smoke test |
-| pua 可选依赖 | 若未安装 superpowers 插件，失败重试增强分支不可用 |
+| 约束执行 | 所有质量门禁和连续性检查依赖 Coordinator 遵循 Skill 规范执行，非自动化代码。实际执行密度取决于 LLM 对规范的遵循程度 |
+| 数据监控 | 依赖用户手动提供平台数据，无法自动读取平台后台 |
+| 成本 | 每章生成+审查约消耗 0.1-0.3 美元 API 费用（方向性参考），长篇创作累计可达数十至数百美元 |
+| Subagent 通信 | 当前使用独立 Subagent 模式，审查员发现问题后通过 Coordinator 中转给写作者。Agent Teams 实验稳定后可直接通信 |
 
 ---
 
@@ -231,15 +235,16 @@ cd ~/novels/项目B  # 切换到项目B目录，再使用Claude Code
 - 再按场景顺序逐段生成
 - 最后执行连续性硬门槛检查
 
-硬门槛包括：
+硬门槛（零容忍）包括：
 
-- 场景覆盖率 <90%
-- 偏离度 >15%
+- 场景覆盖率 < 100%（任何必写场景缺失=阻断）
+- 偏离度 > 0%（任何偏离=阻断，过程偏离随章节累积指数级放大）
+- Bible 不可变更事实被改写
 - 人物/时间线/地点硬冲突
 - 必写场景缺失
 - 本章结束状态与 context card 不一致
 
-命中任一硬门槛时，本章必须修正或重写，不能直接进入下一阶段。
+命中任一硬门槛 = 本章必须修正至零偏离，不存在"确认偏离合理继续"选项。
 
 ---
 
@@ -262,6 +267,22 @@ claude-writing-workflow/
 ```
 
 ## 版本历史
+
+### v3.0.0
+- **偏离零容忍**：场景覆盖率=100%、偏离度=0%——任何偏离=阻断，删除所有"可接受偏离"选项
+- 质量审查门禁扩展至 15 项机械逐项检查清单
+- Context Card 生成后强制 Bible 交叉验证
+- Coordinator 审查通过后强制状态同步
+
+### v2.9.x
+- 1000+ 作品研究注入：CCC 开篇架构、悬念强度分级、中段防崩、推荐触发点设计
+- P0-P2 三级约束落地（13 项强制门禁 + 10 项新能力 + 8 项增强）
+- 阅读体验审查员加入审查组（6 Agent 并行审查）
+- 9 维评分体系（情感体验权重 5→10%）
+
+### v2.5.x
+- 8 维文学成功框架注入（情感契约、回报分级、群像生态、社会共鸣）
+- 1000+ 成功作品深度研究
 
 ### v2.2.0
 - 新增加交互架构定义：三层角色模型（用户/Coordinator/Subagent）
