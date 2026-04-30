@@ -44,16 +44,29 @@
 
 系统自动检测当前目录的进度：新项目从头开始，已有项目从上次进度继续。
 
-### Skill 协调机制
-
-本插件包含 18 个 Skill，**用户只需触发主入口 `using-writing-workflow`，无需手动调用其他 Skill**。主 Skill 会根据工作流状态自动调度对应阶段的 Skill。
+### 交互架构：三层角色模型
 
 ```
-用户："开始小说创作工作流"
-        ↓
-using-writing-workflow（主协调器）
-        ↓ 自动调度
-work-type-selection → platform-research → competitor-analysis → ...
+用户（决策者：选择/确认/打断/回退/跳过）
+  ↕ AskUserQuestion（唯一交互通道）
+Coordinator（主 Agent：调度/门禁/状态管理/汇总展示）
+  ↕ Agent 工具启动独立 Subagent
+Subagent × 14（生产者：生成方案/执行任务/输出审查报告）
+```
+
+**用户始终在回路中**：每个阶段切换时展示进度面板，关键决策必须经用户 AskUserQuestion 确认。用户随时可以暂停、回退或跳过。
+
+**Coordinator 统筹所有 Subagent**：
+- Subagent 不直接与用户交互
+- Subagent 不修改 workflow-state（Coordinator 是唯一写入者）
+- Subagent 返回方案/报告后，Coordinator 决定路由（AskUserQuestion 确认 / 门禁检查 / 交由其他 Subagent 作为输入）
+
+### 启动工作流
+
+在 Claude Code 对话框中输入：
+
+```
+开始小说创作工作流
 ```
 
 ### 交互示例

@@ -263,6 +263,14 @@ claude-writing-workflow/
 
 ## 版本历史
 
+### v2.2.0
+- 新增加交互架构定义：三层角色模型（用户/Coordinator/Subagent）
+- 定义 Coordinator 的 4 种产出路由（决策型/执行型/审查型/参考型）
+- 定义 5 个用户干预时机和进度面板模板
+- 明确 Subagent 硬边界：不交互/不改状态/不做最终决策/不相互通信
+- 新增工具降级协议：WebSearch 失败后优雅降级为 LLM 推断模式
+- 修复 Subagent 绕过 AskUserQuestion 的系统性漏洞
+
 ### v2.1.1
 - 修复 Subagent 绕过 AskUserQuestion 的系统性漏洞
 - 新增加两阶段执行协议：决策型阶段（方案模式）vs 执行型阶段（执行模式）
