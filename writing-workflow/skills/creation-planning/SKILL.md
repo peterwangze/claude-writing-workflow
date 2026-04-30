@@ -46,6 +46,11 @@ description: Use when user needs to plan novel creation - defines length, update
 
 请选择1个主情感 + 1-2个辅助情感。
 这将决定全书的情绪节奏设计和读者预期管理。
+
+确认后，将情感签名写入 workflow-state.json：
+- project_info.emotional_signature.primary: "[主情感]"
+- project_info.emotional_signature.secondary: ["[辅助1]", "[辅助2]"]
+供质量审查阶段验证每章的情感履约情况。
 ```
 
 ### 1. 确认小说篇幅
