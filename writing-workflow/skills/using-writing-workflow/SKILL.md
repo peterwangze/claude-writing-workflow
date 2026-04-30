@@ -107,6 +107,50 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 
 每个阶段启动时，Coordinator 使用 `Agent` 工具启动独立的 subagent，传入以下标准启动模板。
 
+## 两阶段执行协议（防绕行 AskUserQuestion）
+
+Subagent 不能直接调用 AskUserQuestion。为保证用户决策权，**决策型阶段**必须拆为两阶段执行。
+
+### 阶段分类
+
+| 类型 | 阶段 | 说明 |
+|------|------|------|
+| **决策型** | work_type_selection, platform_research, genre_selection, novel_confirmation, creation_planning, outline_writing | 用户必须确认的方案、选择或意向 |
+| **执行型** | competitor_analysis, chapter_outline, content_generation, human_ai_collaboration, quality_review, launch_strategy, monetization_strategy, data_monitoring, reader_interaction | 基于已确认的决策执行生产/审查任务 |
+
+### 决策型阶段执行协议
+
+```
+阶段一：方案生成（Subagent 执行）
+    ↓
+Subagent 仅生成"待确认方案"（选项列表/推荐排序/草案），不写入最终决策
+    ↓
+阶段二：用户确认（Coordinator 执行）
+    ↓
+Coordinator 读取 Subagent 返回的方案
+    ↓
+使用 AskUserQuestion 让用户选择/确认/调整
+    ↓
+用户确认后，Coordinator 将选定项写入最终文件或二次调用 Subagent 执行
+```
+
+**关键约束**：
+- Subagent 输出必须明确标注 `[待确认方案]` 和 `[推荐项]`
+- 决策型阶段的 workflow-state 更新由 **Coordinator 在用户确认后执行**，不在 Subagent 中执行
+- 如果 Subagent 返回了已写入的最终决策文件，Coordinator 必须**将文件标记为草稿**并重新执行 AskUserQuestion 确认
+
+### 执行型阶段执行协议
+
+```
+Subagent 直接执行任务 → 返回结果
+    ↓
+Coordinator 执行强制门禁检查（F1-F4）
+    ↓
+使用 AskUserQuestion 展示门禁结果
+    ↓
+用户确认 → 进入下一阶段
+```
+
 ### 子 Agent 启动规范
 
 所有子 agent 使用 `Agent` 工具的 `subagent_type: "general-purpose"` 启动，`isolation: "worktree"` 用于文件隔离。启动 prompt 必须包含三层约束：
@@ -129,7 +173,15 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 - novel-project/workflow-state.json
 - novel-project/00-work-type.md（作品类型信息）
 
-任务：执行平台调研。使用 WebSearch 实时搜索目标平台的签约政策、收益模式、读者画像。输出 novel-project/01-platform-research.md。严格按照 agent 定义文件中的行为准则执行：每个结论可追溯到搜索来源、风险明确警告、诚实标注数据不确定性。
+**方案模式**：生成平台推荐方案，不做最终选择。
+
+任务：
+1. 搜索四平台的签约政策、收益模式、读者画像
+2. 生成平台对比分析 + 推荐排序（含推荐理由和风险提示）
+3. 输出 `[待确认方案]`——推荐项标注为 `[推荐]`，但不做最终选择
+4. **不要**更新 workflow-state（Coordinator 在用户确认平台选择后执行）
+
+输出文件：novel-project/01-platform-research.md（标题加 `[待确认]` 前缀）
 ```
 
 **市场分析师**（`genre_selection` 阶段，同一 agent 续用）：
@@ -146,7 +198,15 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 - novel-project/16-competitor-analysis.md（如存在）
 - novel-project/02-genre-analysis.md（如阶段续用，加载已有进度）
 
-任务：执行题材选择。搜索并按盈利潜力排序推荐题材。注入竞品分析的差异化方向。输出 novel-project/02-genre-analysis.md。
+**方案模式**：生成题材推荐方案，不做最终选择。
+
+任务：
+1. 搜索当前平台的题材收益数据和热门趋势
+2. 结合竞品分析的差异化方向，生成题材推荐排序（主选+备选，各含盈利数据和风险）
+3. 输出 `[待确认方案]`，标注推荐理由和风险
+4. **不要**更新 workflow-state
+
+输出文件：novel-project/02-genre-analysis.md（标题加 `[待确认]` 前缀）
 ```
 
 **竞品拆解专家**（`competitor_analysis` 阶段）：
@@ -161,7 +221,9 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 - novel-project/workflow-state.json
 - novel-project/01-platform-research.md
 
-任务：选取同赛道头部竞品，从公开信息中提取成功要素和货币化模式。为后续题材选择提供差异化方向。输出 novel-project/16-competitor-analysis.md。所有推测结论必须标注可信度。
+**执行模式**：直接执行分析任务。结果由 Coordinator 进行门禁检查后用 AskUserQuestion 确认。
+
+任务：选取同赛道头部竞品，从公开信息中提取成功要素和货币化模式。输出 novel-project/16-competitor-analysis.md。所有推测结论必须标注可信度。
 ```
 
 ### 策划创作组
@@ -174,7 +236,15 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 角色定义：writing-workflow/agents/creation-strategist.md
 任务规范：writing-workflow/skills/work-type-selection/SKILL.md
 
-任务：引导作者选择作品类型。明确各类型的盈利模式、投入回报、适用场景。对短篇创作者提示盈利上限。输出 novel-project/00-work-type.md，初始化 workflow-state.json（含 guardrails 对象）。
+**方案模式**：你在决策型阶段工作——只生成待确认方案，不做最终决策。
+
+任务：
+1. 搜索当前市场数据，生成作品类型选项列表（含各类型的盈利模式、投入回报、适用场景）
+2. 输出 `[待确认方案]` 到临时文件，标注你的推荐项和理由
+3. **不要**初始化 workflow-state.json（Coordinator 在用户确认后执行）
+4. **不要**做最终选择——用户通过 AskUserQuestion 决定
+
+输出文件：novel-project/00-work-type.md（标题加 `[待确认]` 前缀）
 ```
 
 **创作策略顾问**（`creation_planning` 阶段，同一 agent 续用）：
@@ -189,7 +259,15 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 - novel-project/workflow-state.json
 - novel-project/03-novel-info.md
 
-任务：制定创作规划和盈利可行性评估。计算时间成本、给出收入预估框架和盈亏判断。不画饼，不承诺收益。输出 novel-project/04-creation-plan.md。
+**方案模式**：生成创作规划方案，不做最终决策。
+
+任务：
+1. 制定篇幅、更新频率、章节长度的多项可选方案
+2. 计算盈利可行性评估（时间成本+收入预估+盈亏判断）
+3. 输出 `[待确认方案]`，含推荐方案和备选方案
+4. **不要**更新 workflow-state（Coordinator 在用户确认后执行）
+
+输出文件：novel-project/04-creation-plan.md（标题加 `[待确认]` 前缀）
 ```
 
 **小说架构师**（`outline_writing` 阶段）：
@@ -205,7 +283,16 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 - novel-project/03-novel-info.md
 - novel-project/04-creation-plan.md
 
-任务：生成完整的世界观设定、力量体系、人物设定和故事大纲。锁定不可变更事实到 story-bible。设计伏笔并标注最迟回收章节。你的输出必须可直接指导章节设计师和内容写作者的工作。输出文件：05-outline.md, 08-characters/*, 09-worldbuilding/*, 17-continuity/story-bible.md。
+**方案模式**：生成大纲方案，不做最终确认。
+
+任务：
+1. 生成世界观设定、力量体系、人物设定草案
+2. 生成故事大纲和伏笔设计表
+3. 生成连续性总纲草案
+4. 所有输出文件标题加 `[待确认]` 前缀
+5. **不要**更新 workflow-state
+
+输出文件（均为草案）：05-outline.md, 08-characters/*, 09-worldbuilding/*, 17-continuity/story-bible.md
 ```
 
 ### 内容生产组
@@ -228,7 +315,9 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 - novel-project/09-worldbuilding/power-system.md
 - novel-project/17-continuity/story-bible.md
 
-任务：将大纲拆解为逐章细纲。加载所有设定文件，设计每章的场景、爽点、章末钩子。付费相关章节必须设计付费转化钩子。生成每章的 context card。严格执行平台算法适配检查。输出 06-chapter-outlines/chapter-XXX.md 和 17-continuity/chapter-XXX-context.md。
+**执行模式**：直接生成细纲。结果由 Coordinator 做门禁检查后用 AskUserQuestion 确认。
+
+任务：将大纲拆解为逐章细纲。加载所有设定文件，设计每章的场景、爽点、章末钩子。生成每章的 context card。输出 06-chapter-outlines/chapter-XXX.md 和 17-continuity/chapter-XXX-context.md。
 ```
 
 **内容写作者**（`content_generation` 阶段）：
@@ -251,17 +340,21 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 - novel-project/09-worldbuilding/world-settings.md
 - novel-project/09-worldbuilding/power-system.md
 
-任务：按细纲逐场景生成正文。严格执行看护预检和正文看护包。你写完后的内容将由审查组独立审查——你不自审。你只负责写，不负责评分。输出 07-content/chapter-XXX.md，更新 continuity-ledger.md。
+**执行模式**：直接生成正文。结果由审查组独立审查，Coordinator 汇总后用 AskUserQuestion 确认。
+
+你只负责写，不自审。输出 07-content/chapter-XXX.md，更新 continuity-ledger.md。
 ```
 
-### 审查组
+### 审查组（执行型——5 个 Agent 并行启动）
 
-以下 5 个审查 Agent 在内容写作者完成后**并行启动**。
+以下 5 个审查 Agent 在内容写作者完成后**并行启动**。每个 Agent 的启动模板以 `**执行模式**：独立审查，结果汇总给 Coordinator` 开头。审查结果由 Coordinator 汇总后用 AskUserQuestion 展示给用户。
 
 **连续性审查员**：
 
 ```
-你是连续性审查员。请先读取以下文件：
+**执行模式**：独立审查，只输出报告，不做创作决策。
+
+你是连续性审查员。请先读取：
 
 角色定义：writing-workflow/agents/continuity-reviewer.md
 审查标准规范：writing-workflow/skills/quality-review/SKILL.md（仅"连续性硬门槛"和"评分体系"部分）
@@ -279,6 +372,8 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 **人物世界观审查员**：
 
 ```
+**执行模式**：独立审查，只输出报告。
+
 你是人物世界观审查员。请先读取以下文件：
 
 角色定义：writing-workflow/agents/character-world-reviewer.md
@@ -298,6 +393,8 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 **情节逻辑审查员**：
 
 ```
+**执行模式**：独立审查，只输出报告。
+
 你是情节逻辑审查员。请先读取以下文件：
 
 角色定义：writing-workflow/agents/plot-logic-reviewer.md
@@ -315,6 +412,8 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 **商业编辑**：
 
 ```
+**执行模式**：独立审查，只输出报告和修改建议。
+
 你是商业编辑。请先读取以下文件：
 
 角色定义：writing-workflow/agents/commercial-editor.md
@@ -331,6 +430,8 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 **AI合规官**（在正文完成、审查开始前执行）：
 
 ```
+**执行模式**：独立审查。
+
 你是AI合规官。请先读取以下文件：
 
 角色定义：writing-workflow/agents/ai-compliance-officer.md
@@ -342,9 +443,11 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 任务：评估第 X 章的 AI 参与度，按 A/B/C 三级路径分流。生成证据链留存包。回写 guardrails 数据到 workflow-state.json。路径 C 时必须明确告知财务风险。宁可过严，不可过松。输出 novel-project/13-creation-logs/chapter-XXX-log.md。
 ```
 
-### 发布运营组
+### 发布运营组（执行型）
 
 **发布策略师**（`launch_strategy` 阶段）：
+
+**执行模式**：直接执行。必须检查 guardrails.release_allowed 闸门。
 
 ```
 你是发布策略师。请先读取以下文件：
@@ -362,6 +465,8 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 **变现顾问**（`monetization_strategy` 阶段）：
 
 ```
+**执行模式**：直接执行。必须检查 guardrails.monetization_allowed 闸门。
+
 你是变现顾问。请先读取以下文件：
 
 角色定义：writing-workflow/agents/monetization-advisor.md
@@ -377,6 +482,8 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 **数据运营分析师**（`data_monitoring` + `reader_interaction` 阶段）：
 
 ```
+**执行模式**：直接执行数据分析。
+
 你是数据运营分析师。请先读取以下文件：
 
 角色定义：writing-workflow/agents/data-analyst.md
