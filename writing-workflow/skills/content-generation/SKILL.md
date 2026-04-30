@@ -361,6 +361,8 @@ description: Use when user needs writing assistance for novel content - helps hu
 - 本章新增已生效事实：[列表]
 - 本章新埋伏笔：[列表]
 - 本章回收伏笔：[列表]
+- 本章情感履约：[本章传递的主要情感]（对比 workflow-state 中的情感签名——连续5章偏离=质量审查F4阻断）
+- 本章回报级别：[小/中/大]（滚动10章无中回报=质量审查F4阻断）
 - 下一章必须承接点：[列表]
 ```
 
