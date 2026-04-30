@@ -566,7 +566,7 @@ Coordinator 检测到 WebSearch 不可用/无结果
 - character-world-reviewer: writing-workflow/agents/character-world-reviewer.md  
 - commercial-editor: writing-workflow/agents/commercial-editor.md
 
-审查规范：writing-workflow/skills/quality-review/SKILL.md（大纲审查部分）
+审查规范：writing-workflow/skills/outline-review/SKILL.md（独立的大纲审查标准，非正文审查）
 
 工作文件：
 - novel-project/05-outline.md
@@ -609,7 +609,7 @@ Coordinator 检测到 WebSearch 不可用/无结果
 - commercial-editor: writing-workflow/agents/commercial-editor.md
 - engagement-reviewer: writing-workflow/agents/engagement-reviewer.md
 
-审查规范：writing-workflow/skills/quality-review/SKILL.md（细纲审查部分）
+审查规范：writing-workflow/skills/chapter-outline-review/SKILL.md（独立的细纲审查标准，非正文审查）
 
 工作文件：
 - novel-project/06-chapter-outlines/（全部）
