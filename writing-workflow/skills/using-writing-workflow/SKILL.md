@@ -156,10 +156,23 @@ AskUserQuestion：
 
 ### 跨书学习的应用
 
-启动新项目时，Coordinator 读取 `author-playbook.json`，在以下阶段应用历史经验：
-- **题材选择**：基于"最赚钱题材"和"最佳匹配平台"给出个性化推荐
-- **创作规划**：基于"最佳章节长度"和"有效钩子类型"提供优化建议
-- **质量审查**：将当前评分与历史评分对比，标注"这是你目前得分最高的开篇"或"低于你的平均水平"
+启动新项目时，Coordinator 读取 `author-playbook.json`（若存在），在以下阶段注入历史经验：
+
+**题材选择阶段**（market-analyst 启动时）：
+- 将 playbook 中 `patterns.best_genres` 和 `patterns.best_platforms` 作为个性化推荐的权重因子
+- 提示："基于你的历史数据，[题材X]在[平台Y]上表现最佳"
+
+**创作规划阶段**（creation-strategist 启动时）：
+- 将 playbook 中 `patterns.recommended_chapter_length` 和 `patterns.effective_hook_types` 作为默认推荐
+- 提示："你的历史最佳章节长度为[X]字，最有效的钩子类型是[Y]"
+
+**质量审查阶段**（审查结果展示时）：
+- 将当前评分与 `projects[].quality_scores` 历史数据对比
+- 提示："当前开篇得分[X]，你的历史最佳开篇得分[Y]——这是你目前得分最[高/低]的开篇"
+
+**项目完成/弃书时**（monetization_strategy 或止损决策后）：
+- Coordinator 汇总本书数据，更新 `author-playbook.json`
+- 记录 what_worked / what_didnt_work / would_do_differently
 
 ## 工作流状态管理
 
