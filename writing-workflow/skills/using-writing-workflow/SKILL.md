@@ -308,6 +308,21 @@ Coordinator 读取 Subagent 返回的方案
 - 决策型阶段的 workflow-state 更新由 **Coordinator 在用户确认后执行**，不在 Subagent 中执行
 - 如果 Subagent 返回了已写入的最终决策文件，Coordinator 必须**将文件标记为草稿**并重新执行 AskUserQuestion 确认
 
+### ⚠️ 强制启动规则（Coordinator 必须机械执行）
+
+决策型阶段到达时，Coordinator **严禁**跳过 Subagent 直接向用户展示选项。必须执行以下步骤：
+
+```
+步骤1：查表 — 从"Agent Team 调度"团队结构表中查找当前阶段分配的 Agent
+步骤2：找模板 — 在"子 Agent 启动规范"中找到该 Agent 在当前阶段的启动模板
+步骤3：启动 Subagent — 使用 Agent 工具（subagent_type: "general-purpose"）传入启动模板
+步骤4：等待 — Subagent 返回结果
+步骤5：展示 — 使用 AskUserQuestion 将 Subagent 返回的方案选项呈现给用户
+步骤6：确认 — 用户选择后写入最终文件并更新 workflow-state
+```
+
+> 🚫 **禁止行为**：Coordinator 自行搜索 WebSearch 并向用户展示选项而不启动 Subagent。这等于绕过了 Agent Team 架构。Coordinator 的职责是调度，不是亲自执行市场调研、数据分析或方案生成。
+
 ### 执行型阶段执行协议
 
 ```
@@ -405,7 +420,7 @@ Coordinator 检测到 WebSearch 不可用/无结果
 输出文件：novel-project/01-platform-research.md（标题加 `[待确认]` 前缀）
 ```
 
-**市场分析师**（`genre_selection` 阶段，同一 agent 续用）：
+**市场分析师**（`genre_selection` 阶段，同一 agent 续用。⚠️ 必须用 Agent 工具作为独立 Subagent 执行此模板，Coordinator 不得跳过 Subagent 自行搜索和推荐题材）：
 
 ```
 继续作为网文市场分析师。请先读取以下文件：
