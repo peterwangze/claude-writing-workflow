@@ -1205,7 +1205,7 @@ AskUserQuestion：展示检查结果摘要 → 用户确认后进入下一阶段
 | F1-文件 | 至少 1 章 `06-chapter-outlines/chapter-XXX.md` 存在 > 0，且对应 `17-continuity/chapter-XXX-context.md` 存在 > 0 |
 | F2-状态 | `completed_stages` 含 `"chapter_outline"`，`statistics.total_chapters` > 0 |
 | F3-内容 | 每章细纲含 `## 章节概要` + `## 详细情节` + `## 爽点设计` + `## 章末钩子` |
-| F4-质量 | 细纲自检报告已生成，平台算法适配检查 ≥ 80% 通过 |
+| F4-质量 | 细纲自检报告已生成，平台算法适配检查 ≥ 80% 通过。**悬念强度**：前5章至少4章章末钩子强度为"强"（连续3章弱钩子=不合规） |
 
 #### 阶段 7：正文生成（🔒质量关键，不可跳过）
 
@@ -1214,7 +1214,7 @@ AskUserQuestion：展示检查结果摘要 → 用户确认后进入下一阶段
 | F1-文件 | `07-content/chapter-XXX.md` 存在 > 0，字数达标（≥ 目标字数的 80%） |
 | F2-状态 | `guardrails.latest_passed_chapter` 已更新，`guardrails.latest_drift_score` 已记录，`statistics.total_words` 已更新 |
 | F3-内容 | 正文文件含章节号标题，且场景覆盖率 ≥ 90%，偏离度 ≤ 15% |
-| F4-质量 | continuity-ledger 已更新，quality-review 报告已生成且总分 ≥ 60，human-ai-collaboration 评估已完成且路径非 C |
+| F4-质量 | continuity-ledger 已更新，quality-review 报告已生成且总分 ≥ 60，human-ai-collaboration 评估已完成且路径非 C。**第1-3章**：Contract-Clock-Crucible 三要素全部达标。**全章节**：无连续3章弱钩子。**40-60%进度**：中段防崩检查通过 |
 
 #### 阶段 7.5：AI 合规处理（🔒质量关键）
 
@@ -1232,7 +1232,7 @@ AskUserQuestion：展示检查结果摘要 → 用户确认后进入下一阶段
 | F1-文件 | `10-reviews/quality-reports/` 下存在最新审查报告 |
 | F2-状态 | 无额外状态更新（审查结果记录在报告中） |
 | F3-内容 | 审查报告含 8 维度逐项评分和总分 |
-| F4-质量 | 总分 ≥ 60，无连续性硬失败项 |
+| F4-质量 | 总分 ≥ 60，无任何硬失败项（含 Contract-Clock-Crucible / 悬念断裂 / 中段崩坏） |
 
 #### 阶段 9-12：发布运营阶段（非关键，可跳过）
 

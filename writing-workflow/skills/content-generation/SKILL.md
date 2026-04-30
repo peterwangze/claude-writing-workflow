@@ -821,6 +821,9 @@ Coordinator 在本阶段完成后必须验证（🔒不可跳过）：
 □ 状态更新：`guardrails.latest_passed_chapter` 已更新，`guardrails.latest_drift_score` 已记录，`statistics.total_words` 已更新，`statistics.last_updated` 已更新
 □ 内容标准：正文文件含章节号标题，场景覆盖率 ≥ 90%，偏离度 ≤ 15%
 □ 质量门禁：`continuity-ledger.md` 已更新（含逐角色状态和主角目标），quality-review 报告已生成总分 ≥ 60，human-ai-collaboration 路径非 C
+□ **开篇门禁**（仅第1-3章）：Contract-Clock-Crucible 三要素全部达标
+□ **悬念门禁**（全章节）：无连续3章章末钩子强度为"弱"
+□ **中段门禁**（40-60%进度激活）：主角不在该段内持续被动，有新变量引入
 
 任一□未勾选 → Coordinator 强制阻断（不提供"跳过"选项）。
 
