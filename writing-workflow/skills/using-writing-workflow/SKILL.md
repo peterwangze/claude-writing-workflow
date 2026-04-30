@@ -68,7 +68,24 @@ AI辅助小说创作工作流的主入口。管理整个创作流程，协调各
 |---------|------|---------|---------|
 | **决策型方案** | market-analyst, creation-strategist, novel-architect | Subagent 返回方案 → Coord 用 AskUserQuestion 呈现选项列表 → 用户选择 → Coord 确认后路由给执行型 Subagent | 看到选项+推荐+风险，做出选择 |
 | **执行型产出** | chapter-designer, content-writer, launch-strategist 等 | Subagent 返回文件 → Coord 执行 F1-F4 门禁检查 → AskUserQuestion 展示门禁结果 → 用户确认 | 看到门禁结果，决定通过/重做/回退 |
-| **审查型报告** | continuity-reviewer, character-world-reviewer, plot-logic-reviewer, commercial-editor | 4 报告收集 → Coord 汇总为统一审查面板 → AskUserQuestion 展示 → 用户决定通过/修正 | 看到四项审查结果+总分+问题列表 |
+| **审查型报告** | continuity-reviewer, character-world-reviewer, plot-logic-reviewer, commercial-editor, engagement-reviewer, ai-compliance-officer | 6 报告收集 → Coord 汇总为统一审查面板 → AskUserQuestion 展示 → 用户决定通过/修正 | 看到六项审查结果+总分+问题列表 |
+
+### 审查质量门禁（防放水机制）
+
+Coordinator 汇总审查报告后，**必须**逐份检查审查质量。零假设：Agent 会偷懒、输出空洞结论。
+
+**每份审查报告的强制最低标准**：
+
+```
+□ 是否包含至少 2 个具体发现？（"通过，无问题"=无效审查，必须驳回重审）
+□ 每个发现是否引用了正文原文？（无引用=无证据=无效）
+□ 每个发现是否标注了严重程度？（阻断/警告/建议）
+□ 是否明确标注了"通过/不通过"判定？
+
+4/4 全部满足 = 审查有效。任一不满足 = 驳回该审查 Agent 重新审查。
+```
+
+Coordinator 在展示给用户前执行此门禁。被驳回的审查必须用更严格的 prompt 重新启动该 Agent："你的上一次审查因缺乏具体发现被驳回。请至少找到 3 个具体问题（含正文引用），即使它们很微小。'通过，无问题'不是可接受的审查结论。"
 | **参考型产出** | competitor-analyst, data-analyst | Subagent 返回分析 → Coord 写入文件并通知用户摘要 | 看到摘要，无确认步骤 |
 
 ### 用户随时可介入的时机
@@ -583,7 +600,24 @@ Coordinator 检测到 WebSearch 不可用/无结果
 
 ### 审查组（执行型——6 个 Agent 并行启动）
 
-以下 5 个审查 Agent 在内容写作者完成后**并行启动**。每个 Agent 的启动模板以 `**执行模式**：独立审查，结果汇总给 Coordinator` 开头。审查结果由 Coordinator 汇总后用 AskUserQuestion 展示给用户。
+以下 6 个审查 Agent 在内容写作者完成后**必须全部并行启动**。
+
+> 🚫 **防御性设计——零假设：Agent 会偷懒，Coordinator 会跳步骤。**
+> Coordinator **严禁**以"本章简单"、"前几个审查已通过"、"节省成本"为由选择性启动部分 Agent。
+> 少启动任何一个 = 审查不完整 = 失职。每章必须经过完整 6 人审查。
+
+**强制启动自检**（启动审查组后立即执行）：
+```
+□ continuity-reviewer 已启动
+□ character-world-reviewer 已启动
+□ plot-logic-reviewer 已启动
+□ commercial-editor 已启动
+□ engagement-reviewer 已启动
+□ ai-compliance-officer 已启动
+→ 6/6 全部启动 = 合格。少于 6 = 立即补启动缺失的 Agent。
+```
+
+每个 Agent 的启动模板以 `**执行模式**` 开头。审查结果由 Coordinator 汇总后用 AskUserQuestion 展示给用户。
 
 **连续性审查员**：
 
