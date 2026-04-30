@@ -248,7 +248,9 @@ AskUserQuestion：
 | novel_confirmation | 作品确认 | novel-confirmation | 确定作品基本信息 |
 | creation_planning | 创作规划 | creation-planning | 制定创作计划 |
 | outline_writing | 大纲生成 | outline-writing | 生成世界观和大纲 |
+| outline_review | 大纲审查 | quality-review | 地基审查——Bible完整性+人物世界观自洽+盈利适配（🔒质量关键） |
 | chapter_outline | 章节细纲 | chapter-outline | 生成章节细纲 |
+| chapter_outline_review | 细纲审查 | quality-review | 施工图审查——大纲一致性+平台算法适配+阅读节奏预判（🔒质量关键） |
 | content_generation | 正文生成 | content-generation | 生成正文内容（含平台算法适配） |
 | human_ai_collaboration | AI合规处理 | human-ai-collaboration | 人机协作流程，确保内容过审 |
 | quality_review | 质量审查 | quality-review | 多维度质量审查 |
@@ -272,6 +274,8 @@ AskUserQuestion：
 | 策划创作组 | 创作策略顾问 | work_type_selection, novel_confirmation, creation_planning | `agents/creation-strategist.md` |
 | | 小说架构师 | outline_writing | `agents/novel-architect.md` |
 | 内容生产组 | 章节设计师 | chapter_outline | `agents/chapter-designer.md` |
+| 地基审查组 | 大纲审查员×3 | outline_review | continuity-reviewer + character-world-reviewer + commercial-editor |
+| | 细纲审查员×3 | chapter_outline_review | continuity-reviewer + commercial-editor + engagement-reviewer |
 | | 内容写作者 | content_generation | `agents/content-writer.md` |
 | 审查组 | 连续性审查员 | 连续性硬门槛 + ledger 验证 | `agents/continuity-reviewer.md` |
 | | 人物世界观审查员 | 人物一致性 + 世界观合规 | `agents/character-world-reviewer.md` |
@@ -546,6 +550,91 @@ Coordinator 检测到 WebSearch 不可用/无结果
 5. **不要**更新 workflow-state
 
 输出文件（均为草案）：05-outline.md, 08-characters/*, 09-worldbuilding/*, 17-continuity/story-bible.md
+```
+
+### 地基审查组
+
+**大纲审查**（`outline_review` 阶段，outline_writing 完成后强制执行，🔒质量关键）：
+
+```
+**执行模式**：大纲是故事的地基。地基有问题，正文一定崩溃。三位审查员必须全部启动。
+
+你是连续性审查员 + 人物世界观审查员 + 商业编辑的联合审查组。请按角色分工审查小说架构师的产出。
+
+角色定义：
+- continuity-reviewer: writing-workflow/agents/continuity-reviewer.md
+- character-world-reviewer: writing-workflow/agents/character-world-reviewer.md  
+- commercial-editor: writing-workflow/agents/commercial-editor.md
+
+审查规范：writing-workflow/skills/quality-review/SKILL.md（大纲审查部分）
+
+工作文件：
+- novel-project/05-outline.md
+- novel-project/08-characters/（全部）
+- novel-project/09-worldbuilding/（全部）
+- novel-project/17-continuity/story-bible.md
+
+审查分三个维度并行执行：
+
+**维度1 - 地基完整性（continuity-reviewer）**：
+- story-bible 是否包含≥5条不可变更事实？
+- 时间线锚点是否≥3个关键节点？
+- 伏笔清单是否≥5个，每个都有最迟回收章节？
+- 禁止偏离事项是否明确？
+
+**维度2 - 人物+世界自洽（character-world-reviewer）**：
+- 主角成长弧线是否有清晰轨迹？
+- 主要配角是否有独立动机和困境？
+- 力量体系是否自洽（晋升条件/代价/极限）？
+- 世界观规则是否内部无矛盾？
+
+**维度3 - 盈利+平台适配（commercial-editor）**：
+- 付费卡点是否在分卷规划中标注？
+- 平台算法适配检查是否通过？
+- 爽点分布是否符合目标平台的读者预期？
+- 差异化卖点是否明确？
+
+评分：二进制判定——≥90通过，<90不通过。输出结构化联合审查报告。
+```
+
+**细纲审查**（`chapter_outline_review` 阶段，chapter_outline 完成后强制执行，🔒质量关键）：
+
+```
+**执行模式**：细纲是正文的施工图。施工图错了，正文照着写就是批量犯错。
+
+你是连续性审查员 + 商业编辑 + 阅读体验审查员的联合审查组。
+
+角色定义：
+- continuity-reviewer: writing-workflow/agents/continuity-reviewer.md
+- commercial-editor: writing-workflow/agents/commercial-editor.md
+- engagement-reviewer: writing-workflow/agents/engagement-reviewer.md
+
+审查规范：writing-workflow/skills/quality-review/SKILL.md（细纲审查部分）
+
+工作文件：
+- novel-project/06-chapter-outlines/（全部）
+- novel-project/05-outline.md
+- novel-project/17-continuity/chapter-XXX-context.md（全部）
+
+审查三个维度并行：
+
+**维度1 - 大纲一致性（continuity-reviewer）**：
+- 逐章对照大纲验证情节走向、人物发展是否符合规划
+- context card 的输入/输出状态是否与连续性总纲一致
+- 必写场景是否在大纲中有对应规划
+
+**维度2 - 平台算法适配（commercial-editor）**：
+- 每章是否有章末钩子且标注强度？
+- 付费相关章节是否有付费转化设计？
+- 章节字数是否在平台推荐范围内？
+- 爽点分布密度是否符合目标平台要求？
+
+**维度3 - 阅读节奏预判（engagement-reviewer）**：
+- 前5章钩子强度是否≥4/5为"强"？
+- 章节间情绪曲线是否有起伏？
+- 是否存在连续3章弱钩子的风险区？
+
+评分：二进制判定——≥90通过，<90不通过。输出结构化联合审查报告。
 ```
 
 ### 内容生产组
@@ -1307,6 +1396,15 @@ content_generation / quality_review 通过后：
 | F3-内容 | `05-outline.md` 含 `## 核心设定` + `## 分卷大纲` + `## 伏笔设计`；`main-characters.md` 含 `## 主角`；`story-bible.md` 含 `## 不可变更事实` |
 | F4-质量 | 大纲自检报告已生成，且 `story-bible.md` 中的"不可变更事实"至少 3 项 |
 
+#### 阶段 5.5：大纲审查（🔒质量关键，不可跳过，outline_writing 后强制执行）
+
+| 门禁 | 检查项 |
+|------|--------|
+| F1-文件 | 大纲审查报告已生成且 > 0 字节 |
+| F2-状态 | `completed_stages` 含 `"outline_review"` |
+| F3-内容 | 审查报告含三个维度的逐项评分（地基完整性/人物+世界自洽/盈利+平台适配） |
+| F4-质量 | 总分 ≥ 90。**低于90 = 大纲不通过 = 必须修改大纲后重新审查** |
+
 #### 阶段 6：章节细纲（🔒质量关键，不可跳过）
 
 | 门禁 | 检查项 |
@@ -1315,6 +1413,15 @@ content_generation / quality_review 通过后：
 | F2-状态 | `completed_stages` 含 `"chapter_outline"`，`statistics.total_chapters` > 0 |
 | F3-内容 | 每章细纲含 `## 章节概要` + `## 详细情节` + `## 爽点设计` + `## 章末钩子` |
 | F4-质量 | 细纲自检报告已生成，平台算法适配检查 ≥ 80% 通过。**悬念强度**：前5章至少4章章末钩子强度为"强"（连续3章弱钩子=不合规） |
+
+#### 阶段 6.5：细纲审查（🔒质量关键，不可跳过，chapter_outline 后强制执行）
+
+| 门禁 | 检查项 |
+|------|--------|
+| F1-文件 | 细纲审查报告已生成且 > 0 字节 |
+| F2-状态 | `completed_stages` 含 `"chapter_outline_review"` |
+| F3-内容 | 审查报告含三个维度的逐项评分（大纲一致性/平台算法适配/阅读节奏预判） |
+| F4-质量 | 总分 ≥ 90。**低于90 = 细纲不通过 = 必须修改细纲后重新审查** |
 
 #### 阶段 7：正文生成（🔒质量关键，不可跳过）
 
