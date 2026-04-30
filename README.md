@@ -263,6 +263,12 @@ claude-writing-workflow/
 
 ## 版本历史
 
+### v2.1.1
+- 修复 Subagent 绕过 AskUserQuestion 的系统性漏洞
+- 新增加两阶段执行协议：决策型阶段（方案模式）vs 执行型阶段（执行模式）
+- 6 个决策型阶段改为"Subagent 生成方案 → Coordinator AskUserQuestion 确认"
+- 8 个执行型阶段改为"直接执行 → Coordinator 门禁检查 → AskUserQuestion 展示"
+
 ### v2.1.0
 - 新增 14 个 Agent 的子 Agent 启动协议模板（标准 prompt + 三层约束注入）
 - 审查组 5 个 Agent 支持并行启动
