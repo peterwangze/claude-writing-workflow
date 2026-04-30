@@ -305,6 +305,11 @@ description: Use when user needs to create chapter outlines - generates detailed
 
 Coordinator 在本阶段完成后必须验证（🔒不可跳过）：
 
+**Context Card Bible 交叉验证**（生成后强制执行）：
+- 读取 `17-continuity/story-bible.md` 的"不可变更事实"和"禁止偏离事项"
+- 逐项比对 context card 中的输入状态/必写场景/禁止偏离项是否与 Bible 基线一致
+- 若 context card 中的数值（如时间常数、等级名称、人物基线状态）与 Bible 基线不一致 → 修正 context card 以匹配 Bible，不得将错误值传播到正文生成阶段
+
 □ 输出文件：至少 1 章 `06-chapter-outlines/chapter-XXX.md` 存在且 > 0 字节，对应 `17-continuity/chapter-XXX-context.md` 存在且 > 0 字节
 □ 状态更新：`completed_stages` 含 `"chapter_outline"`，`statistics.total_chapters` > 0
 □ 内容标准：每章细纲含 `## 章节概要` + `## 详细情节` + `## 爽点设计` + `## 章末钩子`

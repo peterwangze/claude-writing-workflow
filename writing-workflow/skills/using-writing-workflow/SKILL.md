@@ -1128,7 +1128,30 @@ F4. 质量门禁（仅关键阶段）─ 失败 → 强制阻断（不提供跳�
 AskUserQuestion：展示检查结果摘要 → 用户确认后进入下一阶段
 ```
 
-### 门禁失败处理模板
+### ### 门禁执行规则
+
+Coordinator 在每阶段完成后必须**逐项执行**门禁检查，**严禁**跳过或仅展示审查报告。
+
+**检查方式**：不依赖审查报告摘要，而是**读取输出文件**直接验证：
+
+- F1（文件存在）：检查文件路径是否存在且 > 0 字节
+- F2（状态更新）：读取 `workflow-state.json`，检查关键字段是否为空/null
+- F3（内容标准）：读取输出文件，检查必需节标题是否存在
+- F4（质量门禁）：读取审查报告，逐项比对 15 项硬门槛（见 quality-review "连续性硬门槛"）
+
+**质量关键阶段的状态同步**（审查通过后强制执行）：
+
+```
+content_generation / quality_review 通过后：
+- guardrails.latest_passed_chapter: 设为通过审查的章节号
+- statistics.total_words: 累计所有已完成章节的字数
+- statistics.total_chapters: 已完成章节数
+- statistics.last_updated: 更新为当前时间戳
+
+不执行此更新 = Coordinator 失职。40-60%中段门禁和累积偏离度依赖这些字段。
+```
+
+**门禁失败处理模板
 
 **非质量关键阶段（F1/F2/F3 失败）**：
 ```
