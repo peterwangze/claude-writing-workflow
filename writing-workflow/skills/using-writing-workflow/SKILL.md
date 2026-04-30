@@ -587,7 +587,7 @@ Coordinator 检测到 WebSearch 不可用/无结果
 - novel-project/17-continuity/chapter-XXX-context.md
 - novel-project/17-continuity/continuity-ledger.md
 
-任务：对第 X 章正文执行连续性硬门槛审查。逐场景对照细纲计算覆盖率和偏离度。检查时间线/地点/人物状态硬冲突、bible 事实是否被改写、伏笔是否逾期。铁面无私——任何一项硬门槛命中 = 不通过。输出结构化审查报告。
+任务：对第 X 章正文执行连续性硬门槛审查。逐场景对照细纲计算覆盖率和偏离度。场景覆盖率必须=100%，偏离度必须=0%（零容忍原则：任何偏离随章节累积会指数级放大）。检查时间线/地点/人物状态硬冲突、bible 事实是否被改写、伏笔是否逾期。铁面无私——任何一项不达标=不通过。输出结构化审查报告。
 ```
 
 **人物世界观审查员**：
@@ -994,8 +994,8 @@ mkdir -p novel-project/17-continuity
 
 出现以下任一情况时，正文视为**未通过**，不得继续下一阶段：
 
-1. 场景覆盖率低于 90%
-2. 偏离度高于 15%
+1. 场景覆盖率低于 100%（零容忍——任何必写场景缺失=阻断）
+2. 偏离度高于 0%（零容忍——任何偏差=阻断，不存在可接受的偏离）
 3. 前后章时间线、地点、人物状态存在硬冲突
 4. 本章 context card 中的必写信息缺失
 5. 未经说明擅自新增关键设定、人物关系或世界规则
@@ -1265,7 +1265,7 @@ content_generation / quality_review 通过后：
 |------|--------|
 | F1-文件 | `07-content/chapter-XXX.md` 存在 > 0，字数达标（≥ 目标字数的 80%） |
 | F2-状态 | `guardrails.latest_passed_chapter` 已更新，`guardrails.latest_drift_score` 已记录，`statistics.total_words` 已更新 |
-| F3-内容 | 正文文件含章节号标题，且场景覆盖率 ≥ 90%，偏离度 ≤ 15% |
+| F3-内容 | 正文文件含章节号标题，且场景覆盖率 = 100%，偏离度 = 0%（零容忍） |
 | F4-质量 | continuity-ledger 已更新，quality-review 报告已生成且总分 ≥ 60，human-ai-collaboration 评估已完成且路径非 C。**第1-3章**：Contract-Clock-Crucible 三要素全部达标。**全章节**：无连续3章弱钩子。**40-60%进度**：中段防崩检查通过 |
 
 #### 阶段 7.5：AI 合规处理（🔒质量关键）
