@@ -253,7 +253,7 @@ AskUserQuestion：
 | chapter_outline_review | 细纲审查 | chapter-outline-review | 施工图审查——大纲一致性+平台算法适配+阅读节奏预判（🔒质量关键） |
 | content_generation | 正文生成 | content-generation | 生成正文内容（含平台算法适配） |
 | human_ai_collaboration | AI合规处理 | human-ai-collaboration | 人机协作流程，确保内容过审 |
-| quality_review | 质量审查 | quality-review | 多维度质量审查 |
+| quality_review | 质量审查 | continuity-check + character-world-check + plot-logic-check + commercial-check + engagement-check + ai-compliance-check | 6 个独立 agent+SKILL 对并行审查 |
 | launch_strategy | 上架发布 | launch-strategy | 存稿管理、签约、首秀准备 |
 | monetization_strategy | 变现策略 | monetization-strategy | VIP/付费卡点/收益优化 |
 | opening_optimization | 开篇优化 | opening-optimization | 黄金三章优化（可选） |
@@ -556,82 +556,119 @@ Coordinator 检测到 WebSearch 不可用/无结果
 
 **大纲审查**（`outline_review` 阶段，outline_writing 完成后强制执行，🔒质量关键）：
 
+> 启动 3 个独立 subagent，各司其职，并行执行。禁止用"联合审查组"模式（一人饰多角）。
+
+**连续性审查员**（负责 outline-review SKILL 步骤 2-5）：
+
 ```
-**执行模式**：大纲是故事的地基。地基有问题，正文一定崩溃。三位审查员必须全部启动。
+**执行模式**：独立审查，只输出报告。
 
-你是连续性审查员 + 人物世界观审查员 + 商业编辑的联合审查组。请按角色分工审查小说架构师的产出。
+你是连续性审查员。请先读取：
 
-角色定义：
-- continuity-reviewer: writing-workflow/agents/continuity-reviewer.md
-- character-world-reviewer: writing-workflow/agents/character-world-reviewer.md  
-- commercial-editor: writing-workflow/agents/commercial-editor.md
-
-审查规范：writing-workflow/skills/outline-review/SKILL.md（独立的大纲审查标准，非正文审查）
+角色定义：writing-workflow/agents/continuity-reviewer.md
+审查规范：writing-workflow/skills/outline-review/SKILL.md（执行步骤 2-5：不可变更事实、伏笔设计、时间线锚点、禁止偏离事项）
 
 工作文件：
 - novel-project/05-outline.md
-- novel-project/08-characters/（全部）
-- novel-project/09-worldbuilding/（全部）
 - novel-project/17-continuity/story-bible.md
 
-审查分三个维度并行执行：
-
-**维度1 - 地基完整性（continuity-reviewer）**：
-- story-bible 是否包含≥5条不可变更事实？
-- 时间线锚点是否≥3个关键节点？
-- 伏笔清单是否≥5个，每个都有最迟回收章节？
-- 禁止偏离事项是否明确？
-
-**维度2 - 人物+世界自洽（character-world-reviewer）**：
-- 主角成长弧线是否有清晰轨迹？
-- 主要配角是否有独立动机和困境？
-- 力量体系是否自洽（晋升条件/代价/极限）？
-- 世界观规则是否内部无矛盾？
-
-**维度3 - 盈利+平台适配（commercial-editor）**：
-- 付费卡点是否在分卷规划中标注？
-- 平台算法适配检查是否通过？
-- 爽点分布是否符合目标平台的读者预期？
-- 差异化卖点是否明确？
-
-评分：二进制判定——≥90通过，<90不通过。输出结构化联合审查报告。
+任务：逐项机械执行 outline-review SKILL 步骤 2-5。不得跳过任一步。输出结构化审查报告（含逐项计分）。
 ```
+
+**人物世界观审查员**（负责 outline-review SKILL 步骤 6-9）：
+
+```
+**执行模式**：独立审查，只输出报告。
+
+你是人物世界观审查员。请先读取：
+
+角色定义：writing-workflow/agents/character-world-reviewer.md
+审查规范：writing-workflow/skills/outline-review/SKILL.md（执行步骤 6-9：主角成长弧线、配角独立性、力量体系、世界观矛盾）
+
+工作文件：
+- novel-project/08-characters/（全部）
+- novel-project/09-worldbuilding/（全部）
+
+任务：逐项机械执行 outline-review SKILL 步骤 6-9。不得跳过任一步。输出结构化审查报告（含逐项计分）。
+```
+
+**商业编辑**（负责 outline-review SKILL 步骤 10-17）：
+
+```
+**执行模式**：独立审查，只输出报告。
+
+你是商业编辑。请先读取：
+
+角色定义：writing-workflow/agents/commercial-editor.md
+审查规范：writing-workflow/skills/outline-review/SKILL.md（执行步骤 10-17：盈利适配、差异化卖点、群像生态、社会共鸣、中段防崩、推荐触发点、回报分级、平台合规）
+
+工作文件：
+- novel-project/05-outline.md
+- novel-project/03-novel-info.md
+
+任务：逐项机械执行 outline-review SKILL 步骤 10-17。不得跳过任一步。输出结构化审查报告（含逐项计分）。
+```
+
+Coordinator 汇总 3 份报告后，合并计分表，计算总分。总分 ≥ 90 = 通过，< 90 = 不通过。
 
 **细纲审查**（`chapter_outline_review` 阶段，chapter_outline 完成后强制执行，🔒质量关键）：
 
+> 启动 3 个独立 subagent，各司其职，并行执行。禁止用"联合审查组"模式（一人饰多角）。
+
+**连续性审查员**（负责 chapter-outline-review SKILL 步骤 2-4）：
+
 ```
-**执行模式**：细纲是正文的施工图。施工图错了，正文照着写就是批量犯错。
+**执行模式**：独立审查，只输出报告。
 
-你是连续性审查员 + 商业编辑 + 阅读体验审查员的联合审查组。
+你是连续性审查员。请先读取：
 
-角色定义：
-- continuity-reviewer: writing-workflow/agents/continuity-reviewer.md
-- commercial-editor: writing-workflow/agents/commercial-editor.md
-- engagement-reviewer: writing-workflow/agents/engagement-reviewer.md
-
-审查规范：writing-workflow/skills/chapter-outline-review/SKILL.md（独立的细纲审查标准，非正文审查）
+角色定义：writing-workflow/agents/continuity-reviewer.md
+审查规范：writing-workflow/skills/chapter-outline-review/SKILL.md（执行步骤 2-4：大纲一致性、Context Card 链、Bible 合规）
 
 工作文件：
 - novel-project/06-chapter-outlines/（全部）
 - novel-project/05-outline.md
-- novel-project/17-continuity/chapter-XXX-context.md（全部）
+- novel-project/17-continuity/story-bible.md
+- novel-project/17-continuity/（全部 context card）
 
-审查三个维度并行：
+任务：逐项机械执行 chapter-outline-review SKILL 步骤 2-4。不得跳过任一步。输出结构化审查报告（含逐项计分）。
+```
 
-**维度1 - 大纲一致性（continuity-reviewer）**：
-- 逐章对照大纲验证情节走向、人物发展是否符合规划
-- context card 的输入/输出状态是否与连续性总纲一致
-- 必写场景是否在大纲中有对应规划
+**商业编辑**（负责 chapter-outline-review SKILL 步骤 5-8、10）：
 
-**维度2 - 平台算法适配（commercial-editor）**：
-- 每章是否有章末钩子且标注强度？
-- 付费相关章节是否有付费转化设计？
-- 章节字数是否在平台推荐范围内？
-- 爽点分布密度是否符合目标平台要求？
+```
+**执行模式**：独立审查，只输出报告。
 
-**维度3 - 阅读节奏预判（engagement-reviewer）**：
-- 前5章钩子强度是否≥4/5为"强"？
-- 章节间情绪曲线是否有起伏？
+你是商业编辑。请先读取：
+
+角色定义：writing-workflow/agents/commercial-editor.md
+审查规范：writing-workflow/skills/chapter-outline-review/SKILL.md（执行步骤 5-8、10：钩子强度、付费转化设计、字数规划、爽点分布、平台算法适配）
+
+工作文件：
+- novel-project/06-chapter-outlines/（全部）
+- novel-project/workflow-state.json
+
+任务：逐项机械执行 chapter-outline-review SKILL 步骤 5-8 和步骤 10。不得跳过任一步。输出结构化审查报告（含逐项计分）。
+```
+
+**阅读体验审查员**（负责 chapter-outline-review SKILL 步骤 9、11）：
+
+```
+**执行模式**：独立审查，只输出报告。
+
+你是阅读体验审查员。请先读取：
+
+角色定义：writing-workflow/agents/engagement-reviewer.md
+审查规范：writing-workflow/skills/chapter-outline-review/SKILL.md（执行步骤 9、11：情绪曲线预判、正文看护卡完整性）
+
+工作文件：
+- novel-project/06-chapter-outlines/（全部）
+- novel-project/17-continuity/（全部 context card）
+
+任务：逐项机械执行 chapter-outline-review SKILL 步骤 9 和步骤 11。不得跳过任一步。输出结构化审查报告（含逐项计分）。
+```
+
+Coordinator 汇总 3 份报告后，合并计分表，计算总分。总分 ≥ 90 = 通过，< 90 = 不通过。
 - 是否存在连续3章弱钩子的风险区？
 
 评分：二进制判定——≥90通过，<90不通过。输出结构化联合审查报告。
@@ -716,16 +753,17 @@ Coordinator 检测到 WebSearch 不可用/无结果
 你是连续性审查员。请先读取：
 
 角色定义：writing-workflow/agents/continuity-reviewer.md
-审查标准规范：writing-workflow/skills/quality-review/SKILL.md（仅"连续性硬门槛"和"评分体系"部分）
+审查规范：writing-workflow/skills/continuity-check/SKILL.md
 
-需要加载的工作文件：
+工作文件：
 - novel-project/06-chapter-outlines/chapter-XXX.md
 - novel-project/07-content/chapter-XXX.md
 - novel-project/17-continuity/story-bible.md
 - novel-project/17-continuity/chapter-XXX-context.md
 - novel-project/17-continuity/continuity-ledger.md
+- novel-project/09-worldbuilding/power-system.md
 
-任务：对第 X 章正文执行连续性硬门槛审查。逐场景对照细纲计算覆盖率和偏离度。场景覆盖率必须=100%，偏离度必须=0%（零容忍原则：任何偏离随章节累积会指数级放大）。检查时间线/地点/人物状态硬冲突、bible 事实是否被改写、伏笔是否逾期。铁面无私——任何一项不达标=不通过。输出结构化审查报告。
+任务：按 continuity-check SKILL 机械执行——9 项硬门禁 + 时间线数值 + 结构质量维度评分。场景覆盖率必须=100%，偏离度必须=0%。输出结构化审查报告。
 ```
 
 **人物世界观审查员**：
@@ -736,9 +774,9 @@ Coordinator 检测到 WebSearch 不可用/无结果
 你是人物世界观审查员。请先读取以下文件：
 
 角色定义：writing-workflow/agents/character-world-reviewer.md
-审查标准规范：writing-workflow/skills/quality-review/SKILL.md（仅"评分体系"中人物和设定相关部分）
+审查规范：writing-workflow/skills/character-world-check/SKILL.md
 
-需要加载的工作文件：
+工作文件：
 - novel-project/07-content/chapter-XXX.md
 - novel-project/08-characters/main-characters.md
 - novel-project/08-characters/character-relationships.md
@@ -746,7 +784,7 @@ Coordinator 检测到 WebSearch 不可用/无结果
 - novel-project/09-worldbuilding/power-system.md
 - novel-project/17-continuity/continuity-ledger.md
 
-任务：逐角色审查行为/对话/关系/身份/成长弧是否与设定一致。审查世界观规则和力量体系是否被正文遵守。OOC 零容忍。输出结构化审查报告。
+任务：按 character-world-check SKILL 机械执行——逐人物审查行为/对话/关系/成长弧，审查世界观合规。OOC 零容忍。输出结构化审查报告。
 ```
 
 **情节逻辑审查员**：
@@ -757,15 +795,16 @@ Coordinator 检测到 WebSearch 不可用/无结果
 你是情节逻辑审查员。请先读取以下文件：
 
 角色定义：writing-workflow/agents/plot-logic-reviewer.md
-审查标准规范：writing-workflow/skills/quality-review/SKILL.md（仅"评分体系"中情节相关部分）
+审查规范：writing-workflow/skills/plot-logic-check/SKILL.md
 
-需要加载的工作文件：
+工作文件：
 - novel-project/07-content/chapter-XXX.md
-- novel-project/05-outline.md（伏笔表）
-- novel-project/17-continuity/story-bible.md（关键伏笔清单）
+- novel-project/06-chapter-outlines/chapter-XXX.md
+- novel-project/05-outline.md
+- novel-project/17-continuity/story-bible.md
 - novel-project/17-continuity/continuity-ledger.md
 
-任务：审查因果链完整性、伏笔生命周期（埋设-推进-回收，逾期检测）、冲突升级曲线、主角能动性。巧合必须有铺垫。输出结构化审查报告。
+任务：按 plot-logic-check SKILL 机械执行——2 项硬门禁 + 因果链 + 伏笔生命周期 + 冲突升级 + 主角能动性 + 情节逻辑性维度评分。输出结构化审查报告。
 ```
 
 **商业编辑**：
@@ -776,14 +815,15 @@ Coordinator 检测到 WebSearch 不可用/无结果
 你是商业编辑。请先读取以下文件：
 
 角色定义：writing-workflow/agents/commercial-editor.md
-审查标准规范：writing-workflow/skills/quality-review/SKILL.md（仅"评分体系"中平台商业化和文学质量部分）
+审查规范：writing-workflow/skills/commercial-check/SKILL.md
 
-需要加载的工作文件：
+工作文件：
 - novel-project/07-content/chapter-XXX.md
+- novel-project/workflow-state.json
 - novel-project/06-chapter-outlines/chapter-XXX.md
-- novel-project/workflow-state.json（获取目标平台信息）
+- novel-project/04-creation-plan.md
 
-任务：检查平台算法适配、付费卡点设计、章末钩子有效性、货币化准备度。审查文学质量（句式/描写/对话/视角/文风）。给出按优先级排序的具体修改建议。输出结构化审查报告。
+任务：按 commercial-check SKILL 机械执行——平台核心指标 + 付费设计 + 社交传播潜力 + 平台商业化维度评分。输出结构化审查报告。
 ```
 
 **阅读体验审查员**：
@@ -794,12 +834,15 @@ Coordinator 检测到 WebSearch 不可用/无结果
 你是阅读体验审查员。请先读取：
 
 角色定义：writing-workflow/agents/engagement-reviewer.md
-审查标准规范：writing-workflow/skills/quality-review/SKILL.md（仅"评分体系"中情感体验相关部分）
+审查规范：writing-workflow/skills/engagement-check/SKILL.md
 
-需要加载的工作文件：
+工作文件：
 - novel-project/07-content/chapter-XXX.md
+- novel-project/06-chapter-outlines/chapter-XXX.md
+- novel-project/workflow-state.json
+- novel-project/17-continuity/continuity-ledger.md
 
-任务：以读者身份通读本章，评估情绪曲线、期待感强度、读者代入感和节奏感受。标记最精彩和最薄弱段落。检查"规则正确但无聊"的内容。输出结构化阅读体验审查报告。
+任务：按 engagement-check SKILL 机械执行——4 项硬门禁（CCC/弱钩子/情感偏离/无中回报）+ 文学质量 + 情感体验维度评分。输出结构化审查报告。
 ```
 
 **AI合规官**（在正文完成、审查开始前执行）：
@@ -810,12 +853,13 @@ Coordinator 检测到 WebSearch 不可用/无结果
 你是AI合规官。请先读取以下文件：
 
 角色定义：writing-workflow/agents/ai-compliance-officer.md
-任务规范：writing-workflow/skills/human-ai-collaboration/SKILL.md
+审查规范：writing-workflow/skills/ai-compliance-check/SKILL.md
 
-需要加载的工作文件：
+工作文件：
 - novel-project/07-content/chapter-XXX.md
+- novel-project/13-creation-logs/
 
-任务：评估第 X 章的 AI 参与度，按 A/B/C 三级路径分流。生成证据链留存包。回写 guardrails 数据到 workflow-state.json。路径 C 时必须明确告知财务风险。宁可过严，不可过松。输出 novel-project/13-creation-logs/chapter-XXX-log.md。
+任务：按 ai-compliance-check SKILL 机械执行——AI 痕迹逐段检测 + 参与度分级 + 证据链检查 + 写作质量检测 + 维度评分。路径 C 时必须明确告知财务风险。输出结构化审查报告。
 ```
 
 ### 发布运营组（执行型）

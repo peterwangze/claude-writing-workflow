@@ -1,36 +1,31 @@
 ---
 name: quality-review
-description: Use when quality check is needed - reviews content for consistency, style, originality, and AI participation level
+description: 质量审查总索引——汇总 6 个独立审查 SKILL 的评分标准、硬门禁清单和维度细则。不直接执行，由 6 个子 SKILL 分别执行
 ---
 
-# Quality Review Skill
+# 质量审查体系
 
-多维度质量审查，包括一致性检查、文风检查、原创性审查和 AI 参与度分级评估。
+本文件是正文质量审查的**总索引和标准定义**。实际执行由 6 个独立的 agent+SKILL 对并行完成。
 
-## 执行人设
+## 执行架构
 
-你是一位严谨的小说质量审查专家，拥有多个视角的审查能力。你能够从架构、节奏、人物、文风、AI痕迹等多个维度评估内容质量。你的审查风格客观公正、问题精准，给出的修改建议具体可行。
+每个审查维度由独立的 subagent 执行专用 SKILL：
 
-## 触发条件
+| Agent | SKILL | 负责内容 | 分值 |
+|-------|-------|---------|------|
+| continuity-reviewer | `continuity-check/SKILL.md` | 硬门禁 1-9 + 时间线数值 + 结构质量 | 25 |
+| character-world-reviewer | `character-world-check/SKILL.md` | 人物一致性 + 世界观合规 | 25 |
+| plot-logic-reviewer | `plot-logic-check/SKILL.md` | 硬门禁 10+13 + 情节逻辑性 | 15 |
+| commercial-editor | `commercial-check/SKILL.md` | 平台商业化 | 10 |
+| engagement-reviewer | `engagement-check/SKILL.md` | 硬门禁 11-12+14-15 + 文学质量 + 情感体验 | 18 |
+| ai-compliance-officer | `ai-compliance-check/SKILL.md` | AI痕迹+原创性 | 7 |
+| **合计** | | | **100** |
 
-- 大纲生成后（自动）
-- 细纲生成后（自动）
-- 每章正文生成后（自动）
-- 用户明确请求质量审查
+> 大纲审查见 `outline-review/SKILL.md`，细纲审查见 `chapter-outline-review/SKILL.md`。
 
-## 审查阶段
+## 审查标准定义
 
-| 阶段 | 审查重点 | 审查角色 |
-|------|----------|----------|
-| 大纲 | 世界观完整性、设定逻辑性、节奏合理性 | 架构审查员、节奏审查员、用户画像审查员 |
-| 细纲 | 与大纲一致性、章节连贯性 | 情节审查员、连贯性审查员 |
-| 正文 | 细纲一致性、人物一致性、前后文连贯性、文风、AI痕迹 | 连贯性审查员、人物审查员、文风审查员、AI痕迹审查员 |
-
-## 执行程序
-
-本 SKILL 仅负责**正文（content）**审查。大纲审查见 `outline-review/SKILL.md`，细纲审查见 `chapter-outline-review/SKILL.md`。
-
-按以下步骤机械执行正文审查：
+以下标准被 6 个子 SKILL 共享引用。各子 SKILL 中的检查项是这些标准的机械执行版。
 
 ### Step 1：加载文件
 
