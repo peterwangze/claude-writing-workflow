@@ -248,9 +248,9 @@ AskUserQuestion：
 | novel_confirmation | 作品确认 | novel-confirmation | 确定作品基本信息 |
 | creation_planning | 创作规划 | creation-planning | 制定创作计划 |
 | outline_writing | 大纲生成 | outline-writing | 生成世界观和大纲 |
-| outline_review | 大纲审查 | quality-review | 地基审查——Bible完整性+人物世界观自洽+盈利适配（🔒质量关键） |
+| outline_review | 大纲审查 | outline-review | 地基审查——Bible完整性+人物世界观自洽+盈利适配（🔒质量关键） |
 | chapter_outline | 章节细纲 | chapter-outline | 生成章节细纲 |
-| chapter_outline_review | 细纲审查 | quality-review | 施工图审查——大纲一致性+平台算法适配+阅读节奏预判（🔒质量关键） |
+| chapter_outline_review | 细纲审查 | chapter-outline-review | 施工图审查——大纲一致性+平台算法适配+阅读节奏预判（🔒质量关键） |
 | content_generation | 正文生成 | content-generation | 生成正文内容（含平台算法适配） |
 | human_ai_collaboration | AI合规处理 | human-ai-collaboration | 人机协作流程，确保内容过审 |
 | quality_review | 质量审查 | quality-review | 多维度质量审查 |
@@ -875,7 +875,7 @@ Coordinator 检测到 WebSearch 不可用/无结果
 ### 启动协议执行规则
 
 1. **每个 subagent 使用 `Agent` 工具独立启动**，`subagent_type: "general-purpose"`，`isolation: "worktree"`
-2. **审查组 5 个 agent 并行启动**（continuity + character-world + plot-logic + commercial + AI-compliance）
+2. **审查组 6 个 agent 并行启动**（continuity + character-world + plot-logic + commercial + engagement + AI-compliance）
 3. **Agent 定义文件是强约束**：启动 prompt 的第一条指令是"先读取角色定义文件"
 4. **SKILL 文件是执行标准**：启动 prompt 中指定对应的 SKILL 规范部分
 5. **工作文件路径是绝对路径**：使用 `novel-project/...` 格式，确保 subagent 能访问
@@ -1146,15 +1146,15 @@ mkdir -p novel-project/17-continuity
 4. 本章 context card 中的必写信息缺失
 5. 未经说明擅自新增关键设定、人物关系或世界规则
 
-### 允许的有限偏离
+### 允许的有限扩充
 
-以下偏离可以接受，但必须在本章自检和审查报告中解释原因：
+以下扩充不视为偏离，无需在审查报告中额外解释：
 
 - 细节扩写但不改变场景功能
 - 衔接过渡补写
 - 为增强连贯性添加的微小动作、情绪、环境信息
 
-> 原则：允许“补充”，不允许“改轨”。
+> 原则：允许”补充”，不允许”改轨”。扩充内容由 quality-review SKILL 在审查时一并检查。
 
 ## 错误处理
 
@@ -1394,7 +1394,7 @@ content_generation / quality_review 通过后：
 | F1-文件 | `05-outline.md`、`08-characters/main-characters.md`、`09-worldbuilding/world-settings.md`、`17-continuity/story-bible.md` 四个文件均存在 > 0 |
 | F2-状态 | `completed_stages` 含 `"outline_writing"`，`files.outline` / `files.characters` / `files.worldbuilding` / `files.continuity_bible` 均已设置 |
 | F3-内容 | `05-outline.md` 含 `## 核心设定` + `## 分卷大纲` + `## 伏笔设计`；`main-characters.md` 含 `## 主角`；`story-bible.md` 含 `## 不可变更事实` |
-| F4-质量 | 大纲自检报告已生成，且 `story-bible.md` 中的"不可变更事实"至少 3 项 |
+| F4-质量 | outline-review 审查报告已生成，且 `story-bible.md` 中的"不可变更事实"至少 3 项 |
 
 #### 阶段 5.5：大纲审查（🔒质量关键，不可跳过，outline_writing 后强制执行）
 
@@ -1412,7 +1412,7 @@ content_generation / quality_review 通过后：
 | F1-文件 | 至少 1 章 `06-chapter-outlines/chapter-XXX.md` 存在 > 0，且对应 `17-continuity/chapter-XXX-context.md` 存在 > 0 |
 | F2-状态 | `completed_stages` 含 `"chapter_outline"`，`statistics.total_chapters` > 0 |
 | F3-内容 | 每章细纲含 `## 章节概要` + `## 详细情节` + `## 爽点设计` + `## 章末钩子` |
-| F4-质量 | 细纲自检报告已生成，平台算法适配检查 ≥ 80% 通过。**悬念强度**：前5章至少4章章末钩子强度为"强"（连续3章弱钩子=不合规） |
+| F4-质量 | chapter-outline-review 审查报告已生成。**悬念强度**：前5章至少4章章末钩子强度为"强"（连续3章弱钩子=不合规） |
 
 #### 阶段 6.5：细纲审查（🔒质量关键，不可跳过，chapter_outline 后强制执行）
 
