@@ -1,7 +1,7 @@
 {
   "name": "writing-workflow",
   "description": "AI辅助小说创作工作流：从平台调研到正文生成的端到端解决方案",
-  "version": "3.5.0",
+  "version": "4.0.0",
   "author": {
     "name": "peterwangze",
     "email": "peterwangze@github.com"
