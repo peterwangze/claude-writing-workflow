@@ -1,6 +1,6 @@
 ---
 name: novel-confirmation
-description: Use when user needs to confirm novel details - generates book titles, synopses, and cover prompts
+description: 作品确认——确定书名、简介、封面方向等作品基本信息
 ---
 
 # Novel Confirmation Skill

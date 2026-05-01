@@ -1,6 +1,6 @@
 ---
 name: creation-planning
-description: Use when user needs to plan novel creation - defines length, update schedule, and outline guidelines
+description: 创作规划——明确小说篇幅、发布频率、存稿策略和大纲生成指导原则
 ---
 
 # Creation Planning Skill

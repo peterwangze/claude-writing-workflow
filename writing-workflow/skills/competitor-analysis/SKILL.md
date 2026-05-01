@@ -1,6 +1,6 @@
 ---
 name: competitor-analysis
-description: Use when analyzing successful novels in the same genre/platform - deep-dives into top works' structure, hooks, pacing, and monetization patterns to inform differentiation strategy
+description: 竞品分析——深度拆解同赛道头部作品的结构、钩子、节奏和变现模式，为差异化策略提供依据
 ---
 
 # Competitor Analysis Skill

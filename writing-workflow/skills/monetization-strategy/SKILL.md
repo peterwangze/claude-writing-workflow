@@ -1,6 +1,6 @@
 ---
 name: monetization-strategy
-description: Use when planning revenue strategy for a novel - covers VIP timing, paid chapter design, platform-specific revenue optimization, and IP derivative strategies
+description: 变现策略——VIP上架时机决策、付费卡点设计、平台收益优化和IP衍生策略
 ---
 
 # Monetization Strategy Skill

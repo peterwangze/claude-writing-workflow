@@ -1,6 +1,6 @@
 ---
 name: data-monitoring
-description: Use when tracking novel performance data - monitors completion rate, retention rate, follow rate and provides optimization suggestions based on data
+description: 数据监控——追踪完读率/留存率/追读率等核心运营指标，基于数据驱动内容优化闭环
 ---
 
 # Data Monitoring Skill

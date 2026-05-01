@@ -1,6 +1,6 @@
 ---
 name: chapter-outline
-description: Use when user needs to create chapter outlines - generates detailed chapter-by-chapter plot outlines
+description: 章节细纲生成——将大纲拆解为逐章详细情节设计、爽点布局和章末钩子
 ---
 
 # Chapter Outline Skill

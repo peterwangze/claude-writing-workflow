@@ -1,6 +1,6 @@
 ---
 name: outline-writing
-description: Use when user needs to create novel outline - generates worldbuilding, characters, and plot structure
+description: 大纲生成——生成世界观设定、人物设定、情节主线和分卷大纲
 ---
 
 # Outline Writing Skill

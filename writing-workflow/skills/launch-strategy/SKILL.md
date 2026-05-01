@@ -1,6 +1,6 @@
 ---
 name: launch-strategy
-description: Use when preparing to publish a novel on a platform - covers manuscript stockpiling, signing contracts, debut preparation, recommendation slot competition, and launch monitoring
+description: 上架发布策略——存稿管理、签约流程、首秀准备、推荐位竞争和发布监控
 ---
 
 # Launch Strategy Skill

@@ -1,6 +1,6 @@
 ---
 name: reader-interaction
-description: Use when managing reader relationships - handles comments, fan operations, reader feedback and builds fan engagement
+description: 读者互动——管理评论互动、粉丝运营、读者反馈收集和社区建设
 ---
 
 # Reader Interaction Skill

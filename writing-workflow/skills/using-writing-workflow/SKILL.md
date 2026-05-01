@@ -1,6 +1,6 @@
 ---
 name: using-writing-workflow
-description: Use when starting novel creation workflow - manages the entire writing process from platform research to content generation
+description: 小说创作工作流入口——管理从平台调研到正文生成的端到端创作流程，Coordinator调度中心
 ---
 
 <SUBAGENT-STOP>

@@ -1,6 +1,6 @@
 ---
 name: opening-optimization
-description: Use when optimizing novel opening chapters - applies Golden Three Chapters rules to maximize reader retention and platform conversion
+description: 开篇优化——应用黄金三章法则最大化前三章读者留存和平台转化率
 ---
 
 # Opening Optimization Skill

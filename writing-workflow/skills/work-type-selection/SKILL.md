@@ -1,6 +1,6 @@
 ---
 name: work-type-selection
-description: Use when starting novel creation - helps user select work type (novel category) before platform research
+description: 作品类型选择——在平台调研前确定作品类型（长篇小说/中篇小说/短篇小说等）
 ---
 
 # Work Type Selection Skill

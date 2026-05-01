@@ -1,6 +1,6 @@
 ---
 name: platform-research
-description: Use when user needs to research and select a novel publishing platform - analyzes platform data, user demographics, and revenue models
+description: 平台调研——调研各小说平台的用户画像、收益模式和签约政策，选择最优发布平台
 ---
 
 # Platform Research Skill

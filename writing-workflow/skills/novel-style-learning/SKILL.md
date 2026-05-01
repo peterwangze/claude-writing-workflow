@@ -1,6 +1,6 @@
 ---
 name: novel-style-learning
-description: Use when learning web novel writing style - teaches what makes web novels different from traditional literature and how to write in proper web novel style
+description: 网文风格学习——学习网文与传统文学的区别，掌握网文特有的写作风格和读者预期管理
 ---
 
 # Novel Style Learning Skill

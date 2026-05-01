@@ -1,6 +1,6 @@
 ---
 name: genre-selection
-description: Use when user needs to select a genre for their novel - analyzes hot and potential genres based on platform data
+description: 题材选择——基于平台数据分析和竞品调研，选择最优创作题材
 ---
 
 # Genre Selection Skill

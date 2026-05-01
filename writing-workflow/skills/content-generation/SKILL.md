@@ -1,6 +1,6 @@
 ---
 name: content-generation
-description: Use when user needs writing assistance for novel content - helps human authors with drafting, revision suggestions, and consistency checks based on outlines and previous chapters
+description: 正文生成——基于细纲和上下文看护包生成小说正文，辅助人类作者创作而非AI代写
 ---
 
 # Content Generation Skill

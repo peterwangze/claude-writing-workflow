@@ -1,6 +1,6 @@
 ---
 name: human-ai-collaboration
-description: Use when managing AI participation in novel creation - establishes compliance workflow with path routing (platform-safe/gray-zone/high-risk) and evidence chain retention
+description: 人机协作合规——评估AI参与度，执行A/B/C三级路径分流，留存完整创作证据链
 ---
 
 # Human-AI Collaboration Skill
