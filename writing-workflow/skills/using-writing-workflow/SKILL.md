@@ -845,10 +845,10 @@ Coordinator 汇总 3 份报告后，合并计分表，计算总分。总分 ≥ 
 任务：按 engagement-check SKILL 机械执行——4 项硬门禁（CCC/弱钩子/情感偏离/无中回报）+ 文学质量 + 情感体验维度评分。输出结构化审查报告。
 ```
 
-**AI合规官**（在正文完成、审查开始前执行）：
+**AI合规官**（`ai-compliance-check` SKILL，质量审查维度 9）：
 
 ```
-**执行模式**：独立审查。
+**执行模式**：独立审查，只输出报告。
 
 你是AI合规官。请先读取以下文件：
 
@@ -857,10 +857,45 @@ Coordinator 汇总 3 份报告后，合并计分表，计算总分。总分 ≥ 
 
 工作文件：
 - novel-project/07-content/chapter-XXX.md
+
+任务：按 ai-compliance-check SKILL 机械执行——AI 痕迹逐段检测 + 维度 9 评分。仅做文本层面的模式识别，不做 AI 参与度分级（那是 human-ai-collaboration 阶段的职责）。输出结构化审查报告。
+```
+
+### AI 合规处理阶段（执行型——`human_ai_collaboration` 阶段）
+
+> 本阶段在正文生成后、质量审查前执行。由 AI 合规官 agent 使用 `human-ai-collaboration` SKILL 独立评估 AI 参与度。
+
+```
+**执行模式**：独立审查，在质量审查组启动前完成。
+
+你是AI合规官。请先读取以下文件：
+
+角色定义：writing-workflow/agents/ai-compliance-officer.md
+任务规范：writing-workflow/skills/human-ai-collaboration/SKILL.md
+
+工作文件：
+- novel-project/07-content/chapter-XXX.md
 - novel-project/13-creation-logs/
 
-任务：按 ai-compliance-check SKILL 机械执行——AI 痕迹逐段检测 + 参与度分级 + 证据链检查 + 写作质量检测 + 维度评分。路径 C 时必须明确告知财务风险。输出结构化审查报告。
+任务：按 human-ai-collaboration SKILL 评估本章的 AI 参与度，执行 A/B/C 三级路径分流。生成证据链留存包。回写 guardrails 数据到 workflow-state.json。路径 C 时必须明确告知财务风险。输出 novel-project/13-creation-logs/chapter-XXX-log.md。
 ```
+
+### 审查结果聚合规则（Coordinator 必须执行）
+
+6 个审查 subagent 各自返回独立报告后，Coordinator 按以下步骤机械执行聚合：
+
+```
+步骤 1：逐份检查 6 份报告是否全部返回 → 缺失任何一份 = 等待或补启动
+步骤 2：逐份读取硬门禁结果（continuity-check 9 项 + plot-logic-check 2 项 + engagement-check 4 项 = 15 项）
+步骤 3：任一硬门禁 = 阻断 → 本章不通过，无需继续聚合
+步骤 4：汇总各维度得分：
+  总分 = continuity-check 得分 + character-world-check 得分 + plot-logic-check 得分
+        + commercial-check 得分 + engagement-check 得分 + ai-compliance-check 得分
+步骤 5：判定：总分 ≥ 90 且无硬门禁阻断 → ✅ 通过，否则 → 🚫 不通过
+步骤 6：使用 AskUserQuestion 向用户展示聚合结果（含各项得分和总分，含阻断项详情）
+```
+
+> 聚合规则：评分不加权、不四舍五入。各 agent 评分直接相加 = 总分。少任何一份报告 = 审查不完整 = 阻断。
 
 ### 发布运营组（执行型）
 
@@ -1446,7 +1481,7 @@ content_generation / quality_review 通过后：
 |------|--------|
 | F1-文件 | 大纲审查报告已生成且 > 0 字节 |
 | F2-状态 | `completed_stages` 含 `"outline_review"` |
-| F3-内容 | 审查报告含三个维度的逐项评分（地基完整性/人物+世界自洽/盈利+平台适配） |
+| F3-内容 | 审查报告含三个维度（地基完整性/人物+世界自洽/盈利+平台适配）的逐项评分，共 17 个子项 |
 | F4-质量 | 总分 ≥ 90。**低于90 = 大纲不通过 = 必须修改大纲后重新审查** |
 
 #### 阶段 6：章节细纲（🔒质量关键，不可跳过）
@@ -1464,7 +1499,7 @@ content_generation / quality_review 通过后：
 |------|--------|
 | F1-文件 | 细纲审查报告已生成且 > 0 字节 |
 | F2-状态 | `completed_stages` 含 `"chapter_outline_review"` |
-| F3-内容 | 审查报告含三个维度的逐项评分（大纲一致性/平台算法适配/阅读节奏预判） |
+| F3-内容 | 审查报告含三个维度（大纲一致性/平台算法适配/阅读节奏）的逐项评分，共 11 个子项 |
 | F4-质量 | 总分 ≥ 90。**低于90 = 细纲不通过 = 必须修改细纲后重新审查** |
 
 #### 阶段 7：正文生成（🔒质量关键，不可跳过）
@@ -1473,8 +1508,8 @@ content_generation / quality_review 通过后：
 |------|--------|
 | F1-文件 | `07-content/chapter-XXX.md` 存在 > 0，字数达标（≥ 目标字数的 80%） |
 | F2-状态 | `guardrails.latest_passed_chapter` 已更新，`guardrails.latest_drift_score` 已记录，`statistics.total_words` 已更新 |
-| F3-内容 | 正文文件含章节号标题，且场景覆盖率 = 100%，偏离度 = 0%（零容忍） |
-| F4-质量 | continuity-ledger 已更新，quality-review 报告已生成且总分 ≥ 90，human-ai-collaboration 评估已完成且路径非 C。**第1-3章**：Contract-Clock-Crucible 三要素全部达标。**全章节**：无连续3章弱钩子。**40-60%进度**：中段防崩检查通过 |
+| F3-内容 | 正文文件含章节号标题 |
+| F4-质量 | continuity-ledger 已更新（含逐角色状态和主角目标），human-ai-collaboration 评估已完成且路径非 C。quality-review 6 份审查报告全部生成，Coordinator 汇总后总分 ≥ 90 |
 
 #### 阶段 7.5：AI 合规处理（🔒质量关键）
 
@@ -1489,10 +1524,10 @@ content_generation / quality_review 通过后：
 
 | 门禁 | 检查项 |
 |------|--------|
-| F1-文件 | `10-reviews/quality-reports/` 下存在最新审查报告 |
-| F2-状态 | 无额外状态更新（审查结果记录在报告中） |
-| F3-内容 | 审查报告含 8 维度逐项评分和总分 |
-| F4-质量 | 总分 ≥ 90，无任何硬失败项。硬失败项完整清单见 `quality-review/SKILL.md` "连续性硬门槛（先判定）"章节（共15项）。低于 90 = 不通过 = 必须修改。Coordinator 必须逐项检查 quality-review 报告中的判定结果，任一失败=阻断 |
+| F1-文件 | `10-reviews/quality-reports/` 下存在 6 份独立审查报告（continuity / character-world / plot-logic / commercial / engagement / ai-compliance） |
+| F2-状态 | `guardrails.latest_review_score` 已设置为汇总总分，`guardrails.latest_review_hard_gates` 已记录硬门禁结果（通过/阻断，共 15 项） |
+| F3-内容 | 6 份报告含各自维度的逐项评分：continuity-check（25分）+ character-world-check（25分）+ plot-logic-check（15分）+ commercial-check（10分）+ engagement-check（18分）+ ai-compliance-check（7分）= 满分 100 分 |
+| F4-质量 | Coordinator 汇总 6 份报告后计算总分 ≥ 90，且 15 项硬门禁全部通过。任一硬门禁阻断 = 不通过。总分 < 90 = 不通过 = 必须修改。Coordinator 必须逐份检查 6 份报告的判定结果，任一失败=阻断 |
 
 #### 阶段 9-12：发布运营阶段（非关键，可跳过）
 

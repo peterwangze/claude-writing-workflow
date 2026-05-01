@@ -199,7 +199,7 @@ description: Use when user needs writing assistance for novel content - helps hu
 
 ### 5. 调用合规评估与质量审查
 
-生成完成后，Coordinator 调用 `human-ai-collaboration` SKILL 进行 AI 参与度评估，随后调用 `quality-review` SKILL 进行正文质量审查。审查由独立 subagent 执行，不得在生成会话中自审。
+生成完成后，Coordinator 调用 `human-ai-collaboration` SKILL 进行 AI 参与度评估，随后启动 6 个独立审查 subagent（`continuity-check` + `character-world-check` + `plot-logic-check` + `commercial-check` + `engagement-check` + `ai-compliance-check`）并行执行正文质量审查。审查由独立 subagent 执行，不得在生成会话中自审。审查标准和聚合规则见 `quality-review/SKILL.md`。
 
 > 注意：若本章 AI 参与度被评为路径 C（高风险），将提示用户该内容不适合平台签约投稿，后续上架发布和变现策略阶段将被阻断。
 
@@ -719,10 +719,7 @@ Coordinator 在本阶段完成后必须验证（🔒不可跳过）：
 □ 输出文件：`07-content/chapter-XXX.md` 存在且 > 0 字节，字数 ≥ 目标字数的 80%
 □ 状态更新：`guardrails.latest_passed_chapter` 已更新，`guardrails.latest_drift_score` 已记录，`statistics.total_words` 已更新，`statistics.last_updated` 已更新
 □ 内容标准：正文文件含章节号标题
-□ 质量门禁：`continuity-ledger.md` 已更新（含逐角色状态和主角目标），quality-review 审查报告已生成且总分 ≥ 90，human-ai-collaboration 路径非 C
-□ **开篇门禁**（仅第1-3章）：Contract-Clock-Crucible 三要素全部达标
-□ **悬念门禁**（全章节）：无连续3章章末钩子强度为"弱"
-□ **中段门禁**（40-60%进度激活）：主角不在该段内持续被动，有新变量引入
+□ 质量门禁：`continuity-ledger.md` 已更新（含逐角色状态和主角目标），human-ai-collaboration 路径非 C，quality-review 6 份审查报告全部返回且 Coordinator 汇总总分 ≥ 90
 
 任一□未勾选 → Coordinator 强制阻断（不提供"跳过"选项）。
 
