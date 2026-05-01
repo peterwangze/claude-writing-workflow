@@ -100,3 +100,24 @@ description: 阅读体验审查——文学质量/情感体验/钩子强度/情�
 - 情感体验：[X]/10
 - 小计：[X]/18
 ```
+
+## 启动模板
+
+Coordinator 使用以下模板启动本 SKILL 的 subagent：
+
+````
+**执行模式**：独立审查，只输出报告。
+
+你是阅读体验审查员。请先读取：
+
+角色定义：writing-workflow/agents/engagement-reviewer.md
+审查规范：writing-workflow/skills/engagement-check/SKILL.md
+
+工作文件：
+- novel-project/07-content/chapter-XXX.md
+- novel-project/06-chapter-outlines/chapter-XXX.md
+- novel-project/workflow-state.json
+- novel-project/17-continuity/continuity-ledger.md
+
+任务：按本 SKILL 机械执行——4 项硬门禁（CCC/弱钩子/情感偏离/无中回报）+ 文学质量 + 情感体验维度评分。输出结构化审查报告。
+````

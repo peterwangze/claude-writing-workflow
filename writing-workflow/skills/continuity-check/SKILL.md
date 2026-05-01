@@ -81,3 +81,26 @@ description: 连续性硬门禁审查——场景覆盖率/偏离度/Bible合规
 ## 阻断项详情
 [逐项说明]
 ```
+
+## 启动模板
+
+Coordinator 使用以下模板启动本 SKILL 的 subagent：
+
+```
+**执行模式**：独立审查，只输出报告，不做创作决策。
+
+你是连续性审查员。请先读取：
+
+角色定义：writing-workflow/agents/continuity-reviewer.md
+审查规范：writing-workflow/skills/continuity-check/SKILL.md
+
+工作文件：
+- novel-project/06-chapter-outlines/chapter-XXX.md
+- novel-project/07-content/chapter-XXX.md
+- novel-project/17-continuity/story-bible.md
+- novel-project/17-continuity/chapter-XXX-context.md
+- novel-project/17-continuity/continuity-ledger.md
+- novel-project/09-worldbuilding/power-system.md
+
+任务：按本 SKILL 的 Step 2-4 机械执行——9 项硬门禁 + 时间线数值 + 结构质量维度评分。场景覆盖率必须=100%，偏离度必须=0%。输出结构化审查报告。
+```

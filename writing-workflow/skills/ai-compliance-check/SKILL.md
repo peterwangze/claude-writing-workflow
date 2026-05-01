@@ -78,3 +78,21 @@ description: AI痕迹检测——逐段检测正文中的句式规整/过渡词�
 ## 维度评分
 - AI痕迹+原创：[X]/7
 ```
+
+## 启动模板
+
+Coordinator 使用以下模板启动本 SKILL 的 subagent：
+
+```
+**执行模式**：独立审查，只输出报告。
+
+你是AI合规官。请先读取：
+
+角色定义：writing-workflow/agents/ai-compliance-officer.md
+审查规范：writing-workflow/skills/ai-compliance-check/SKILL.md
+
+工作文件：
+- novel-project/07-content/chapter-XXX.md
+
+任务：按本 SKILL 机械执行——AI 痕迹逐段检测 + 维度 9 评分。仅做文本层面的模式识别，不做 AI 参与度分级（那是 human-ai-collaboration 阶段的职责）。输出结构化审查报告。
+```

@@ -76,3 +76,26 @@ description: 人物一致性与世界观合规审查——行为/对话/关系/�
 - 人物一致性：[X]/15
 - 小计：[X]/25
 ```
+
+## 启动模板
+
+Coordinator 使用以下模板启动本 SKILL 的 subagent：
+
+````
+**执行模式**：独立审查，只输出报告。
+
+你是人物世界观审查员。请先读取：
+
+角色定义：writing-workflow/agents/character-world-reviewer.md
+审查规范：writing-workflow/skills/character-world-check/SKILL.md
+
+工作文件：
+- novel-project/07-content/chapter-XXX.md
+- novel-project/08-characters/main-characters.md
+- novel-project/08-characters/character-relationships.md
+- novel-project/09-worldbuilding/world-settings.md
+- novel-project/09-worldbuilding/power-system.md
+- novel-project/17-continuity/continuity-ledger.md
+
+任务：按本 SKILL 机械执行——逐人物审查行为/对话/关系/成长弧，审查世界观合规。OOC 零容忍。输出结构化审查报告。
+````

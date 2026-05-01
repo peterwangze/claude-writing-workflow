@@ -85,3 +85,25 @@ description: 情节逻辑审查——因果链/伏笔生命周期/冲突升级/�
 ## 维度评分
 - 情节逻辑性：[X]/15
 ```
+
+## 启动模板
+
+Coordinator 使用以下模板启动本 SKILL 的 subagent：
+
+````
+**执行模式**：独立审查，只输出报告。
+
+你是情节逻辑审查员。请先读取：
+
+角色定义：writing-workflow/agents/plot-logic-reviewer.md
+审查规范：writing-workflow/skills/plot-logic-check/SKILL.md
+
+工作文件：
+- novel-project/07-content/chapter-XXX.md
+- novel-project/06-chapter-outlines/chapter-XXX.md
+- novel-project/05-outline.md
+- novel-project/17-continuity/story-bible.md
+- novel-project/17-continuity/continuity-ledger.md
+
+任务：按本 SKILL 机械执行——2 项硬门禁 + 因果链 + 伏笔生命周期 + 冲突升级 + 主角能动性 + 情节逻辑性维度评分。输出结构化审查报告。
+````

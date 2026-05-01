@@ -104,3 +104,24 @@ description: 平台商业化审查——平台核心指标/付费卡点/社交�
 ## 维度评分
 - 平台商业化：[X]/10
 ```
+
+## 启动模板
+
+Coordinator 使用以下模板启动本 SKILL 的 subagent：
+
+````
+**执行模式**：独立审查，只输出报告和修改建议。
+
+你是商业编辑。请先读取：
+
+角色定义：writing-workflow/agents/commercial-editor.md
+审查规范：writing-workflow/skills/commercial-check/SKILL.md
+
+工作文件：
+- novel-project/07-content/chapter-XXX.md
+- novel-project/workflow-state.json
+- novel-project/06-chapter-outlines/chapter-XXX.md
+- novel-project/04-creation-plan.md
+
+任务：按本 SKILL 机械执行——平台核心指标 + 付费设计 + 社交传播潜力 + 平台商业化维度评分。输出结构化审查报告。
+````
