@@ -1,0 +1,41 @@
+{
+  "current_stage": "content_generation",
+  "completed_stages": ["work_type_selection", "platform_research", "competitor_analysis", "genre_selection", "novel_confirmation", "creation_planning", "outline_writing", "chapter_outline"],
+  "project_info": {
+    "work_type": "长篇小说",
+    "platform": "起点中文网",
+    "genre": "都市修真融合（都市修仙+冷门职业）",
+    "title": "法医仙途",
+    "target_words": 2000000,
+    "update_frequency": "每日双更",
+    "platform_revenue_model": "订阅分成（作者50%）+ 全勤奖（600-1500元/月）+ 半年奖（订阅收入40%加成）+ 读者打赏（50%）+ 版权IP分成（5%-20%）。50万字以上最少可获5000元保底奖励。完本后存量付费订阅产生长尾收益。"
+  },
+  "files": {
+    "work_type_info": "test-novel-project/00-work-type.md",
+    "platform_research": "test-novel-project/01-platform-research.md",
+    "genre_analysis": "test-novel-project/02-genre-analysis.md",
+    "novel_info": "test-novel-project/03-novel-info.md",
+    "creation_plan": "test-novel-project/04-creation-plan.md",
+    "competitor_analysis": "test-novel-project/16-competitor-analysis.md",
+    "outline": "test-novel-project/05-outline.md",
+    "characters": "test-novel-project/08-characters/",
+    "character_relationships": "test-novel-project/08-characters/character-relationships.md",
+    "worldbuilding": "test-novel-project/09-worldbuilding/",
+    "continuity_bible": "test-novel-project/17-continuity/story-bible.md"
+  },
+  "guardrails": {
+    "continuity_mode": "strict",
+    "latest_passed_chapter": 0,
+    "latest_ai_path": null,
+    "release_allowed": true,
+    "monetization_allowed": true,
+    "latest_drift_score": null,
+    "latest_context_card": null,
+    "latest_continuity_ledger": "test-novel-project/17-continuity/continuity-ledger.md"
+  },
+  "statistics": {
+    "total_chapters": 3,
+    "total_words": 0,
+    "last_updated": "2026-04-29T23:00:00+08:00"
+  }
+}
