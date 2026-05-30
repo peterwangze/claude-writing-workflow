@@ -3,6 +3,8 @@ name: novel-creator
 description: 子agent用于并行处理小说创作任务
 ---
 
+> ⚠️ **已废弃 (DEPRECATED)** — 自 v4.0.0 起，正文生成职责由 [content-writer](content-writer.md) 承担。本文件保留作为历史参考，不再被 orchestrator 调度。
+
 # Novel Creator Agent
 
 用于并行处理以下任务：

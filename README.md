@@ -8,11 +8,11 @@
 
 ## 特性
 
-- **全流程覆盖**：18 个 Skill + 16 个专业 Agent（5 团队），覆盖创作→发布→运营→变现完整链路
+- **全流程覆盖**：26 个 SKILL + 16 个专业 Agent（5 团队），覆盖创作→发布→运营→变现完整链路
 - **Agent Team 架构**：创作者与审查者绝对分离，6 个独立审查 Agent 并行审查每章
 - **人类原创为主**：默认工作模式为人类主导创作，AI 仅做研究、灵感、校对等有限辅助
 - **零容忍连续性**：场景覆盖率=100%，偏离度=0%——任何偏离随章节累积会指数级放大
-- **9 维质量审查**：基于行业标准 + 1000+ 作品研究的评分体系
+- **6 维质量审查**：基于行业标准 + 1000+ 作品研究的评分体系，6 个独立审查 Agent 并行审查每章
 - **平台写法参考**：番茄/起点/晋江/七猫差异化写法，CCC 开篇架构验证
 - **基于实时数据**：WebSearch 驱动的市场调研，1000+ 作品成功模式研究注入
 - **正文看护流程**：story bible + context card + continuity ledger 三层约束 + Bible 交叉验证
@@ -256,7 +256,7 @@ claude-writing-workflow/
 │   ├── .claude-plugin/
 │   │   ├── plugin.json        # 插件元数据
 │   │   └── marketplace.json   # Marketplace 配置
-│   ├── skills/                # 18 个工作流 Skill
+│   ├── skills/                # 26 个工作流 SKILL
 │   ├── agents/                # 子 Agent 配置
 │   ├── hooks/                 # SessionStart Hook
 │   └── README.md              # 插件详细使用指南
