@@ -45,12 +45,21 @@
 | TSK-008 | REQ-004+005: 清理 novel-creator 孤儿Agent + 文档数字修复(SKILL数量/质量维度) | completed | P2 | Developer | — |
 | TSK-009 | REQ-003: 数据闭环自动化调研——探索平台数据自动接入方案 | completed | P1 | Analyst | — |
 | TSK-010 | 审查 TSK-009 数据闭环调研报告——Requirement Reviewer 独立验证 | completed | P1 | Requirement Reviewer | — |
+| TSK-011 | REQ-003: 修复调研报告 B1-B3 阻塞项（B1阅文平台、B2增量价值、B3 CSV验证） | completed | P1 | Analyst | 2026-05-31 |
+| TSK-012 | REQ-002: 执行 Tier-1 长篇 smoke test（测试方案已设计，待执行） | completed | P1 | QA | 2026-05-31 |
+| TSK-013 | 审查 TSK-011 数据闭环调研报告修复——Requirement Reviewer 独立验证 | needs_change | P1 | Requirement Reviewer | 2026-05-31 |
+| TSK-014 | 修复 TSK-013 审查发现：CSV Schema 缺失 retention_rate_3d 字段 | completed | P1 | Developer | — |
+| TSK-015 | 审查 TSK-012 Tier-1 smoke test——Test Reviewer 独立验证 | needs_change | P1 | Test Reviewer | 2026-05-31 |
+| TSK-016 | 修复 TSK-015 审查发现：P1-5事实错误+P1计数不一致 | completed | P1 | QA | 2026-05-31 |
+| TSK-017 | 重新审查 TSK-014 修复（CSV Schema retention_rate_3d）——Requirement Reviewer 验证 | completed | P1 | Requirement Reviewer | 2026-05-31 |
+| TSK-018 | 重新审查 TSK-016 修复——Test Reviewer 最终验证 | completed | P1 | Test Reviewer | 2026-05-31 |
+| TSK-019 | REQ-001: 审查七猫检查项增强——commercial-check/quality-review SKILL 变更 Code Review | completed | P1 | Code Reviewer | 2026-05-31 |
 
 ## 需求跟踪矩阵
 
 | REQ-001 | 七猫平台算法适配——补充算法级写作指导（高优先级） | TSK-001 G1 | TSK-003 | in_progress |
-| REQ-002 | 长篇端到端 smoke test——验证长篇完整路径（中优先级） | TSK-001 G2 | TSK-006 | in_progress |
-| REQ-003 | 数据闭环自动化——减少手动数据输入依赖（中优先级） | TSK-001 G4 | TSK-009 | in_progress |
+| REQ-002 | 长篇端到端 smoke test——验证长篇完整路径（中优先级） | TSK-001 G2 | TSK-006 | completed |
+| REQ-003 | 数据闭环自动化——减少手动数据输入依赖（中优先级） | TSK-001 G4 | TSK-009 | completed |
 | REQ-004 | 清理 novel-creator 孤儿 Agent（低优先级） | TSK-001 G3 | TSK-008 | completed |
 | REQ-005 | 文档 SKILL 数量自洽（低优先级） | TSK-001 G5 | TSK-008 | completed |
 
