@@ -143,6 +143,16 @@ description: 作品类型选择——在平台调研前确定作品类型（长�
 > 3. 保存并退出
 > ```
 
+⚠️ **必须使用 AskUserQuestion**（不可直接输出以下文本）：
+
+```
+您选择了短篇创作路径。
+
+1. 跳过平台调研，直接选题材（推荐）
+2. 仍然进行平台调研
+3. 保存并退出
+```
+
 ### 5. 初始化项目结构
 
 创建项目目录和状态文件：
@@ -273,7 +283,7 @@ Coordinator 在本阶段完成后必须验证：
 □ 状态更新：`workflow-state.json` 中 `completed_stages` 含 `"work_type_selection"`，`project_info.work_type` 已设置，`guardrails` 对象存在且包含全部默认字段
 □ 内容标准：`00-work-type.md` 含节标题 `## 基本信息` 和 `## 类型分析`
 
-任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+任一□未勾选 → Coordinator 阻断推进，**使用 AskUserQuestion** 确认处理方式。
 
 ## 注意事项
 

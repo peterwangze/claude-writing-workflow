@@ -341,6 +341,7 @@ IP衍生路径：
 2. 使用数据降级框架（含行业常识性提醒，不含具体数值）
 3. 跳过此平台收益分析，继续其他内容
 4. 手动输入收益信息
+```
 
 ## 多作品组合策略
 
@@ -387,7 +388,7 @@ Coordinator 在本阶段完成后必须验证（🔒若 `monetization_allowed = 
 □ 内容标准：`15-monetization-strategy.md` 含 `## 各平台收益模式` 或 `## VIP上架时机决策`
 □ 合规闸门：`guardrails.monetization_allowed` 必须为 true（路径 B/C 阻断）
 
-任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+任一□未勾选 → Coordinator 阻断推进，**使用 AskUserQuestion** 确认处理方式。
 
 ## 注意事项
 

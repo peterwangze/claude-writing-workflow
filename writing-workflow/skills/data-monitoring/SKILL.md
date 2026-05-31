@@ -586,7 +586,7 @@ Coordinator 在本阶段完成后必须验证：
 □ 状态更新：`statistics.last_monitoring_date` 已更新，`statistics.last_updated` 已更新
 □ 内容标准：报告文件含 `## 核心数据` 汇总表（至少含完读率、追读率、收藏增长）
 
-任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+任一□未勾选 → Coordinator 阻断推进，**使用 AskUserQuestion** 确认处理方式。
 
 ## 注意事项
 

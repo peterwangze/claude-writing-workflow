@@ -132,6 +132,7 @@ description: 作品确认——确定书名、简介、封面方向等作品基�
 简介：[简要说明]
 
 ...（共5个备选）
+```
 
 ⚠️ **必须使用 AskUserQuestion**（不可直接输出以下文本）：
 
@@ -287,7 +288,7 @@ Coordinator 在本阶段完成后必须验证：
 □ 状态更新：`completed_stages` 含 `"novel_confirmation"`，`project_info.title` 已设置且非 null
 □ 内容标准：`03-novel-info.md` 含 `## 主选方案`（含书名和简介）和 `## 备选方案`
 
-任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+任一□未勾选 → Coordinator 阻断推进，**使用 AskUserQuestion** 确认处理方式。
 
 ## 简介撰写原则
 

@@ -240,7 +240,7 @@ Coordinator 在本阶段完成后必须验证：
 □ 状态更新：`completed_stages` 含 `"genre_selection"`，`project_info.genre` 已设置且非 null
 □ 内容标准：`02-genre-analysis.md` 含 `## 红海题材分析` 或 `## 蓝海题材分析`，且含 `## 题材推荐`
 
-任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+任一□未勾选 → Coordinator 阻断推进，**使用 AskUserQuestion** 确认处理方式。
 
 ## 类型质量公约
 

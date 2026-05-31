@@ -336,6 +336,7 @@ AI: 抱歉，无法获取[平台名称]的最新政策数据。
 可能原因：
 1. 网络连接问题
 2. 搜索服务暂时不可用
+```
 
 ⚠️ **必须使用 AskUserQuestion**（不可直接输出以下文本）：
 
@@ -356,7 +357,7 @@ Coordinator 在本阶段完成后必须验证（🔒若 `release_allowed = false
 □ 内容标准：`14-launch-strategy.md` 含 `## 存稿量计算` 和 `## 签约流程指导`
 □ 合规闸门：`guardrails.release_allowed` 必须为 true（路径 B/C 阻断）
 
-任一□未勾选 → Coordinator 阻断推进，使用AskUserQuestion确认处理方式。
+任一□未勾选 → Coordinator 阻断推进，**使用 AskUserQuestion** 确认处理方式。
 
 ## 注意事项
 
