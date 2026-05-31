@@ -1,5 +1,36 @@
 # Changelog
 
+## 4.1.0 (2026-06-01)
+
+### 新增（New Features）
+
+- **AskUserQuestion 交互标准化**：17 个 SKILL 文件中 47 个交互点统一为 ⚠️ 强制格式，确保所有用户交互点可追溯、可审计
+- **强制性 AskUserQuestion 检查点清单**：40 个检查点 ID（21 决策型 + 19 执行型），作为 `using-writing-workflow` 的交互质量门禁
+- **治理系统集成**：software-project-governance 半途接入，建立 `.governance/` 全套治理文件（plan-tracker / evidence-log / decision-log / risk-log）
+
+### 改进（Enhancements）
+
+- **七猫平台商业化检查升级**：从 4 项模糊指标升级为 7 项算法级检查，对齐七猫推荐算法核心参数
+- **七猫综合推荐数据同步**：用户画像中在线时长（75.2→80 分钟）、性别比例（93%→91%）与最新平台数据对齐
+- **创作计划情感签名**：新增 `emotional_signature` 字段及 `workflow-state.json` 对应扩展
+- **数据闭环自动化调研报告**：完成 765 行完整报告，含 CSV Schema 定义与平台数据接入方案
+
+### 修复（Bug Fixes）
+
+- **chapter-002 字数超标修剪**：+67.8% 偏差修剪至目标范围 2800 字 ±30%
+- **平台数据更新**：晋江用户画像 2026 年数据刷新 + 七猫 AI 政策来源补充官方引用
+- **novel-creator 孤儿 Agent 废弃标记**：REQ-004 清理完成
+- **文档 SKILL 数量自洽修复**：REQ-005 文档中 SKILL 数量与实际一致
+- **Markdown 代码块配对修复**：7 个 SKILL 文件中未闭合或多余的代码块标记已修复
+- **using-writing-workflow 行 731 多余代码块标记清除**：消除导致渲染异常的孤立代码围栏
+
+### 变更（Changes）
+
+- REQ-001（七猫适配）至 REQ-005（文档修复）全部 completed
+- Smoke Test Tier-1 长篇 E2E 验证全部通过，4 个 P1 警告已修复（TSK-020→027）
+
+---
+
 ## 4.0.0 (2026-05-01)
 
 ### 架构重构：SKILL 生产与审查分离

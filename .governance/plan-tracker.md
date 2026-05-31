@@ -66,7 +66,9 @@
 | TSK-029 | 审查 TSK-028 AskUserQuestion 标准化变更——Code Reviewer 独立验证 | completed | P1 | Code Reviewer | — |
 | TSK-030 | 修复 TSK-029 审查发现：P0(monetary代码块)+P1(5文件配对+gate-check+CP-WT-02) | completed | P1 | Developer | — |
 | TSK-031 | 重新审查 TSK-030 修复——Code Reviewer 最终验证 | completed | P1 | Code Reviewer | — |
-| TSK-032 | 修复 FINDING-006: using-writing-workflow 行1467预存未闭合代码块 | in_progress | P2 | Developer | — |
+| TSK-032 | 修复 FINDING-006: using-writing-workflow 行1467预存未闭合代码块 | completed | P2 | Developer | — |
+| TSK-033 | 发布 v4.1.0——更新 CHANGELOG + git tag + 版本规划 | in_progress | P1 | Release | — |
+| TSK-034 | 审查 TSK-033 v4.1.0 发布——Release Reviewer 验证 | pending | P1 | Release Reviewer | — |
 
 ## 需求跟踪矩阵
 
@@ -81,6 +83,7 @@
 | 版本 | 目标 | 预计日期 | 状态 |
 |------|------|----------|------|
 | 4.0.0 | SKILL 生产与审查分离架构重构 | 2026-05-01 | released |
+| 4.1.0 | AskUserQuestion 标准化 + 七猫适配增强 + 治理集成 | 2026-06-01 | released |
 
 ## 变更控制
 

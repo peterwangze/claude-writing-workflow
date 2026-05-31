@@ -54,3 +54,4 @@ EVD-016 | 2026-05-31 | TSK-028 | manual-verification | 全量标准化 AskUserQu
 EVD-017 | 2026-05-31 | TSK-029 | review-report | Code Review: TSK-028 NEEDS_CHANGE — 1×P0(monetary未闭合代码块) + 4×P1(5文件配对断裂+gate-check不一致+CP-WT-02缺失) | commit 72ec7ca
 EVD-018 | 2026-05-31 | TSK-030 | manual-verification | 修复 TSK-029 全部 P0+P1: 7 文件代码块修复 + 10 文件 gate-check 加粗 + CP-WT-02 指令补全 | commit 990f091, 11 files changed
 EVD-019 | 2026-05-31 | TSK-031 | review-report | Code Review: TSK-030 APPROVED — 5/5 发现验证通过。新发现 FINDING-006(P1) 预存问题 using-writing-workflow 行1467未闭合代码块 | commit 990f091
+EVD-020 | 2026-05-31 | TSK-032 | manual-verification | 修复 using-writing-workflow 行731多余代码块标记(107→108偶数)，门禁规则表渲染恢复 | commit 8225851, 1 line deleted
