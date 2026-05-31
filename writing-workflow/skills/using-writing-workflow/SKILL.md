@@ -665,7 +665,7 @@ Coordinator 检测到 WebSearch 不可用/无结果
 任务：逐项机械执行 outline-review SKILL 步骤 10-17。不得跳过任一步。输出结构化审查报告（含逐项计分）。
 ```
 
-Coordinator 汇总 3 份报告后，合并计分表，计算总分。总分 ≥ 90 = 通过，< 90 = 不通过。
+Coordinator 汇总 3 份报告后，合并计分表，计算总分。总分 = 100 = 通过，< 100 = 不通过。
 
 **细纲审查**（`chapter_outline_review` 阶段，chapter_outline 完成后强制执行，🔒质量关键）：
 
@@ -724,10 +724,10 @@ Coordinator 汇总 3 份报告后，合并计分表，计算总分。总分 ≥ 
 任务：逐项机械执行 chapter-outline-review SKILL 步骤 9 和步骤 11。不得跳过任一步。输出结构化审查报告（含逐项计分）。
 ```
 
-Coordinator 汇总 3 份报告后，合并计分表，计算总分。总分 ≥ 90 = 通过，< 90 = 不通过。
+Coordinator 汇总 3 份报告后，合并计分表，计算总分。总分 = 100 = 通过，< 100 = 不通过。
 - 是否存在连续3章弱钩子的风险区？
 
-评分：二进制判定——≥90通过，<90不通过。输出结构化联合审查报告。
+评分：二进制判定——=100通过，<100不通过。输出结构化联合审查报告。
 
 ### 内容生产组
 
@@ -946,7 +946,7 @@ Coordinator 汇总 3 份报告后，合并计分表，计算总分。总分 ≥ 
 步骤 4：汇总各维度得分：
   总分 = continuity-check 得分 + character-world-check 得分 + plot-logic-check 得分
         + commercial-check 得分 + engagement-check 得分 + ai-compliance-check 得分
-步骤 5：判定：总分 ≥ 90 且无硬门禁阻断 → ✅ 通过，否则 → 🚫 不通过
+步骤 5：判定：总分 = 100 且无硬门禁阻断 → ✅ 通过，否则 → 🚫 不通过
 步骤 6：使用 AskUserQuestion 向用户展示聚合结果（含各项得分和总分，含阻断项详情）
 ```
 
@@ -1537,7 +1537,7 @@ content_generation / quality_review 通过后：
 | F1-文件 | 大纲审查报告已生成且 > 0 字节 |
 | F2-状态 | `completed_stages` 含 `"outline_review"` |
 | F3-内容 | 审查报告含三个维度（地基完整性/人物+世界自洽/盈利+平台适配）的逐项评分，共 17 个子项 |
-| F4-质量 | 总分 ≥ 90。**低于90 = 大纲不通过 = 必须修改大纲后重新审查** |
+| F4-质量 | 总分 = 100。**低于100 = 大纲不通过 = 必须修改大纲后重新审查** |
 
 #### 阶段 6：章节细纲（🔒质量关键，不可跳过）
 
@@ -1555,7 +1555,7 @@ content_generation / quality_review 通过后：
 | F1-文件 | 细纲审查报告已生成且 > 0 字节 |
 | F2-状态 | `completed_stages` 含 `"chapter_outline_review"` |
 | F3-内容 | 审查报告含三个维度（大纲一致性/平台算法适配/阅读节奏）的逐项评分，共 11 个子项 |
-| F4-质量 | 总分 ≥ 90。**低于90 = 细纲不通过 = 必须修改细纲后重新审查** |
+| F4-质量 | 总分 = 100。**低于100 = 细纲不通过 = 必须修改细纲后重新审查** |
 
 #### 阶段 7：正文生成（🔒质量关键，不可跳过）
 
@@ -1564,7 +1564,7 @@ content_generation / quality_review 通过后：
 | F1-文件 | `07-content/chapter-XXX.md` 存在 > 0，字数达标（≥ 目标字数的 80%） |
 | F2-状态 | `guardrails.latest_passed_chapter` 已更新，`guardrails.latest_drift_score` 已记录，`statistics.total_words` 已更新 |
 | F3-内容 | 正文文件含章节号标题 |
-| F4-质量 | continuity-ledger 已更新（含逐角色状态和主角目标），human-ai-collaboration 评估已完成且路径非 C。quality-review 6 份审查报告全部生成，Coordinator 汇总后总分 ≥ 90 |
+| F4-质量 | continuity-ledger 已更新（含逐角色状态和主角目标），human-ai-collaboration 评估已完成且路径非 C。quality-review 6 份审查报告全部生成，Coordinator 汇总后总分 = 100 |
 
 #### 阶段 7.5：AI 合规处理（🔒质量关键）
 
@@ -1582,7 +1582,7 @@ content_generation / quality_review 通过后：
 | F1-文件 | `10-reviews/quality-reports/` 下存在 6 份独立审查报告（continuity / character-world / plot-logic / commercial / engagement / ai-compliance） |
 | F2-状态 | `guardrails.latest_review_score` 已设置为汇总总分，`guardrails.latest_review_hard_gates` 已记录硬门禁结果（通过/阻断，共 15 项） |
 | F3-内容 | 6 份报告含各自维度的逐项评分：continuity-check（25分）+ character-world-check（25分）+ plot-logic-check（15分）+ commercial-check（10分）+ engagement-check（18分）+ ai-compliance-check（7分）= 满分 100 分 |
-| F4-质量 | Coordinator 汇总 6 份报告后计算总分 ≥ 90，且 15 项硬门禁全部通过。任一硬门禁阻断 = 不通过。总分 < 90 = 不通过 = 必须修改。Coordinator 必须逐份检查 6 份报告的判定结果，任一失败=阻断 |
+| F4-质量 | Coordinator 汇总 6 份报告后计算总分 = 100，且 15 项硬门禁全部通过。任一硬门禁阻断 = 不通过。总分 < 100 = 不通过 = 必须修改。Coordinator 必须逐份检查 6 份报告的判定结果，任一失败=阻断 |
 
 #### 阶段 9-12：发布运营阶段（非关键，可跳过）
 

@@ -277,7 +277,7 @@ Coordinator 在本阶段完成后必须验证（🔒不可跳过）：
 □ 输出文件：至少 1 章 `06-chapter-outlines/chapter-XXX.md` 存在且 > 0 字节，对应 `17-continuity/chapter-XXX-context.md` 存在且 > 0 字节
 □ 状态更新：`completed_stages` 含 `"chapter_outline"`，`statistics.total_chapters` > 0
 □ 内容标准：每章细纲含 `## 章节概要` + `## 详细情节` + `## 爽点设计` + `## 章末钩子`
-□ 质量门禁：chapter-outline-review 审查报告已生成且总分 ≥ 90
+□ 质量门禁：chapter-outline-review 审查报告已生成且总分 = 100
 □ **悬念强度门禁**：前5章至少4章章末钩子强度为"强"。连续3章弱钩子=不合规（数据支撑：带悬念结尾追读率高22%，前50页流失44%读者）
 
 任一□未勾选 → Coordinator 强制阻断（不提供"跳过"选项）。

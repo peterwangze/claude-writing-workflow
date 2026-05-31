@@ -395,7 +395,7 @@ Coordinator 在本阶段完成后必须验证（🔒不可跳过）：
 □ 输出文件（4 项必须全部存在）：`05-outline.md`、`08-characters/main-characters.md`、`09-worldbuilding/world-settings.md`、`17-continuity/story-bible.md` 均存在且 > 0 字节
 □ 状态更新：`completed_stages` 含 `"outline_writing"`，`files.outline`/`files.characters`/`files.worldbuilding`/`files.continuity_bible` 均已设置，`statistics.last_updated` 已更新
 □ 内容标准：`05-outline.md` 含 `## 核心设定` + `## 分卷大纲` + `## 伏笔设计`；`main-characters.md` 含 `## 主角`；`story-bible.md` 含 `## 不可变更事实`（至少 3 项硬事实）和 `## 关键伏笔清单`
-□ 质量门禁：outline-review 审查报告已生成且总分 ≥ 90
+□ 质量门禁：outline-review 审查报告已生成且总分 = 100
 
 任一□未勾选 → Coordinator 强制阻断（不提供"跳过"选项）。
 
