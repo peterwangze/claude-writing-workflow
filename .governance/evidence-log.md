@@ -47,3 +47,7 @@
 ## 待补录
 
 （无）
+
+---
+
+EVD-016 | 2026-05-31 | TSK-028 | manual-verification | 全量标准化 AskUserQuestion 交互指令：47 个交互点跨 17 个 SKILL 文件添加 ⚠️ 标准格式前缀 + using-writing-workflow 添加 40 个检查点 ID 清单 | commit 72ec7ca, 18 files changed (+175/-39)
