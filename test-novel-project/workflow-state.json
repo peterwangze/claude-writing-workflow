@@ -8,6 +8,10 @@
     "title": "法医仙途",
     "target_words": 2000000,
     "update_frequency": "每日双更",
+    "emotional_signature": {
+      "primary": "智识满足",
+      "secondary": ["紧张悬疑", "爽感驱动"]
+    },
     "platform_revenue_model": "订阅分成（作者50%）+ 全勤奖（600-1500元/月）+ 半年奖（订阅收入40%加成）+ 读者打赏（50%）+ 版权IP分成（5%-20%）。50万字以上最少可获5000元保底奖励。完本后存量付费订阅产生长尾收益。"
   },
   "files": {

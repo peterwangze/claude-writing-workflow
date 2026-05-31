@@ -54,6 +54,14 @@
 | TSK-017 | 重新审查 TSK-014 修复（CSV Schema retention_rate_3d）——Requirement Reviewer 验证 | completed | P1 | Requirement Reviewer | 2026-05-31 |
 | TSK-018 | 重新审查 TSK-016 修复——Test Reviewer 最终验证 | completed | P1 | Test Reviewer | 2026-05-31 |
 | TSK-019 | REQ-001: 审查七猫检查项增强——commercial-check/quality-review SKILL 变更 Code Review | completed | P1 | Code Reviewer | 2026-05-31 |
+| TSK-020 | Smoke P1-1+P1-2: 更新平台调研——晋江用户画像2026年数据+七猫AI政策官方来源 | completed | P1 | Analyst | 2026-05-31 |
+| TSK-021 | Smoke P1-3: 补充创作计划情感签名(emotional_signature)+workflow-state.json字段 | completed | P1 | Developer | 2026-05-31 |
+| TSK-022 | Smoke P1-4: 修复chapter-002字数超标(+67.8%)——修剪至2800字±30% | completed | P1 | Developer | 2026-05-31 |
+| TSK-023 | 审查 TSK-020 平台调研更新——Requirement Reviewer 独立验证 | needs_change | P1 | Requirement Reviewer | 2026-05-31 |
+| TSK-024 | 审查 TSK-021 情感签名补充——Code Reviewer 独立验证 | completed | P1 | Code Reviewer | 2026-05-31 |
+| TSK-025 | 审查 TSK-022 章节修剪——Code Reviewer 独立验证 | completed | P1 | Code Reviewer | 2026-05-31 |
+| TSK-026 | 修复 TSK-023 审查发现：综合推荐中 C1(在线时长75.2→80分钟)+C2(女性比例93%→91%) | completed | P1 | Developer | 2026-05-31 |
+| TSK-027 | 重新审查 TSK-026 修复——Requirement Reviewer 验证 | completed | P1 | Requirement Reviewer | 2026-05-31 |
 
 ## 需求跟踪矩阵
 
