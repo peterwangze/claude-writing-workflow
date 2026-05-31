@@ -63,7 +63,10 @@
 | TSK-026 | 修复 TSK-023 审查发现：综合推荐中 C1(在线时长75.2→80分钟)+C2(女性比例93%→91%) | completed | P1 | Developer | 2026-05-31 |
 | TSK-027 | 重新审查 TSK-026 修复——Requirement Reviewer 验证 | completed | P1 | Requirement Reviewer | 2026-05-31 |
 | TSK-028 | 全量标准化 AskUserQuestion 交互指令——统一 17 个 SKILL 文件标注 + using-writing-workflow 检查点清单 | completed | P1 | Developer | 2026-05-31 |
-| TSK-029 | 审查 TSK-028 AskUserQuestion 标准化变更——Code Reviewer 独立验证 | pending | P1 | Code Reviewer | — |
+| TSK-029 | 审查 TSK-028 AskUserQuestion 标准化变更——Code Reviewer 独立验证 | completed | P1 | Code Reviewer | — |
+| TSK-030 | 修复 TSK-029 审查发现：P0(monetary代码块)+P1(5文件配对+gate-check+CP-WT-02) | completed | P1 | Developer | — |
+| TSK-031 | 重新审查 TSK-030 修复——Code Reviewer 最终验证 | completed | P1 | Code Reviewer | — |
+| TSK-032 | 修复 FINDING-006: using-writing-workflow 行1467预存未闭合代码块 | in_progress | P2 | Developer | — |
 
 ## 需求跟踪矩阵
 
