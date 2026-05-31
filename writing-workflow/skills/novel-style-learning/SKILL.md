@@ -410,11 +410,20 @@ Coordinator 在本阶段完成后验证（可选阶段，最低检查）：
 □ 用户确认：用户已通过 AskUserQuestion 确认完成学习（无文件输出要求）
 □ 状态更新：`completed_stages` 若未包含则追加 `"novel_style_learning"`，`statistics.last_updated` 已更新
 
-任一□未勾选 → Coordinator 提示用户，使用AskUserQuestion选择确认完成/继续学习/跳过。
+任一□未勾选 → Coordinator 提示用户。
+
+⚠️ **必须使用 AskUserQuestion**（不可直接输出以下文本）：
+
+```
+网文风格学习阶段确认，请选择：
+1. 确认完成
+2. 继续学习
+3. 跳过
+```
 
 ### 学习完成确认
 
-使用AskUserQuestion确认：
+⚠️ **必须使用 AskUserQuestion**（不可直接输出以下文本）：
 
 ```
 网文风格学习已完成。

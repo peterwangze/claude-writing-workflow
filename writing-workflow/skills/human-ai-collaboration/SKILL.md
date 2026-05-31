@@ -139,7 +139,7 @@ monetization-strategy（变现策略）：
 
 ### 1. AI辅助范围确定
 
-使用AskUserQuestion确认AI辅助程度：
+⚠️ **必须使用 AskUserQuestion**（不可直接输出以下文本）：
 
 ```
 请选择本章AI辅助模式：

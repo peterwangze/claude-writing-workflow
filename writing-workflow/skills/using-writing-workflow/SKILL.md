@@ -356,6 +356,62 @@ Coordinator 执行强制门禁检查（F1-F4）
 用户确认 → 进入下一阶段
 ```
 
+## 强制性 AskUserQuestion 检查点清单
+
+以下检查点在每个阶段执行时 **MUST 机械执行**。跳过任何一个 = 流程违规。
+
+### 决策型阶段检查点
+
+| 阶段 | 检查点 ID | 何时触发 | 问什么 |
+|------|-----------|---------|--------|
+| work_type_selection | CP-WT-01 | 阶段开始 | 作品类型选择（长篇/短篇） |
+| work_type_selection | CP-WT-02 | 选择后 | 是否跳过平台调研（短篇路径） |
+| platform_research | CP-PR-01 | 调研完成 | 目标平台选择 |
+| platform_research | CP-PR-02 | 选择后 | 确认平台调研结果 |
+| genre_selection | CP-GS-01 | 调研完成 | 题材选择 |
+| genre_selection | CP-GS-02 | 选择后 | 是否添加额外元素 |
+| genre_selection | CP-GS-03 | 最终确认 | 题材确认 |
+| competitor_analysis | CP-CA-01 | 竞品列表生成 | 是否同意竞品列表 |
+| competitor_analysis | CP-CA-02 | 分析完成 | 确认分析结果 |
+| novel_confirmation | CP-NC-01 | 概念生成 | 概念选择 |
+| novel_confirmation | CP-NC-02 | 主选确认 | 是否满意主选方案 |
+| novel_confirmation | CP-NC-03 | 备选确认 | 确认备选方案 |
+| creation_planning | CP-CP-01 | 开始 | 篇幅选择 |
+| creation_planning | CP-CP-02 | 篇幅后 | 发布频率选择 |
+| creation_planning | CP-CP-03 | 频率后 | 章节长度选择 |
+| creation_planning | CP-CP-04 | 计划生成 | 确认指导原则 |
+| creation_planning | CP-CP-05 | 情感签名 | 确认情感选择 |
+| creation_planning | CP-CP-06 | 完成时 | 确认写作投入 |
+| creation_planning | CP-CP-07 | 审查后 | 是否调整规划 |
+| outline_writing | CP-OW-01 | 大纲生成 | 确认大纲 |
+| outline_writing | CP-OW-02 | 审查后 | 确认审查结果 |
+
+### 执行型阶段检查点
+
+| 阶段 | 检查点 ID | 何时触发 | 问什么 |
+|------|-----------|---------|--------|
+| chapter_outline | CP-CO-01 | 阶段开始 | 细纲生成范围 |
+| chapter_outline | CP-CO-02 | 每5章批次 | 确认当前批次+是否继续 |
+| chapter_outline | CP-CO-03 | 大量章节时 | 是否使用并行生成 |
+| chapter_outline | CP-CO-04 | 审查后 | 门禁结果确认 |
+| content_generation | CP-CG-01 | 阶段开始 | 正文生成范围 |
+| content_generation | CP-CG-02 | 每章完成后 | 确认+是否继续 |
+| content_generation | CP-CG-03 | 审查后 | 门禁结果确认 |
+| human_ai_collaboration | CP-HC-01 | 每章开始前 | AI辅助模式选择 |
+| quality_review | CP-QR-01 | 6项审查汇总后 | 审查结果确认+通过/修正/重写 |
+| launch_strategy | CP-LS-01 | 方案生成后 | 存稿方案选择 |
+| launch_strategy | CP-LS-02 | 最终确认 | 上架策略确认 |
+| monetization_strategy | CP-MS-01 | 方案生成后 | 变现目标确认 |
+| monetization_strategy | CP-MS-02 | 最终确认 | 变现策略确认 |
+| data_monitoring | CP-DM-01 | 数据异常时 | 预警确认 |
+| data_monitoring | CP-DM-02 | 修订建议时 | 修订确认 |
+| data_monitoring | CP-DM-03 | 止损触发时 | 止损确认 |
+| reader_interaction | CP-RI-01 | 互动完成后 | 互动管理确认 |
+| opening_optimization | CP-OO-01 | 优化报告后 | 确认/跳过 |
+| novel_style_learning | CP-SL-01 | 学习完成 | 确认学习结果 |
+
+> **执行纪律**：Coordinator 在推进到下一阶段前，MUST 回顾本清单确认当前阶段所有检查点已执行。遗漏 = 流程违规。
+
 ## 工具降级协议（防 WebSearch 卡死）
 
 部分阶段依赖 WebSearch 获取实时数据。如果用户环境无 WebSearch 能力或搜索持续失败，阶段将卡住。本协议定义统一的降级流程。
