@@ -57,7 +57,7 @@
 
 ## 需求跟踪矩阵
 
-| REQ-001 | 七猫平台算法适配——补充算法级写作指导（高优先级） | TSK-001 G1 | TSK-003 | in_progress |
+| REQ-001 | 七猫平台算法适配——补充算法级写作指导（高优先级） | TSK-001 G1 | TSK-003 | completed |
 | REQ-002 | 长篇端到端 smoke test——验证长篇完整路径（中优先级） | TSK-001 G2 | TSK-006 | completed |
 | REQ-003 | 数据闭环自动化——减少手动数据输入依赖（中优先级） | TSK-001 G4 | TSK-009 | completed |
 | REQ-004 | 清理 novel-creator 孤儿 Agent（低优先级） | TSK-001 G3 | TSK-008 | completed |
