@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.2.0 (2026-06-01)
+
+### 新增（New Features）
+
+- **零容忍质量政策**：审查及格线从 90 分提升到 100 分满分标准。任何扣分 = 不通过 = 必须修改到满分后重新审查。覆盖大纲审查、细纲审查、正文质量审查三个阶段。
+
+### 变更（Changes）
+
+- 审查评分判定：`>=90 通过` → `=100 通过，<100 不通过`
+- 7 个 SKILL 文件共 30 处阈值和说明文字全面更新
+- 受影响文件：quality-review, outline-review, chapter-outline-review, using-writing-workflow, chapter-outline, content-generation, outline-writing
+
+---
+
 ## 4.1.0 (2026-06-01)
 
 ### 新增（New Features）

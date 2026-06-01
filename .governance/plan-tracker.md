@@ -67,8 +67,12 @@
 | TSK-030 | 修复 TSK-029 审查发现：P0(monetary代码块)+P1(5文件配对+gate-check+CP-WT-02) | completed | P1 | Developer | — |
 | TSK-031 | 重新审查 TSK-030 修复——Code Reviewer 最终验证 | completed | P1 | Code Reviewer | — |
 | TSK-032 | 修复 FINDING-006: using-writing-workflow 行1467预存未闭合代码块 | completed | P2 | Developer | — |
-| TSK-033 | 发布 v4.1.0——更新 CHANGELOG + git tag + 版本规划 | in_progress | P1 | Release | — |
-| TSK-034 | 审查 TSK-033 v4.1.0 发布——Release Reviewer 验证 | pending | P1 | Release Reviewer | — |
+| TSK-033 | 发布 v4.1.0——更新 CHANGELOG + git tag + 版本规划 | completed | P1 | Release | — |
+| TSK-034 | 审查 TSK-033 v4.1.0 发布——Release Reviewer 验证 | completed | P1 | Release Reviewer | — |
+| TSK-035 | 质量政策升级：审查及格线 90→100 分满分标准——修改 7 个 SKILL 文件约 28 处阈值 + 说明文字 | completed | P0 | Developer | — |
+| TSK-036 | 审查 TSK-035 审查阈值变更——Code Reviewer 独立验证 | completed | P1 | Code Reviewer | — |
+| TSK-037 | 发布 v4.2.0——质量政策升级版本 | in_progress | P1 | Release | — |
+| TSK-038 | 审查 TSK-037 v4.2.0 发布——Release Reviewer 验证 | pending | P1 | Release Reviewer | — |
 
 ## 需求跟踪矩阵
 
@@ -84,6 +88,7 @@
 |------|------|----------|------|
 | 4.0.0 | SKILL 生产与审查分离架构重构 | 2026-05-01 | released |
 | 4.1.0 | AskUserQuestion 标准化 + 七猫适配增强 + 治理集成 | 2026-06-01 | released |
+| 4.2.0 | 零容忍质量政策——审查及格线 90→100 分满分标准 | 2026-06-01 | released |
 
 ## 变更控制
 
