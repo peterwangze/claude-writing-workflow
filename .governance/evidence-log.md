@@ -55,3 +55,5 @@ EVD-017 | 2026-05-31 | TSK-029 | review-report | Code Review: TSK-028 NEEDS_CHAN
 EVD-018 | 2026-05-31 | TSK-030 | manual-verification | 修复 TSK-029 全部 P0+P1: 7 文件代码块修复 + 10 文件 gate-check 加粗 + CP-WT-02 指令补全 | commit 990f091, 11 files changed
 EVD-019 | 2026-05-31 | TSK-031 | review-report | Code Review: TSK-030 APPROVED — 5/5 发现验证通过。新发现 FINDING-006(P1) 预存问题 using-writing-workflow 行1467未闭合代码块 | commit 990f091
 EVD-020 | 2026-05-31 | TSK-032 | manual-verification | 修复 using-writing-workflow 行731多余代码块标记(107→108偶数)，门禁规则表渲染恢复 | commit 8225851, 1 line deleted
+EVD-021 | 2026-06-01 | TSK-035 | manual-verification | 质量政策升级：审查及格线 90→100 分满分标准。7 文件 30 处阈值替换 + 说明文字更新。零容忍质量政策 | commit 0ca2798
+EVD-022 | 2026-06-01 | TSK-036 | review-report | Code Review: TSK-035 APPROVED — 零发现，7 文件全部正确修改，无残留 90 阈值引用 | commit 0ca2798
