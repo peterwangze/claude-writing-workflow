@@ -41,6 +41,7 @@
 | EVD-021 | 2026-05-31 | TSK-025 | review-report | Code Reviewer 审查 TSK-022: APPROVED——字数3015(+7.7%通过)、情节100%完整、连续性无断裂、风格一致。1 P2(自检报告字数不精确)。审查报告: .governance/review-TSK-025.md | plan-tracker.md TSK-025 |
 | EVD-022 | 2026-05-31 | TSK-026 | manual-verification | Developer 修复综合推荐数据不一致: C1(75.2→80分钟)+C2(93%→约91%)与用户画像表同步。Commit: 4577766 | plan-tracker.md TSK-026 |
 | EVD-023 | 2026-05-31 | TSK-027 | review-report | Requirement Reviewer 最终验证 TSK-026: APPROVED——C1/C2已修复、旧值零残留、15个跨节数据点全一致。审查报告: .governance/review-TSK-027.md | plan-tracker.md TSK-027 |
+| EVD-024 | 2026-06-04 | TSK-039 | manual-verification | 修复插件版本号同步——3 个 JSON 文件版本统一为 4.2.0: .claude-plugin/marketplace.json(3.0.0→4.2.0), writing-workflow/.claude-plugin/plugin.json(4.0.0→4.2.0), writing-workflow/.claude-plugin/marketplace.json(3.1.0→4.2.0)。JSON 语法验证通过，旧版本零残留 | commit a5fc066 |
 
 ---
 

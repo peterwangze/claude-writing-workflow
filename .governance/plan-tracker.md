@@ -73,6 +73,7 @@
 | TSK-036 | 审查 TSK-035 审查阈值变更——Code Reviewer 独立验证 | completed | P1 | Code Reviewer | — |
 | TSK-037 | 发布 v4.2.0——质量政策升级版本 | completed | P1 | Release | — |
 | TSK-038 | 审查 TSK-037 v4.2.0 发布——Release Reviewer 验证 | completed | P1 | Release Reviewer | — |
+| TSK-039 | 修复插件版本号同步——3 个 JSON 文件版本从 3.0.0/3.1.0/4.0.0 → 4.2.0，解决用户在 marketplace 中看到旧版本(3.0.0)的问题 | completed | P0 | Developer | — |
 
 ## 需求跟踪矩阵
 
